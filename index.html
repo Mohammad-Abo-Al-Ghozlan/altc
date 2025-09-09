@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afkar Altatweer Contracting Co. | Building Excellence</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #f8f9fa;
+            --accent-color: #ffb400;
+            --dark-bg: #0a0a0a;
+            --overlay-dark: rgba(10, 10, 10, 0.75);
+            --overlay-darker: rgba(10, 10, 10, 0.85);
+            --saudi-green: #006c35;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            background-color: var(--dark-bg);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 2rem;
+            transition: all 0.5s ease;
+        }
+        
+        .navbar-scrolled {
+            background-color: var(--overlay-darker);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .nav-link {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin: 0 1rem;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* 3D Scene Containers */
+        #three-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .three-scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        
+        .three-scene.active {
+            opacity: 1;
+        }
+        
+        /* Sections Common Styles */
+        section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .section-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay-dark);
+            z-index: 1;
+        }
+        
+        .content-container {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+        }
+        
+        /* Video Background */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        /* Hero Section - Enhanced */
+        #hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-background-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .floating-logo {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .saudi-flag {
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            top: 20%;
+            right: 10%;
+            opacity: 0.2;
+            animation: wave 20s infinite linear;
+            transform-origin: center;
+        }
+        
+        .construction-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .construction-element {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.1;
+            color: var(--accent-color);
+        }
+        
+        .ce-1 { top: 15%; left: 10%; animation: bounce 8s infinite ease-in-out; }
+        .ce-2 { top: 25%; right: 15%; animation: bounce 10s infinite ease-in-out 1s; }
+        .ce-3 { bottom: 30%; left: 20%; animation: bounce 12s infinite ease-in-out 2s; }
+        .ce-4 { bottom: 20%; right: 25%; animation: bounce 9s infinite ease-in-out 3s; }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3;
+        }
+        
+        .hero-logo {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1.5s forwards 0.5s;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero-logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            animation: lineExpand 2s forwards 1.5s;
+        }
+        
+        .hero-tagline {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1.5s forwards 1s;
+        }
+        
+        .hero-cta {
+            opacity: 0;
+            animation: fadeIn 1.5s forwards 1.5s;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 3;
+        }
+        
+        /* Particle Animation */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+        
+        /* About Section */
+        #about {
+            display: flex;
+            align-items: center;
+        }
+        
+        .about-content {
+            max-width: 800px;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2rem;
+            opacity: 0;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            color: white;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background-color: var(--accent-color);
+            transition: width 1s ease;
+        }
+        
+        .in-view .section-title::after {
+            width: 100%;
+        }
+        
+        .values-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .values-list li {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            position: relative;
+            padding-left: 2rem;
+            transform: translateX(-20px);
+            transition: all 0.5s ease;
+        }
+        
+        .values-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-size: 2rem;
+            position: absolute;
+            left: 0;
+            top: -0.5rem;
+        }
+        
+        .in-view .values-list li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            height: 100%;
+        }
+        
+        .service-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            height: 100%;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        
+        .in-view .service-item {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .service-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, var(--overlay-darker), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        
+        .service-item:hover .service-bg {
+            transform: scale(1.1);
+        }
+        
+        .service-item:hover .service-overlay {
+            opacity: 1;
+        }
+        
+        .service-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            transform: translateY(20px);
+            transition: transform 0.5s ease;
+        }
+        
+        .service-item:hover .service-name {
+            transform: translateY(0);
+        }
+        
+        /* Stats Section */
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+        
+        .stat-item {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.5s ease;
+        }
+        
+        .in-view .stat-item {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* Projects Section */
+        .project-slider {
+            height: 100%;
+            position: relative;
+        }
+        
+        .project-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        
+        .project-slide.active {
+            opacity: 1;
+        }
+        
+        .project-info {
+            position: absolute;
+            bottom: 10%;
+            left: 10%;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+        
+        .project-slide.active .project-info {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .project-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-nav {
+            position: absolute;
+            bottom: 10%;
+            right: 10%;
+            z-index: 10;
+        }
+        
+        /* 3D Model Viewer */
+        .model-viewer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        /* Contact Section */
+        .contact-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 12px;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+        
+        .in-view .contact-form {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .form-control {
+            /* background: rgba(255, 255, 255, 0.1); */
+            border: none;
+            border-radius: 4px;
+            color: var(--primary-color);
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 0.25rem rgba(255, 180, 0, 0.25);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background-color: var(--accent-color);
+            border: none;
+            color: var(--dark-bg);
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            background-color: #ffa000;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            background-color: var(--overlay-darker);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-info {
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-bg-element {
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.03;
+            color: var(--accent-color);
+            z-index: 1;
+        }
+        
+        .fe-1 { top: 10%; left: 10%; animation: rotate 30s infinite linear; }
+        .fe-2 { bottom: 10%; right: 10%; animation: rotate 20s infinite linear reverse; }
+        
+        /* 3D Parallax Elements */
+        .parallax-element {
+            position: absolute;
+            will-change: transform;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(-50%, -50%) translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translate(-50%, -50%) translateY(-20px) rotate(5deg);
+            }
+        }
+        
+        @keyframes wave {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(2deg);
+            }
+            75% {
+                transform: rotate(-2deg);
+            }
+        }
+        
+        @keyframes lineExpand {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes particleMove {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(var(--move-y)) translateX(var(--move-x));
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-logo {
+                font-size: 3.5rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .saudi-flag {
+                width: 200px;
+                height: 133px;
+                right: 5%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-logo {
+                font-size: 2.5rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                color: white;
+                font-size: 2rem;
+            }
+            
+            .content-container {
+                padding: 0 5%;
+            }
+            
+            .floating-logo {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .construction-element {
+                font-size: 2rem;
+            }
+            
+            .saudi-flag {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 3D Background Container -->
+    <div id="three-container"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="assets/atcc-logo-.png" alt="ATCE Logo">
+                ATCC
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hero">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#stats">Achievements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section - Enhanced -->
+    <section id="hero">
+        <video class="video-background" autoplay muted loop>
+            <source src="assets/flag.mp4" type="video/mp4">
+        </video>
+        <div class="section-overlay"></div>
+        
+        <div class="hero-background-elements">
+            <img class="floating-logo" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmI0MDAiIHN0cm9rZS13aWR0aD0iMyIvPjxwYXRoIGQ9Ik03MCA3MEgxMzBWMTMwSjcwVjcwWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZiNDAwIiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNNzAgNzBMMTMwIDEzMCIgc3Ryb2tlPSIjZmZiNDAwIiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNMTMwIDcwTDcwIDEzMCIgc3Ryb2tlPSIjZmZiNDAwIiBzdHJva2Utd2lkdGg9IjMiLz48L3N2Zz4=" alt="Logo">
+            
+            <div class="saudi-flag">
+                <svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet">
+                    <rect width="300" height="200" fill="#006c35"/>
+                    <text x="150" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold">ﺷﻬﺎﺩﺓ</text>
+                    <text x="150" y="160" text-anchor="middle" fill="white" font-size="30">ﻻ ﺇﻟﻪ ﺇﻻ ﺍﻟﻠﻪ</text>
+                </svg>
+            </div>
+            
+            <div class="construction-elements">
+                <i class="construction-element ce-1 fas fa-hard-hat"></i>
+                <i class="construction-element ce-2 fas fa-tools"></i>
+                <i class="construction-element ce-3 fas fa-truck-pickup"></i>
+                <i class="construction-element ce-4 fas fa-building"></i>
+            </div>
+            
+            <div class="particles" id="particles-container"></div>
+        </div>
+        
+        <div class="content-container">
+            <div class="hero-content">
+                <img src="assets/atcc-logo-.png" style="height: 80px; margin-bottom: 1rem;" alt="ATCE Logo">
+                <h1 class="hero-logo">AFKAR AL-TATWEER</h1>
+                <p class="hero-tagline">Building Excellence Beyond Premium Quality</p>
+                <div class="hero-cta">
+                    <button class="btn btn-outline-light btn-lg me-3">Our Projects</button>
+                    <p><br></p>
+                    <button class="btn btn-primary btn-lg">Contact Us</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5V19M12 19L19 12M12 19L5 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <video class="video-background" autoplay muted loop>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-architect-reviewing-blueprints-41363-large.mp4" type="video/mp4">
+        </video>
+        <div class="section-overlay"></div>
+        <div class="content-container">
+            <div class="about-content">
+                <h2 class="">Our Commitment</h2>
+                <ul class="values-list">
+                    <li>Quality Services</li>
+                    <li>Customer Satisfaction</li>
+                    <li>International Standards</li>
+                    <li>Ethical Leadership</li>
+                    <li>Innovative Solutions</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- MoHG Section -->
+     <div></div>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="section-overlay"></div>
+        <div class="content-container">
+            <h2 class=" mb-5">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <video class="service-bg" autoplay muted loop>
+                        <source src="assets/ser1.mp4" type="video/mp4">
+                    </video>
+                    <div class="service-overlay">
+                        <h3 class="service-name">Infrastructure</h3>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <video class="service-bg" autoplay muted loop>
+                        <source src="assets/ser2.mp4" type="video/mp4">
+                    </video>
+                    <div class="service-overlay">
+                        <h3 class="service-name">Civil Works</h3>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <video class="service-bg" autoplay muted loop>
+                        <source src="assets/ser7.mp4" type="video/mp4">
+                    </video>
+                    <div class="service-overlay">
+                        <h3 class="service-name">Landscaping</h3>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <video class="service-bg" autoplay muted loop>
+                        <source src="assets/ser4.mp4" type="video/mp4">
+                    </video>
+                    <div class="service-overlay">
+                        <h3 class="service-name">Asphalt Works</h3>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <video class="service-bg" autoplay muted loop>
+                        <source src="assets/ser5.mp4" type="video/mp4">
+                    </video>
+                    <div class="service-overlay">
+                        <h3 class="service-name">MEP</h3>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <video class="service-bg" autoplay muted loop>
+                        <source src="assets/ser6.mp4" type="video/mp4">
+                    </video>
+                    <div class="service-overlay">
+                        <h3 class="service-name">Dewatering</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats">
+        <div class="section-overlay"></div>
+        <div class="content-container">
+            <h2 class=" mb-5">Our Achievements</h2>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="100">0</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="65">0</div>
+                    <div class="stat-label">Team Members</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="15">0</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="130">0</div>
+                    <div class="stat-label">Equipment Units</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="project-slider">
+            <div class="project-slide active">
+                <video class="video-background" autoplay muted loop>
+                    <source src="assets/proj1.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="project-info">
+                    <h3 class="project-title">Yanbu Commercial Port</h3>
+                    <p>Marine quay construction for Global Marine</p>
+                </div>
+            </div>
+            <div class="project-slide">
+                <video class="video-background" autoplay muted loop>
+                    <source src="assets/proj2.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="project-info">
+                    <h3 class="project-title">Ministry Building</h3>
+                    <p>Commerce and Investment Ministry in Yanbu</p>
+                </div>
+            </div>
+            <div class="project-slide">
+                <video class="video-background" autoplay muted loop>
+                    <source src="assets/proj3.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="project-info">
+                    <h3 class="project-title">King Khalid Road</h3>
+                    <p>Road construction and expansion for Ministry of Transport</p>
+                </div>
+            </div>
+            <div class="project-nav">
+                <button class="btn btn-outline-light me-2 project-prev">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="btn btn-outline-light project-next">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <video class="video-background" autoplay muted loop>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-architect-in-modern-office-41364-large.mp4" type="video/mp4">
+        </video>
+        <div class="section-overlay"></div>
+        <div class="content-container">
+            <h2 class=" mb-5">Get In Touch</h2>
+            <div class="contact-form">
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="Your Name">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" class="form-control" placeholder="Your Email">
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Subject">
+                    <textarea class="form-control" rows="5" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-bg-element fe-1">
+            <i class="fas fa-building"></i>
+        </div>
+        <div class="footer-bg-element fe-2">
+            <i class="fas fa-tools"></i>
+        </div>
+        <div class="container">
+            <div class="contact-info">
+                <p>Mobile: 0544777959 | 05336999619</p>
+                <p>Yanbu, Yanbu' as Sina'iyah 2442, AN Nawah, 8733</p>
+                <p>VAT: 310198822200003 | C.R: 4700116838</p>
+            </div>
+            <p>&copy; 2025 Afkar Altatweer Contracting Co. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Three.js variables
+        let scene, camera, renderer, controls;
+        let currentScene = 'hero';
+        let scenes = {};
+        
+        // Initialize Three.js
+        function initThreeJS() {
+            // Set up the container
+            const container = document.getElementById('three-container');
+            
+            // Create scene
+            scene = new THREE.Scene();
+            
+            // Create camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+            
+            // Create renderer
+            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+            
+            // Create scenes for each section
+            createHeroScene();
+            createAboutScene();
+            createServicesScene();
+            createStatsScene();
+            createProjectsScene();
+            createContactScene();
+            
+            // Set initial scene
+            showScene('hero');
+            
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize);
+            
+            // Start animation loop
+            animate();
+        }
+        
+        // Create hero scene
+        function createHeroScene() {
+            const heroScene = new THREE.Scene();
+            
+            // Add ambient light
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            heroScene.add(ambientLight);
+            
+            // Add directional light
+            const directionalLight = new THREE.DirectionalLight(0xffb400, 1);
+            directionalLight.position.set(5, 5, 5);
+            heroScene.add(directionalLight);
+            
+            // Create floating 3D elements
+            const geometry = new THREE.BoxGeometry(1, 1, 1);
+            const material = new THREE.MeshPhongMaterial({ 
+                color: 0xffb400,
+                emissive: 0x000000,
+                specular: 0xffffff,
+                shininess: 100,
+                transparent: true,
+                opacity: 0.7
+            });
+            
+            // Add multiple floating elements
+            for (let i = 0; i < 15; i++) {
+                const cube = new THREE.Mesh(geometry, material.clone());
+                cube.position.x = (Math.random() - 0.5) * 10;
+                cube.position.y = (Math.random() - 0.5) * 10;
+                cube.position.z = (Math.random() - 0.5) * 10;
+                cube.rotation.x = Math.random() * Math.PI;
+                cube.rotation.y = Math.random() * Math.PI;
+                cube.scale.setScalar(Math.random() * 0.5 + 0.3);
+                heroScene.add(cube);
+                
+                // Store animation properties
+                cube.userData = {
+                    speed: Math.random() * 0.01 + 0.005,
+                    rotationSpeed: {
+                        x: Math.random() * 0.02 - 0.01,
+                        y: Math.random() * 0.02 - 0.01,
+                        z: Math.random() * 0.02 - 0.01
+                    }
+                };
+            }
+            
+            scenes.hero = heroScene;
+        }
+        
+        // Create about scene
+        function createAboutScene() {
+            const aboutScene = new THREE.Scene();
+            
+            // Add lights
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+            aboutScene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(1, 1, 1);
+            aboutScene.add(directionalLight);
+            
+            // Create blueprint-like grid
+            const gridHelper = new THREE.GridHelper(20, 20, 0x006c35, 0x444444);
+            gridHelper.rotation.x = Math.PI / 2;
+            aboutScene.add(gridHelper);
+            
+            // Create floating text elements (simplified with geometries)
+            const values = ['Quality', 'Satisfaction', 'Standards', 'Leadership', 'Innovation'];
+            
+            values.forEach((value, i) => {
+                // Using boxes as placeholders for text geometries
+                const textGeometry = new THREE.BoxGeometry(1.5, 0.2, 0.2);
+                const textMaterial = new THREE.MeshPhongMaterial({ 
+                    color: 0xffb400,
+                    emissive: 0x222222,
+                    specular: 0xffffff
+                });
+                
+                const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+                textMesh.position.y = i * 1 - 2;
+                textMesh.position.x = -5;
+                textMesh.userData = {
+                    originalX: textMesh.position.x,
+                    targetX: 0,
+                    speed: 0.05
+                };
+                aboutScene.add(textMesh);
+            });
+            
+            scenes.about = aboutScene;
+        }
+        
+        // Create other scenes (simplified for brevity)
+        function createServicesScene() {
+            scenes.services = new THREE.Scene();
+            // Add service-related 3D elements
+        }
+        
+        function createStatsScene() {
+            scenes.stats = new THREE.Scene();
+            // Add stats-related 3D elements
+        }
+        
+        function createProjectsScene() {
+            scenes.projects = new THREE.Scene();
+            // Add projects-related 3D elements
+        }
+        
+        function createContactScene() {
+            scenes.contact = new THREE.Scene();
+            // Add contact-related 3D elements
+        }
+        
+        // Show specific scene
+        function showScene(sceneName) {
+            currentScene = sceneName;
+            scene = scenes[sceneName];
+        }
+        
+        // Handle window resize
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Animate based on current scene
+            if (currentScene === 'hero' && scenes.hero) {
+                scenes.hero.children.forEach(child => {
+                    if (child.userData && child.userData.speed) {
+                        child.rotation.x += child.userData.rotationSpeed.x;
+                        child.rotation.y += child.userData.rotationSpeed.y;
+                        child.rotation.z += child.userData.rotationSpeed.z;
+                        
+                        // Floating animation
+                        child.position.y += Math.sin(Date.now() * 0.001 * child.userData.speed) * 0.01;
+                    }
+                });
+            }
+            
+            if (currentScene === 'about' && scenes.about) {
+                // Animate text elements
+                scenes.about.children.forEach(child => {
+                    if (child.userData && child.userData.originalX !== undefined) {
+                        // Move toward target position
+                        child.position.x += (child.userData.targetX - child.position.x) * child.userData.speed;
+                    }
+                });
+            }
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+            
+            // Change 3D scene based on scroll position
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2) {
+                    const sectionId = section.id;
+                    showScene(sectionId);
+                }
+            });
+        });
+
+        // Create particles for hero section
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 5 + 2;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                
+                const moveX = (Math.random() - 0.5) * 100;
+                const moveY = (Math.random() - 0.5) * 100;
+                
+                particle.style.setProperty('--move-x', `${moveX}px`);
+                particle.style.setProperty('--move-y', `${moveY}px`);
+                
+                const duration = Math.random() * 10 + 5;
+                particle.style.animation = `particleMove ${duration}s linear infinite`;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    
+                    if (entry.target.classList.contains('section-title')) {
+                        entry.target.style.animation = 'fadeInUp 0.5s forwards';
+                    }
+                    
+                    if (entry.target.id === 'about') {
+                        const values = document.querySelectorAll('.values-list li');
+                        values.forEach((value, index) => {
+                            setTimeout(() => {
+                                value.style.transitionDelay = `${index * 0.2}s`;
+                            }, index * 200);
+                        });
+                    }
+                    
+                    if (entry.target.id === 'stats') {
+                        const counters = document.querySelectorAll('.stat-number');
+                        counters.forEach(counter => {
+                            const target = +counter.getAttribute('data-count');
+                            const count = +counter.innerText;
+                            const increment = target / 100;
+                            
+                            if (count < target) {
+                                const updateCount = () => {
+                                    const current = +counter.innerText;
+                                    if (current < target) {
+                                        counter.innerText = Math.ceil(current + increment);
+                                        setTimeout(updateCount, 15);
+                                    } else {
+                                        counter.innerText = target;
+                                    }
+                                };
+                                updateCount();
+                            }
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('section').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Project slider
+        const slides = document.querySelectorAll('.project-slide');
+        const prevBtn = document.querySelector('.project-prev');
+        const nextBtn = document.querySelector('.project-next');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        });
+
+        // Auto slide every 5 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }, 5000);
+        
+        // Initialize particles
+        createParticles();
+        
+        // Initialize Three.js
+        initThreeJS();
+    </script>
+    <style>
+        .service-item {
+  perspective: 1000px;
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+.service-item:hover {
+  transform: rotateY(15deg) rotateX(5deg) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+.service-overlay {
+  transform: translateZ(50px);
+}
+
+    </style>
+    <script>
+        // Hero scene with advanced effects
+function createHeroScene() {
+    const heroScene = new THREE.Scene();
+
+    // Lighting
+    const ambient = new THREE.AmbientLight(0xffffff, 0.3);
+    heroScene.add(ambient);
+
+    const spot = new THREE.SpotLight(0xffb400, 2, 50, Math.PI / 6, 0.5);
+    spot.position.set(10, 15, 10);
+    heroScene.add(spot);
+
+    // Particle galaxy
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCount = 2000;
+    const posArray = new Float32Array(particlesCount * 3);
+    for (let i = 0; i < particlesCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 20;
+    }
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+    const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.05,
+        color: 0xffb400,
+        transparent: true,
+        opacity: 0.7,
+        blending: THREE.AdditiveBlending
+    });
+
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    heroScene.add(particlesMesh);
+
+    // Rotating torus (symbolic construction ring)
+    const torusGeo = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
+    const torusMat = new THREE.MeshStandardMaterial({
+        color: 0x006c35,
+        metalness: 0.7,
+        roughness: 0.2,
+        emissive: 0x112211
+    });
+    const torus = new THREE.Mesh(torusGeo, torusMat);
+    heroScene.add(torus);
+
+    // Animate
+    torus.userData = { rotateSpeed: 0.01 };
+    particlesMesh.userData = { rotateSpeed: -0.001 };
+
+    scenes.hero = heroScene;
+}
+
+// Animate loop addition
+if (currentScene === 'hero') {
+    scenes.hero.traverse(obj => {
+        if (obj.userData.rotateSpeed) {
+            obj.rotation.y += obj.userData.rotateSpeed;
+        }
+    });
+}
+
+    </script>
+</body>
+</html>
