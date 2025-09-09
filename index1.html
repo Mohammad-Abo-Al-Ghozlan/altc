@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Afkar Altatweer Contracting Co. | Building Excellence</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Page styles -->
+  <style>
+    :root{
+      --primary:#f8f9fa;
+      --accent:#ffb400;
+      --bg:#060606;
+      --overlay: rgba(6,6,6,0.75);
+      --muted: rgba(255,255,255,0.08);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Montserrat',sans-serif;
+      color:var(--primary);
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    /* NAV */
+    .navbar{
+      position:fixed; top:0; left:0; right:0; z-index:2000;
+      padding:1rem 2rem; transition:all .35s ease; background:black;
+    }
+    .navbar-scrolled{ background:linear-gradient(180deg, rgba(6,6,6,0.85), rgba(6,6,6,0.6)); backdrop-filter: blur(6px); padding:.6rem 2rem; }
+    .navbar .nav-link{ color:var(--primary); font-weight:500; margin-left:.6rem; position:relative; }
+    .navbar .nav-link::after{ content:''; position:absolute; left:0; bottom:-6px; height:2px; width:0; background:var(--accent); transition:width .28s; }
+    .navbar .nav-link:hover::after{ width:100%; }
+
+    /* HERO with canvas */
+    #hero{
+      position:relative; height:100vh; min-height:640px; width:100%; display:flex; align-items:center; justify-content:center;
+    }
+    #heroCanvas{
+      position:absolute; inset:0; width:100%; height:100%; display:block; z-index:0;
+    }
+    .hero-overlay{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(6,6,6,0.25), rgba(6,6,6,0.6)); z-index:1; pointer-events:none; }
+    .hero-content{
+      position:relative; z-index:5; text-align:center; padding:0 1rem; max-width:1200px;
+    }
+    .hero-brand{ display:flex; gap:1rem; align-items:center; justify-content:center; margin-bottom:1rem; }
+    .brand-logo{ width:64px; height:64px; border-radius:8px; background:linear-gradient(180deg,#111,#222); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,.6); }
+    .brand-name{ font-size:2.4rem; font-weight:700; letter-spacing:1px; }
+    .hero-title{ font-size:clamp(28px,5vw,64px); line-height:1; font-weight:800; margin-bottom:.6rem; text-transform:uppercase; }
+    .hero-sub{ font-size:clamp(14px,1.6vw,20px); color:rgba(255,255,255,0.85); margin-bottom:1.5rem; }
+
+    .hero-ctas{ display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; }
+
+    .btn-ghost{ color:var(--primary); border:1px solid rgba(255,255,255,0.12); background:transparent; padding:.7rem 1.4rem; border-radius:8px; font-weight:600; }
+    .btn-solid{ background:var(--accent); color:#111; border:none; padding:.75rem 1.6rem; border-radius:10px; font-weight:700; box-shadow:0 8px 24px rgba(255,180,0,0.12); }
+
+    /* Sections shared */
+    section{ position:relative; min-height:70vh; padding:6rem 0; }
+    .content-container{ max-width:1200px; margin:0 auto; padding:0 1rem; }
+
+    /* ABOUT */
+    .section-title{ font-size:2.6rem; font-weight:700; color:var(--primary); margin-bottom:1.4rem; display:inline-block; position:relative; }
+    .section-sub{ color:rgba(255,255,255,.85); margin-bottom:1.2rem; }
+
+    /* SERVICES GRID with 3D tilt */
+    .services-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; margin-top:1.5rem; }
+    .service-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:12px; padding:1.2rem; height:220px; position:relative; overflow:hidden;
+      transform-style:preserve-3d; perspective:1200px; transition:transform .25s ease, box-shadow .25s ease;
+      display:flex; flex-direction:column; justify-content:flex-end;
+      border:1px solid rgba(255,255,255,0.04);
+    }
+    .service-card .label{ font-weight:700; font-size:1.2rem; }
+    .service-card .desc{ color:rgba(255,255,255,0.75); font-size:.95rem; margin-top:.4rem; }
+    .service-card .gloss{ position:absolute; inset:0; background:linear-gradient(120deg, rgba(255,255,255,0.02), transparent); pointer-events:none; mix-blend-mode:overlay; }
+
+    /* STATS */
+    .stats{ display:flex; gap:1.5rem; justify-content:space-between; align-items:center; margin-top:1.5rem; }
+    .stat{ flex:1; background:var(--muted); padding:1.4rem; border-radius:10px; text-align:center; }
+    .stat .num{ font-size:2.6rem; font-weight:800; color:var(--accent); margin-bottom:.2rem; }
+    .stat .lbl{ font-size:.9rem; color:rgba(255,255,255,0.85); letter-spacing:1px; text-transform:uppercase; }
+
+    /* PROJECTS (3D coverflow-like) */
+    .projects-wrap{ height:520px; position:relative; }
+    #projectsCanvas{ position:absolute; inset:0; width:100%; height:100%; z-index:0; }
+    .projects-ui{ position:relative; z-index:5; display:flex; justify-content:center; gap:1rem; margin-top:12px; }
+    .proj-btn{ border-radius:10px; padding:.6rem .9rem; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--primary); }
+
+    /* CONTACT */
+    .contact-form{ background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); padding:2rem; border-radius:12px; border:1px solid rgba(255,255,255,0.04); }
+
+    /* FOOTER */
+    footer{ background:linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.85)); padding:2.6rem 0; color:rgba(255,255,255,0.85); text-align:center; }
+
+    /* Responsive */
+    @media (max-width:992px){ .services-grid{ grid-template-columns:repeat(2,1fr);} .stats{ flex-direction:column; } }
+    @media (max-width:640px){ .services-grid{ grid-template-columns:1fr;} .hero-title{ font-size:28px;} .hero-sub{ font-size:14px;} }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <div class="brand-logo"><svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+            <rect width="24" height="24" rx="4" fill="#111"/><path d="M4 16L12 6l8 10" stroke="#ffb400" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="ms-2 brand-name">ATCE</div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#stats">Achievements</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="hero" aria-label="Hero section">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <div class="hero-brand">
+        <div class="brand-logo">
+          <!-- small svg logo -->
+          <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="44" fill="#0b0b0b"/><path d="M20 70 L50 30 L80 70 Z" fill="#ffb400"/></svg>
+        </div>
+      </div>
+
+      <h1 class="hero-title">Building Excellence — 3D, Precision & Performance</h1>
+      <p class="hero-sub">Infrastructure, Dewatering, Shoring & Civil works — professional Saudi projects with modern engineering and digital-first presentation.</p>
+
+      <div class="hero-ctas">
+        <button class="btn btn-ghost" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">Our Projects</button>
+        <button class="btn btn-solid" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Us</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="content-container">
+      <h2 class="section-title">Our Commitment</h2>
+      <p class="section-sub">We deliver large-scale infrastructure and civil projects with strict safety, international standards, and modern execution techniques (dewatering, shoring, marine works, roads).</p>
+
+      <div class="row mt-4">
+        <div class="col-lg-6">
+          <ul style="list-style:none; padding-left:0;">
+            <li style="margin-bottom:.6rem"><strong>Quality Services</strong> — certified workflows & QC</li>
+            <li style="margin-bottom:.6rem"><strong>Customer Satisfaction</strong> — on-time & on-budget delivery</li>
+            <li style="margin-bottom:.6rem"><strong>International Standards</strong> — ISO-aligned systems</li>
+          </ul>
+        </div>
+        <div class="col-lg-6">
+          <div style="height:220px; border-radius:12px; background:linear-gradient(180deg,#051018,#09121b); display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.03)">
+            <div>
+              <div style="font-size:1.6rem; font-weight:700; color:var(--accent);">Yanbu, Saudi Arabia</div>
+              <div style="color:rgba(255,255,255,0.7); margin-top:.4rem">VAT: 310198822200003 | C.R: 4700116838</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="content-container">
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-sub">Modular and specialized offerings across infrastructure, civil works, MEP and dewatering.</p>
+
+      <div class="services-grid" id="servicesGrid">
+        <!-- Card 1 -->
+        <div class="service-card" data-tilt data-tilt-max="15" data-tilt-scale="1.04">
+          <div class="gloss"></div>
+          <div class="label">Infrastructure</div>
+          <div class="desc">Roads, ports, heavy civil and marine works with full project lifecycle delivery.</div>
+        </div>
+        <!-- Card 2 -->
+        <div class="service-card" data-tilt data-tilt-max="14" data-tilt-scale="1.04">
+          <div class="gloss"></div>
+          <div class="label">Civil Works</div>
+          <div class="desc">Structural, foundations and reinforced concrete experts for large projects.</div>
+        </div>
+        <!-- Card 3 -->
+        <div class="service-card" data-tilt data-tilt-max="16" data-tilt-scale="1.04">
+          <div class="gloss"></div>
+          <div class="label">Dewatering</div>
+          <div class="desc">Temporary and permanent dewatering systems — pumps, monitoring and controls.</div>
+        </div>
+
+        <div class="service-card" data-tilt data-tilt-max="12" data-tilt-scale="1.04">
+          <div class="gloss"></div>
+          <div class="label">MEP</div>
+          <div class="desc">Mechanical, electrical & plumbing — integrated with smart site coordination.</div>
+        </div>
+        <div class="service-card" data-tilt data-tilt-max="12" data-tilt-scale="1.04">
+          <div class="gloss"></div>
+          <div class="label">Asphalt Works</div>
+          <div class="desc">Pavement, resurfacing and highways with modern compaction and QC.</div>
+        </div>
+        <div class="service-card" data-tilt data-tilt-max="12" data-tilt-scale="1.04">
+          <div class="gloss"></div>
+          <div class="label">Landscaping</div>
+          <div class="desc">Exterior works and finishes to ensure sustainable project handover.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="content-container">
+      <h2 class="section-title">Our Achievements</h2>
+
+      <div class="stats mt-4">
+        <div class="stat">
+          <div class="num" data-target="100">0</div>
+          <div class="lbl">Projects Completed</div>
+        </div>
+        <div class="stat">
+          <div class="num" data-target="65">0</div>
+          <div class="lbl">Team Members</div>
+        </div>
+        <div class="stat">
+          <div class="num" data-target="15">0</div>
+          <div class="lbl">Years Experience</div>
+        </div>
+        <div class="stat">
+          <div class="num" data-target="130">0</div>
+          <div class="lbl">Equipment Units</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS (3D Canvas coverflow-like) -->
+  <section id="projects">
+    <div class="content-container">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-sub">Selected recent works — explore with the 3D viewer.</p>
+
+      <div class="projects-wrap">
+        <canvas id="projectsCanvas"></canvas>
+        <div class="projects-ui">
+          <button class="proj-btn" id="projPrev"><i class="fa fa-chevron-left"></i></button>
+          <button class="proj-btn" id="projNext"><i class="fa fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="content-container">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="contact-form">
+            <form onsubmit="event.preventDefault(); alert('Message sent (demo)')">
+              <div class="row g-2">
+                <div class="col-6"><input class="form-control" placeholder="Your name" required></div>
+                <div class="col-6"><input class="form-control" placeholder="Email" type="email" required></div>
+              </div>
+              <input class="form-control mt-2" placeholder="Subject" required>
+              <textarea class="form-control mt-2" rows="5" placeholder="Message" required></textarea>
+              <button class="btn btn-solid w-100 mt-3" type="submit">Send Message</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div style="height:100%; display:flex; align-items:center; justify-content:center;">
+            <div style="text-align:left">
+              <p style="font-weight:700; font-size:1.1rem">Contact Info</p>
+              <p style="color:rgba(255,255,255,0.75)">Mobile: 0544777959 | 05336999619</p>
+              <p style="color:rgba(255,255,255,0.75)">Yanbu, Yanbu' as Sina'iyah 2442, AN Nawah, 8733</p>
+              <p style="color:rgba(255,255,255,0.75)">VAT: 310198822200003 | C.R: 4700116838</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>&copy; <span id="year"></span> Afkar Altatweer Contracting Co. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS: Three.js + GSAP + Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.150.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.150.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+  // Utilities
+  document.getElementById('year').innerText = new Date().getFullYear();
+
+  // Navbar scroll toggle
+  (function(){
+    const nav = document.querySelector('.navbar');
+    function tick(){ if(window.scrollY>40) nav.classList.add('navbar-scrolled'); else nav.classList.remove('navbar-scrolled'); }
+    window.addEventListener('scroll', tick); tick();
+  })();
+
+  // ---------------------------
+  // HERO: THREE.JS SCENE (floating buildings + subtle camera parallax)
+  // ---------------------------
+  (function(){
+    const canvas = document.getElementById('heroCanvas');
+    const renderer = new THREE.WebGLRenderer({canvas: canvas, antialias:true, alpha:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    const scene = new THREE.Scene();
+
+    // Camera
+    const camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight, 0.1, 2000);
+    camera.position.set(0, 6, 22);
+
+    // Lights
+    const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 0.6);
+    scene.add(hemi);
+    const dir = new THREE.DirectionalLight(0xffd27a, 0.9);
+    dir.position.set(10,20,10);
+    scene.add(dir);
+
+    // Ground subtle plane
+    const groundMat = new THREE.MeshStandardMaterial({color:0x070707, roughness:0.9, metalness:0.05});
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(100,100), groundMat);
+    ground.rotation.x = -Math.PI/2;
+    ground.position.y = -1.2;
+    scene.add(ground);
+
+    // Instanced "buildings" — multiple boxes with varying heights forming city blocks
+    const buildingGeo = new THREE.BoxGeometry(1,1,1);
+    const buildingMat = new THREE.MeshStandardMaterial({color:0x0f1724, metalness:0.6, roughness:0.2, emissive:0x001118, emissiveIntensity:0.05});
+    const buildings = new THREE.Group();
+    const seed = 12;
+    for(let x=-seed; x<=seed; x+=1.8){
+      for(let z=-6; z<=6; z+=1.8){
+        const h = Math.random()*6 + 0.6;
+        const mesh = new THREE.Mesh(buildingGeo, buildingMat);
+        mesh.scale.set(1, h, 1);
+        mesh.position.set(x + (Math.random()-0.5)*0.4, h/2 - 1, z + (Math.random()-0.5)*0.4);
+        mesh.castShadow = false;
+        mesh.receiveShadow = true;
+        // small gold accent stripe
+        if(Math.random() > 0.88){
+          const stripe = new THREE.Mesh(new THREE.BoxGeometry(0.2, h*0.8, 0.02), new THREE.MeshStandardMaterial({color:0xffb400, metalness:1, roughness:0.25}));
+          stripe.position.set(mesh.position.x, mesh.position.y + 0.1, mesh.position.z + 0.51);
+          buildings.add(stripe);
+        }
+        buildings.add(mesh);
+      }
+    }
+    buildings.rotation.y = 0.4;
+    scene.add(buildings);
+
+    // A floating branded disc (subtle)
+    const ringGeo = new THREE.TorusGeometry(6.2, 0.12, 16, 120);
+    const ringMat = new THREE.MeshStandardMaterial({color:0xffb400, metalness:1, roughness:0.3, emissive:0x2b1d00, emissiveIntensity:0.06});
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = Math.PI/2 * 0.98;
+    ring.position.set(0, 8.2, -4);
+    scene.add(ring);
+
+    // subtle particles (dust)
+    const particlesGeo = new THREE.BufferGeometry();
+    const count = 450;
+    const pos = new Float32Array(count*3);
+    for(let i=0;i<count;i++){
+      pos[i*3+0] = (Math.random()-0.5)*50;
+      pos[i*3+1] = Math.random()*10 - 2;
+      pos[i*3+2] = (Math.random()-0.5)*30;
+    }
+    particlesGeo.setAttribute('position', new THREE.BufferAttribute(pos,3));
+    const particlesMat = new THREE.PointsMaterial({size:0.06, color:0xffb400, transparent:true, opacity:0.05});
+    const particles = new THREE.Points(particlesGeo, particlesMat);
+    scene.add(particles);
+
+    // Resize
+    function onResize(){
+      const w = window.innerWidth, h = window.innerHeight;
+      renderer.setSize(w,h);
+      camera.aspect = w/h;
+      camera.updateProjectionMatrix();
+    }
+    window.addEventListener('resize', onResize, {passive:true});
+
+    // Mouse parallax for camera
+    const mouse = {x:0,y:0};
+    window.addEventListener('mousemove', (e)=>{
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
+    });
+
+    // Animation loop
+    let t = 0;
+    function animate(){
+      t += 0.005;
+      // rotate buildings group slowly
+      buildings.rotation.y += 0.0008;
+      ring.rotation.z += 0.0015;
+
+      // particles slight drift
+      particles.rotation.y += 0.0004;
+
+      // camera subtle follow
+      const camTargetX = mouse.x * 1.8;
+      const camTargetY = -mouse.y * 0.8 + 5.0;
+      camera.position.x += (camTargetX - camera.position.x) * 0.06;
+      camera.position.y += (camTargetY - camera.position.y) * 0.06;
+      camera.lookAt(0,1.8,0);
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+  })();
+
+  // ---------------------------
+  // SERVICE CARDS: 3D tilt effect (mouse) & entrance animation via GSAP
+  // ---------------------------
+  (function(){
+    const cards = document.querySelectorAll('.service-card');
+    cards.forEach((card, idx) => {
+      // initial entrance
+      gsap.from(card, {y: 40, opacity:0, duration:1, delay: idx*0.12, ease:'expo.out'});
+
+      // tilt:
+      card.addEventListener('mousemove', (e)=>{
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        const rx = (py - 0.5) * parseFloat(card.dataset.tiltMax || 12);
+        const ry = (px - 0.5) * parseFloat(card.dataset.tiltMax || 12) * -1;
+        const scale = parseFloat(card.dataset.tiltScale || 1.03);
+
+        card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale(${scale})`;
+        card.style.boxShadow = `${-ry*2}px ${rx*2}px 30px rgba(0,0,0,0.45)`;
+      });
+      card.addEventListener('mouseleave', ()=> {
+        card.style.transform = '';
+        card.style.boxShadow = '';
+      });
+    });
+  })();
+
+  // ---------------------------
+  // STATS: count-up on scroll using GSAP ScrollTrigger
+  // ---------------------------
+  (function(){
+    gsap.registerPlugin(ScrollTrigger);
+    const counters = document.querySelectorAll('.stat .num');
+    counters.forEach(el=>{
+      const end = parseInt(el.getAttribute('data-target') || el.innerText || '0', 10);
+      gsap.fromTo(el, {innerText:0}, {
+        innerText: end,
+        duration: 2,
+        ease: 'power1.out',
+        snap:{innerText:1},
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 80%',
+          once: true
+        },
+        onUpdate: function() {
+          el.innerText = Math.floor(el.innerText);
+        },
+        onComplete: function(){ el.innerText = end; }
+      });
+    });
+  })();
+
+  // ---------------------------
+  // PROJECTS: lightweight 3D coverflow with Three.js planes
+  // ---------------------------
+  (function(){
+    const canvas = document.getElementById('projectsCanvas');
+    const renderer = new THREE.WebGLRenderer({canvas: canvas, alpha:true, antialias:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(canvas.clientWidth || canvas.width, canvas.clientHeight || canvas.height);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+    camera.position.set(0,0,10);
+
+    // lights
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    const pl = new THREE.PointLight(0xffd27a, 0.8); pl.position.set(10,10,10); scene.add(pl);
+
+    // placeholder textures (you should replace with project images)
+    const loader = new THREE.TextureLoader();
+    const textures = [
+      loader.load('vid.mp4'),
+      loader.load('vid.mp4'),
+      loader.load('vid.mp4')
+    ];
+
+    const group = new THREE.Group();
+    const planes = [];
+    const planeGeo = new THREE.PlaneGeometry(6.4, 4.2);
+    textures.forEach((tex, i)=>{
+      const mat = new THREE.MeshStandardMaterial({map:tex, metalness:0.25, roughness:0.6});
+      const mesh = new THREE.Mesh(planeGeo, mat);
+      mesh.position.x = (i - 1) * 3.8;
+      mesh.position.z = Math.abs(i-1)*-0.6;
+      mesh.rotation.y = (i===1)?0: (i<1?0.35:-0.35);
+      mesh.userData.index = i;
+      group.add(mesh);
+      planes.push(mesh);
+    });
+
+    scene.add(group);
+
+    // Sizing
+    function fitCanvas(){
+      const rect = canvas.getBoundingClientRect();
+      renderer.setSize(rect.width, rect.height);
+      camera.aspect = rect.width / rect.height;
+      camera.updateProjectionMatrix();
+    }
+    window.addEventListener('resize', fitCanvas);
+    // initial
+    fitCanvas();
+
+    // simple auto-rotate and render
+    let current = 1; // center index
+    function render(){
+      // group subtle bob
+      group.rotation.y += 0.002;
+      renderer.render(scene, camera);
+      requestAnimationFrame(render);
+    }
+    render();
+
+    // Controls via UI
+    const prevBtn = document.getElementById('projPrev');
+    const nextBtn = document.getElementById('projNext');
+
+    function showIndex(idx){
+      current = idx;
+      // animate each plane to new position around center
+      planes.forEach((p, i)=>{
+        const targetX = (i - current) * 3.8;
+        const targetZ = Math.abs(i-current)*-0.6;
+        const targetR = (i===current)?0: (i<current?0.45:-0.45);
+        gsap.to(p.position, {x:targetX, z:targetZ, duration:0.9, ease:'power3.out'});
+        gsap.to(p.rotation, {y:targetR, duration:0.9, ease:'power3.out'});
+        gsap.to(p.material, {metalness: (i===current?0.35:0.15), duration:0.7});
+      });
+    }
+
+    prevBtn.addEventListener('click', ()=> showIndex((current-1+planes.length)%planes.length));
+    nextBtn.addEventListener('click', ()=> showIndex((current+1)%planes.length));
+
+    // auto slide every 6s
+    let auto = setInterval(()=> showIndex((current+1)%planes.length), 6000);
+    [prevBtn,nextBtn, canvas].forEach(el=>{
+      el.addEventListener('mouseenter', ()=> clearInterval(auto));
+      el.addEventListener('mouseleave', ()=> auto = setInterval(()=> showIndex((current+1)%planes.length), 6000));
+    });
+  })();
+
+  // ---------------------------
+  // Accessibility: reduce motion for users who prefer it
+  // ---------------------------
+  (function(){
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if(mq.matches){
+      // disable heavy animations by reducing GSAP timeline speeds or pausing them if needed
+      gsap.globalTimeline.timeScale(0.6);
+    }
+  })();
+
+  // ---------------------------
+  // Small helpers: lazy load background videos (if you want to use) and intersection animations
+  // ---------------------------
+  (function(){
+    gsap.registerPlugin(ScrollTrigger);
+    // apply entrance animations to section titles and paragraphs
+    document.querySelectorAll('section').forEach(section=>{
+      gsap.from(section.querySelectorAll('.section-title, .section-sub, .service-card, .stat, .project-info'), {
+        opacity:0, y: 30, duration:1, stagger:.08,
+        scrollTrigger: { trigger: section, start: 'top 85%' }
+      });
+    });
+  })();
+
+  </script>
+</body>
+</html>

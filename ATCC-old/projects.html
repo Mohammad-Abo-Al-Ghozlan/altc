@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects - Afkar Altatweer Contracting Co.</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a5276;
+            --secondary-color: #2e86c1;
+            --accent-color: #f39c12;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(radius);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            border-top: 5px solid white;
+            animation: spin 1.2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.scrolled {
+            padding: 8px 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link {
+            position: relative;
+            color: var(--dark-color);
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 150px 0 100px;
+            color: white;
+            position: relative;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .breadcrumb {
+            background: transparent;
+            justify-content: center;
+        }
+
+        .breadcrumb-item a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        .breadcrumb-item.active {
+            color: white;
+        }
+
+        .breadcrumb-item+.breadcrumb-item::before {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 60px;
+            padding-bottom: 15px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* Project Filter */
+        .project-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 8px 20px;
+            margin: 5px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Project Cards */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .project-card:hover img {
+            transform: scale(1.15) rotate(2deg);
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            padding: 30px 20px 20px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .project-category {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        /* Project Details Modal */
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+        }
+
+        .modal-header {
+            background: var(--gradient);
+            color: white;
+            border-bottom: none;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .project-info {
+            margin-bottom: 20px;
+        }
+
+        .project-info-item {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .project-info-icon {
+            width: 30px;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: white;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Clients Section */
+        .clients-section {
+            background-color: var(--light-color);
+        }
+
+        .client-logo {
+            height: 80px;
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.4s ease;
+            object-fit: contain;
+            padding: 15px;
+        }
+
+        .client-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .btn-hero {
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-hero:hover::before {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.2rem;
+            margin: 0 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-5px) rotate(10deg);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .project-filter {
+                flex-direction: column;
+                align-items: center;
+            }
+            .filter-btn {
+                width: 200px;
+                margin: 5px 0;
+                text-align: center;
+            }
+        }
+
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">AFKAR AL-TATWEER</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about-us.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="projects.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact-us.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center page-header-content" data-aos="fade-up">
+                    <h1 class="display-4 fw-bold">Our Projects</h1>
+                    <p class="lead">Showcasing Our Excellence in Construction and Infrastructure Development</p>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Projects</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Featured Projects</h2>
+            <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">Explore our portfolio of successfully completed projects across various sectors</p>
+            
+            <!-- Project Filter -->
+            <div class="project-filter" data-aos="fade-up" data-aos-delay="200">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="infrastructure">Infrastructure</button>
+                <button class="filter-btn" data-filter="civil">Civil Works</button>
+                <button class="filter-btn" data-filter="dewatering">Dewatering</button>
+                <button class="filter-btn" data-filter="asphalt">Asphalt Works</button>
+                <button class="filter-btn" data-filter="landscape">Landscape</button>
+            </div>
+            
+            <!-- Projects Grid -->
+            <div class="row" id="project-grid">
+                <!-- Infrastructure Projects -->
+                <div class="col-md-6 col-lg-4 mb-4 project-item" data-category="infrastructure" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Infrastructure Works - Neom">
+                        <div class="project-overlay">
+                            <span class="project-category">Infrastructure</span>
+                            <h3 class="project-title">Infrastructure Works - Neom</h3>
+                            <p>Large-scale infrastructure development for the future city</p>
+                            <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#projectModal1">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4 project-item" data-category="infrastructure" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Infrastructure Development">
+                        <div class="project-overlay">
+                            <span class="project-category">Infrastructure</span>
+                            <h3 class="project-title">Road Network Expansion</h3>
+                            <p>Comprehensive road construction and expansion project</p>
+                            <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#projectModal2">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Civil Works Projects -->
+                <div class="col-md-6 col-lg-4 mb-4 project-item" data-category="civil" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Civil Works - Neom">
+                        <div class="project-overlay">
+                            <span class="project-category">Civil Works</span>
+                            <h3 class="project-title">Civil Works - Neom</h3>
+                            <p>Comprehensive civil engineering projects</p>
+                            <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#projectModal3">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4 project-item" data-category="civil" data-aos="fade-up" data-aos-delay="400">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1465433045946-ba6506ce5a59?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ministry of Commerce Building">
+                        <div class="project-overlay">
+                            <span class="project-category">Civil Works</span>
+                            <h3 class="project-title">Ministry of Commerce Building</h3>
+                            <p>Yanbu commercial construction</p>
+                            <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#projectModal4">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dewatering Projects -->
+                <div class="col-md-6 col-lg-4 mb-4 project-item" data-category="dewatering" data-aos="fade-up" data-aos-delay="500">
+                    <div class="project-card">
+                        <img src="https://cdn.pixabay.com/photo/2024/10/12/08/06/building-9114701_1280.jpg" alt="Dewatering & Shoring Works">
+                        <div class="project-overlay">
+                            <span class="project-category">Dewatering</span>
+                            <h3 class="project-title">Dewatering & Shoring Works</h3>
+                            <p>Water management and excavation support systems</p>
+                            <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#projectModal5">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4 project-item" data-category="dewatering" data-aos="fade-up" data-aos-delay="600">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1566669437686-9c5c91cc5c5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Water Desalination Project">
+                        <div class="project-overlay">
+                            <span class="project-category">Dewatering</span>
+                            <h3 class="project-title">Water Desalination Project</h3>
+                            <p>Duba water desalination facility construction</p>
+                            <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#projectModal6">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Asphalt Works Projects -->
+                <div class="col-md-6 col-lg-4 mb-4 project-item" data-category="asphalt" data-aos="fade-up" data-aos-delay="700">
+                    <div class="project-card">
+                        <img src="https://cdn.pixabay.com/photo/2019/02/25/20/13/site-4020496_1280.jpg" alt="Asphalt Works">
+                        <div class="project-overlay">
+                            <span class="project-category">Asphalt Works</span>
+                            <h3 class="project-title">Asphalt Works</h3>
+                            <p>Road construction and maintenance</p>
+                            <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#projectModal7">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4 project-item" data-category="asphalt" data-aos="fade-up" data-aos-delay="800">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1570358934837-1c421a56bf7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="King Khalid Road Expansion">
+                        <div class="project-overlay">
+                            <span class="project-category">Asphalt Works</span>
+                            <h3 class="project-title">King Khalid Road Expansion</h3>
+                            <p>Road construction and extension project in Yanbu</p>
+                            <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#projectModal8">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Landscape Projects -->
+                <div class="col-md-6 col-lg-4 mb-4 project-item" data-category="landscape" data-aos="fade-up" data-aos-delay="900">
+                    <div class="project-card">
+                        <img src="https://cdn.pixabay.com/photo/2014/03/11/23/21/site-285645_1280.jpg" alt="Landscape Works">
+                        <div class="project-overlay">
+                            <span class="project-category">Landscape</span>
+                            <h3 class="project-title">Landscape Works</h3>
+                            <p>Environmental and aesthetic enhancements</p>
+                            <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#projectModal9">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="150">0</div>
+                        <div class="stat-text">Projects Completed</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="95">0</div>
+                        <div class="stat-text">Happy Clients</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="12">0</div>
+                        <div class="stat-text">Years Experience</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="50">0</div>
+                        <div class="stat-text">Awards Received</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section class="clients-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Our Valued Clients</h2>
+            <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">We've had the privilege to work with prestigious organizations and companies</p>
+            
+            <div class="row align-items-center justify-content-center">
+                <div class="col-6 col-md-4 col-lg-2 text-center mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/WHO_logo.svg/468px-WHO_logo.svg.png?20220707000606" alt="Client 1" class="client-logo">
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 text-center mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/General_Electric_logo.svg/750px-General_Electric_logo.svg.png?20241107142738" alt="Client 2" class="client-logo">
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 text-center mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Client 3" class="client-logo">
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 text-center mb-4" data-aos="fade-up" data-aos-delay="500">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Client 4" class="client-logo">
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 text-center mb-4" data-aos="fade-up" data-aos-delay="600">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Samsung.svg/512px-Samsung.svg.png?20210716073651" alt="Client 5" class="client-logo">
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 text-center mb-4" data-aos="fade-up" data-aos-delay="700">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/368px-Google_2015_logo.svg.png?20150901165636" alt="Client 6" class="client-logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                    <h2 class="mb-4">Have a Project in Mind?</h2>
+                    <p class="lead mb-4">Let's discuss how we can bring our expertise and commitment to excellence to your next construction project.</p>
+                    <a href="contact-us.html" class="btn btn-hero btn-primary btn-lg me-3">Start a Project</a>
+                    <a href="services.html" class="btn btn-hero btn-outline-light btn-lg">Our Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h4>Afkar Altatweer Contracting Co.</h4>
+                    <p>Building excellence in every project with commitment to quality, integrity, and customer satisfaction.</p>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h4>Quick Links</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="about-us.html" class="text-white text-decoration-none">About</a></li>
+                        <li><a href="services.html" class="text-white text-decoration-none">Services</a></li>
+                        <li><a href="projects.html" class="text-white text-decoration-none">Projects</a></li>
+                        <li><a href="contact-us.html" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Connect With Us</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="mt-3">
+                        <p><i class="fas fa-phone me-2"></i> Mobile: 0544777959, 05336999619</p>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> Yanbu, Yanbu' as Sina'iyah</p>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="text-center">
+                <p>&copy; 2025 Afkar Altatweer Contracting Co. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Project Modals -->
+    <!-- Modal 1 -->
+    <div class="modal fade" id="projectModal1" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Infrastructure Works - Neom</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Infrastructure Works - Neom" class="img-fluid rounded mb-4">
+                    <div class="project-info">
+                        <div class="project-info-item">
+                            <div class="project-info-icon"><i class="fas fa-calendar"></i></div>
+                            <div>Completion Date: December 2023</div>
+                        </div>
+                        <div class="project-info-item">
+                            <div class="project-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>Location: Neom, Saudi Arabia</div>
+                        </div>
+                        <div class="project-info-item">
+                            <div class="project-info-icon"><i class="fas fa-tag"></i></div>
+                            <div>Category: Infrastructure Development</div>
+                        </div>
+                        <div class="project-info-item">
+                            <div class="project-info-icon"><i class="fas fa-user"></i></div>
+                            <div>Client: Neom Development Corporation</div>
+                        </div>
+                    </div>
+                    <h4>Project Description</h4>
+                    <p>Large-scale infrastructure development for the future city of Neom. This project involved comprehensive planning and execution of road networks, utility systems, and site preparation works to support the visionary Neom development.</p>
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>Advanced road network design</li>
+                        <li>Integrated utility systems</li>
+                        <li>Sustainable infrastructure solutions</li>
+                        <li>Future-proof design for smart city integration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal fade" id="projectModal2" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Road Network Expansion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Road Network Expansion" class="img-fluid rounded mb-4">
+                    <div class="project-info">
+                        <div class="project-info-item">
+                            <div class="project-info-icon"><i class="fas fa-calendar"></i></div>
+                            <div>Completion Date: August 2023</div>
+                        </div>
+                        <div class="project-info-item">
+                            <div class="project-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>Location: Riyadh, Saudi Arabia</div>
+                        </div>
+                        <div class="project-info-item">
+                            <div class="project-info-icon"><i class="fas fa-tag"></i></div>
+                            <div>Category: Infrastructure</div>
+                        </div>
+                        <div class="project-info-item">
+                            <div class="project-info-icon"><i class="fas fa-user"></i></div>
+                            <div>Client: Ministry of Transport</div>
+                        </div>
+                    </div>
+                    <h4>Project Description</h4>
+                    <p>Comprehensive road construction and expansion project to alleviate traffic congestion and improve connectivity in the growing urban area. The project included new road construction, intersection improvements, and drainage system upgrades.</p>
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>20 km of new road construction</li>
+                        <li>5 major intersection upgrades</li>
+                        <li>Advanced drainage and stormwater management</li>
+                        <li>Smart traffic signaling system</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add more modals for other projects following the same pattern -->
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(function() {
+                preloader.style.opacity = '0';
+                setTimeout(function() {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Initialize AOS
+        AOS.init({
+            duration: 1200,
+            once: true,
+            offset: 100
+        });
+
+        // Project Filter
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectItems = document.querySelectorAll('.project-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Filter projects
+                    projectItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+
+        // Statistics Counter
+        function animateCounter() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-count');
+                const count = +counter.innerText;
+                const increment = Math.ceil(target / speed);
+                
+                if (count < target) {
+                    counter.innerText = Math.min(count + increment, target);
+                    setTimeout(() => animateCounter(), 1);
+                }
+            });
+        }
+        
+        // Initialize counter when stats section is in view
+        const statsSection = document.querySelector('.stats-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
