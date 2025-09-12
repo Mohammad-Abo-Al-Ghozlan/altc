@@ -775,8 +775,62 @@
         
         <div class="content-container">
             <div class="hero-content">
-                <img src="assets/atcc-logo-.png" style="height: 180px; margin-bottom: 1rem;" alt="ATCE Logo">
-                <h1 class="hero-logo">AFKAR AL-TATWEER</h1>
+                <img src="assets/atcc-logo-.png" style="height: 180px; margin-bottom: 1rem;" alt="ATCE Logo"><br>
+                <h1 class="hero-logo" id="handwriting-animation">AFKAR AL-TATWEER</h1>
+
+<style>#handwriting-animation {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffb400;
+    position: relative;
+    display: inline-block;
+    margin: 30px 0;
+    padding: 0 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    animation: typing 4.5s steps(22) forwards, blink 0.7s infinite;
+    text-shadow: 0 0 10px rgba(255, 180, 0, 0.5);
+}
+
+#handwriting-animation::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 80%;
+    width: 3px;
+    background-color: #ffb400;
+    animation: blink 0.7s infinite;
+    box-shadow: 0 0 10px rgba(255, 180, 0, 0.8);
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink {
+    from, to { opacity: 0 }
+    50% { opacity: 1 }
+}
+
+/* Add this to your existing CSS */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');</style>
+<script>
+    // JavaScript to replay the animation if needed
+function replayHandwritingAnimation() {
+    const element = document.getElementById('handwriting-animation');
+    element.style.animation = 'none';
+    void element.offsetWidth; // Trigger reflow
+    element.style.animation = 'typing 4.5s steps(22) forwards, blink 0.7s infinite';
+}
+
+// Optional: Replay animation when element is clicked
+document.getElementById('handwriting-animation').addEventListener('click', replayHandwritingAnimation);
+</script>
                 <p class="hero-tagline">Building Excellence Beyond Premium Quality</p>
                 <div class="hero-cta">
                     <button class="btn btn-outline-light btn-lg me-3">Our Projects</button>
@@ -1478,7 +1532,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </section>
 
     <!-- Gallery Section -->
-    <section id="gallery" style="margin-top: 100px;">
+    <section id="gallery" style="margin-top: 100px;overflow: visible;width: 100%;">
         <div class="box">
             <span style="--i:1"><img src="assets/img1.jpg"></span>
             <span style="--i:2"><img src="assets/img2.jpg"></span>
