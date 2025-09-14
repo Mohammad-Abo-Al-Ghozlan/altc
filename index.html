@@ -754,10 +754,10 @@
 
     <!-- Hero Section - Enhanced -->
     <section id="hero">
-        <video class="" autoplay muted loop style="opacity: 0.2;position: absolute;height: 70%;top: 0;left: 0;width: 100%;z-index: 0;">
+        <!-- <video class="" autoplay muted loop style="opacity: 0.2;position: absolute;height: 70%;top: 0;left: 0;width: 100%;z-index: 0;">
             <source src="assets/flag.mp4" type="video/mp4">
         </video>
-        <img src="assets/king.png" class="video-background" style="height: 180%;object-fit: contain;">
+        <img src="assets/king.png" class="video-background" style="height: 180%;object-fit: contain;"> -->
         <div class="section-overlay"></div>
         
         <div class="hero-background-elements">
@@ -776,22 +776,52 @@
         <div class="content-container">
             <div class="hero-content">
                 <img src="assets/atcc-logo-.png" style="height: 180px; margin-bottom: 1rem;" alt="ATCE Logo"><br>
-                <h1 class="hero-logo" id="handwriting-animation">AFKAR AL-TATWEER</h1>
+      <h1 class="hero-logo" id="handwriting-animation">AFKAR AL-TATWEER</h1>
 
-<style>#handwriting-animation {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.8rem;
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+#handwriting-animation {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
     font-weight: 700;
-    color: #ffb400;
+    color: #f5d248;
     position: relative;
     display: inline-block;
-    margin: 30px 0;
-    padding: 0 10px;
+    margin: 40px 0;
+    padding: 0 15px;
     overflow: hidden;
     white-space: nowrap;
     width: 0;
-    animation: typing 4.5s steps(22) forwards, blink 0.7s infinite;
-    text-shadow: 0 0 10px rgba(255, 180, 0, 0.5);
+    animation: typing 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    text-shadow: 0 2px 4px rgba(26, 54, 93, 0.1);
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #eed25d 0%, #cda337 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: typing 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards, 
+               gradientShift 6s ease-in-out infinite;
+}
+
+#handwriting-animation::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+                transparent 0%, 
+                #eed25d 20%, 
+                #cda337 80%, 
+                transparent 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: underlineGrow 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.5s;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(255, 180, 0, 0.8);
 }
 
 #handwriting-animation::after {
@@ -800,36 +830,154 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    height: 80%;
+    height: 85%;
     width: 3px;
-    background-color: #ffb400;
-    animation: blink 0.7s infinite;
+    background: linear-gradient(135deg, #eed25d, #cda337);
+    animation: cursorBlink 1s ease-in-out infinite;
+    border-radius: 2px;
     box-shadow: 0 0 10px rgba(255, 180, 0, 0.8);
 }
 
 @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
+    from { 
+        width: 0;
+        opacity: 0.7;
+    }
+    to { 
+        width: 100%;
+        opacity: 1;
+    }
 }
 
-@keyframes blink {
-    from, to { opacity: 0 }
-    50% { opacity: 1 }
+@keyframes cursorBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
 }
 
-/* Add this to your existing CSS */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');</style>
+@keyframes underlineGrow {
+    from { 
+        transform: scaleX(0);
+        opacity: 0;
+    }
+    to { 
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Hover effects for interactivity */
+#handwriting-animation:hover {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+    filter: brightness(1.1);
+}
+
+#handwriting-animation:hover::before {
+    box-shadow: 0 0 10px rgba(255, 180, 0, 0.8);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    #handwriting-animation {
+        font-size: 2rem;
+        margin: 30px 0;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 480px) {
+    #handwriting-animation {
+        font-size: 1.6rem;
+        margin: 20px 0;
+    }
+}
+</style>
+
 <script>
-    // JavaScript to replay the animation if needed
-function replayHandwritingAnimation() {
-    const element = document.getElementById('handwriting-animation');
-    element.style.animation = 'none';
-    void element.offsetWidth; // Trigger reflow
-    element.style.animation = 'typing 4.5s steps(22) forwards, blink 0.7s infinite';
+class HandwritingAnimation {
+    constructor(elementId) {
+        this.element = document.getElementById(elementId);
+        this.isAnimating = false;
+        this.init();
+    }
+
+    init() {
+        if (this.element) {
+            this.element.addEventListener('click', () => this.replay());
+            
+            // Add intersection observer for scroll-based replay
+            this.setupIntersectionObserver();
+            
+            // Add accessibility
+            this.element.setAttribute('role', 'banner');
+            this.element.setAttribute('aria-label', 'AFKAR AL-TATWEER company logo with typing animation');
+        }
+    }
+
+    replay() {
+        if (this.isAnimating) return;
+        
+        this.isAnimating = true;
+        
+        // Reset animations with improved performance
+        this.element.style.animation = 'none';
+        this.element.offsetHeight; // Force reflow
+        
+        this.element.style.animation = `
+            typing 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+            gradientShift 6s ease-in-out infinite
+        `;
+        
+        // Reset the pseudo-element animations
+        this.resetPseudoElements();
+        
+        setTimeout(() => {
+            this.isAnimating = false;
+        }, 4000);
+    }
+
+    resetPseudoElements() {
+        // Create temporary style to reset pseudo-elements
+        const style = document.createElement('style');
+        style.textContent = `
+            #handwriting-animation::before {
+                animation: none !important;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        setTimeout(() => {
+            document.head.removeChild(style);
+        }, 10);
+    }
+
+    setupIntersectionObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !this.isAnimating) {
+                    // Optional: replay when scrolling into view
+                    // this.replay();
+                }
+            });
+        });
+        
+        observer.observe(this.element);
+    }
 }
 
-// Optional: Replay animation when element is clicked
-document.getElementById('handwriting-animation').addEventListener('click', replayHandwritingAnimation);
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    new HandwritingAnimation('handwriting-animation');
+});
+
+// Export for potential external use
+window.HandwritingAnimation = HandwritingAnimation;
 </script>
                 <p class="hero-tagline">Building Excellence Beyond Premium Quality</p>
                 <div class="hero-cta">
