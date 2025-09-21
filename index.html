@@ -155,6 +155,11 @@
             justify-content: center;
             text-align: center;
             position: relative;
+            /* background-image: url('testbg2.png'); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
         }
         
         .hero-background-elements {
@@ -754,6 +759,7 @@
 
     <!-- Hero Section - Enhanced -->
     <section id="hero">
+        <div></div>
         <!-- <video class="" autoplay muted loop style="opacity: 0.2;position: absolute;height: 70%;top: 0;left: 0;width: 100%;z-index: 0;">
             <source src="assets/flag.mp4" type="video/mp4">
         </video>
@@ -775,210 +781,221 @@
         
         <div class="content-container">
             <div class="hero-content">
-                <img src="assets/atcc-logo-.png" style="height: 180px; margin-bottom: 1rem;" alt="ATCE Logo"><br>
-      <h1 class="hero-logo" id="handwriting-animation">AFKAR AL-TATWEER</h1>
+                <img src="assets/atcc-logo-.png" style="height: 180px; margin-bottom: 1rem;" alt="ATCE Logo">
+                
+                <br>
+                <h1 class="hero-logo" id="handwriting-animation">AFKAR AL-TATWEER</h1>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
-
-#handwriting-animation {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #f5d248;
-    position: relative;
-    display: inline-block;
-    margin: 40px 0;
-    padding: 0 15px;
-    overflow: hidden;
-    white-space: nowrap;
-    width: 0;
-    animation: typing 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    text-shadow: 0 2px 4px rgba(26, 54, 93, 0.1);
-    letter-spacing: 2px;
-    background: linear-gradient(135deg, #eed25d 0%, #cda337 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% 200%;
-    animation: typing 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards, 
-               gradientShift 6s ease-in-out infinite;
-}
-
-#handwriting-animation::before {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, 
-                transparent 0%, 
-                #eed25d 20%, 
-                #cda337 80%, 
-                transparent 100%);
-    transform: scaleX(0);
-    transform-origin: left;
-    animation: underlineGrow 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.5s;
-    border-radius: 2px;
-    box-shadow: 0 0 10px rgba(255, 180, 0, 0.8);
-}
-
-#handwriting-animation::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 85%;
-    width: 3px;
-    background: linear-gradient(135deg, #eed25d, #cda337);
-    animation: cursorBlink 1s ease-in-out infinite;
-    border-radius: 2px;
-    box-shadow: 0 0 10px rgba(255, 180, 0, 0.8);
-}
-
-@keyframes typing {
-    from { 
-        width: 0;
-        opacity: 0.7;
-    }
-    to { 
-        width: 100%;
-        opacity: 1;
-    }
-}
-
-@keyframes cursorBlink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0.3; }
-}
-
-@keyframes underlineGrow {
-    from { 
-        transform: scaleX(0);
-        opacity: 0;
-    }
-    to { 
-        transform: scaleX(1);
-        opacity: 1;
-    }
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Hover effects for interactivity */
-#handwriting-animation:hover {
-    transform: translateY(-2px);
-    transition: transform 0.3s ease;
-    filter: brightness(1.1);
-}
-
-#handwriting-animation:hover::before {
-    box-shadow: 0 0 10px rgba(255, 180, 0, 0.8);
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    #handwriting-animation {
-        font-size: 2rem;
-        margin: 30px 0;
-        letter-spacing: 1px;
-    }
-}
-
-@media (max-width: 480px) {
-    #handwriting-animation {
-        font-size: 1.6rem;
-        margin: 20px 0;
-    }
-}
-</style>
-
-<script>
-class HandwritingAnimation {
-    constructor(elementId) {
-        this.element = document.getElementById(elementId);
-        this.isAnimating = false;
-        this.init();
-    }
-
-    init() {
-        if (this.element) {
-            this.element.addEventListener('click', () => this.replay());
-            
-            // Add intersection observer for scroll-based replay
-            this.setupIntersectionObserver();
-            
-            // Add accessibility
-            this.element.setAttribute('role', 'banner');
-            this.element.setAttribute('aria-label', 'AFKAR AL-TATWEER company logo with typing animation');
-        }
-    }
-
-    replay() {
-        if (this.isAnimating) return;
-        
-        this.isAnimating = true;
-        
-        // Reset animations with improved performance
-        this.element.style.animation = 'none';
-        this.element.offsetHeight; // Force reflow
-        
-        this.element.style.animation = `
-            typing 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards,
-            gradientShift 6s ease-in-out infinite
-        `;
-        
-        // Reset the pseudo-element animations
-        this.resetPseudoElements();
-        
-        setTimeout(() => {
-            this.isAnimating = false;
-        }, 4000);
-    }
-
-    resetPseudoElements() {
-        // Create temporary style to reset pseudo-elements
-        const style = document.createElement('style');
-        style.textContent = `
-            #handwriting-animation::before {
-                animation: none !important;
-            }
-        `;
-        document.head.appendChild(style);
-        
-        setTimeout(() => {
-            document.head.removeChild(style);
-        }, 10);
-    }
-
-    setupIntersectionObserver() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !this.isAnimating) {
-                    // Optional: replay when scrolling into view
-                    // this.replay();
+                <style>
+                @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+                
+                #handwriting-animation {
+                    font-family: 'Playfair Display', serif;
+                    font-size: 2.5rem;
+                    font-weight: 700;
+                    color: #f5d248;
+                    position: relative;
+                    display: inline-block;
+                    margin: 40px 0;
+                    padding: 0 15px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    width: 0;
+                    animation: typing 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+                    text-shadow: 0 2px 4px rgba(26, 54, 93, 0.1);
+                    letter-spacing: 2px;
+                    background: linear-gradient(135deg, #eed25d 0%, #cda337 100%);
+                    background-clip: text;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-size: 200% 200%;
+                    animation: typing 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards, 
+                               gradientShift 6s ease-in-out infinite;
                 }
-            });
-        });
-        
-        observer.observe(this.element);
-    }
-}
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    new HandwritingAnimation('handwriting-animation');
-});
+                #handwriting-animation::before {
+                    content: '';
+                    position: absolute;
+                    bottom: -2px;
+                    left: 0;
+                    right: 0;
+                    height: 3px;
+                    background: linear-gradient(90deg, 
+                                transparent 0%, 
+                                #eed25d 20%, 
+                                #cda337 80%, 
+                                transparent 100%);
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    animation: underlineGrow 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.5s;
+                    border-radius: 2px;
+                    box-shadow: 0 0 10px rgba(255, 180, 0, 0.8);
+                }
 
-// Export for potential external use
-window.HandwritingAnimation = HandwritingAnimation;
-</script>
+                #handwriting-animation::after {
+                    content: '';
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    height: 85%;
+                    width: 3px;
+                    background: linear-gradient(135deg, #eed25d, #cda337);
+                    animation: cursorBlink 1s ease-in-out infinite;
+                    border-radius: 2px;
+                    box-shadow: 0 0 10px rgba(255, 180, 0, 0.8);
+                }
+
+                @keyframes typing {
+                    from { 
+                        width: 0;
+                        opacity: 0.7;
+                    }
+                    to { 
+                        width: 100%;
+                        opacity: 1;
+                    }
+                }
+
+                @keyframes cursorBlink {
+                    0%, 50% { opacity: 1; }
+                    51%, 100% { opacity: 0.3; }
+                }
+
+                @keyframes underlineGrow {
+                    from { 
+                        transform: scaleX(0);
+                        opacity: 0;
+                    }
+                    to { 
+                        transform: scaleX(1);
+                        opacity: 1;
+                    }
+                }
+
+                @keyframes gradientShift {
+                    0% { background-position: 0% 50%; }
+                    50% { background-position: 100% 50%; }
+                    100% { background-position: 0% 50%; }
+                }
+
+                /* Hover effects for interactivity */
+                #handwriting-animation:hover {
+                    transform: translateY(-2px);
+                    transition: transform 0.3s ease;
+                    filter: brightness(1.1);
+                }
+
+                #handwriting-animation:hover::before {
+                    box-shadow: 0 0 10px rgba(255, 180, 0, 0.8);
+                }
+
+                /* Responsive design */
+                @media (max-width: 768px) {
+                    #handwriting-animation {
+                        font-size: 2rem;
+                        margin: 30px 0;
+                        letter-spacing: 1px;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    #handwriting-animation {
+                        font-size: 1.6rem;
+                        margin: 20px 0;
+                    }
+                }
+                </style>
+
+                <script>
+                class HandwritingAnimation {
+                    constructor(elementId) {
+                        this.element = document.getElementById(elementId);
+                        this.isAnimating = false;
+                        this.init();
+                    }
+                
+                    init() {
+                        if (this.element) {
+                            this.element.addEventListener('click', () => this.replay());
+
+                            // Add intersection observer for scroll-based replay
+                            this.setupIntersectionObserver();
+
+                            // Add accessibility
+                            this.element.setAttribute('role', 'banner');
+                            this.element.setAttribute('aria-label', 'AFKAR AL-TATWEER company logo with typing animation');
+                        }
+                    }
+                
+                    replay() {
+                        if (this.isAnimating) return;
+
+                        this.isAnimating = true;
+
+                        // Reset animations with improved performance
+                        this.element.style.animation = 'none';
+                        this.element.offsetHeight; // Force reflow
+
+                        this.element.style.animation = `
+                            typing 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+                            gradientShift 6s ease-in-out infinite
+                        `;
+
+                        // Reset the pseudo-element animations
+                        this.resetPseudoElements();
+
+                        setTimeout(() => {
+                            this.isAnimating = false;
+                        }, 4000);
+                    }
+                
+                    resetPseudoElements() {
+                        // Create temporary style to reset pseudo-elements
+                        const style = document.createElement('style');
+                        style.textContent = `
+                            #handwriting-animation::before {
+                                animation: none !important;
+                            }
+                        `;
+                        document.head.appendChild(style);
+
+                        setTimeout(() => {
+                            document.head.removeChild(style);
+                        }, 10);
+                    }
+                
+                    setupIntersectionObserver() {
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting && !this.isAnimating) {
+                                    // Optional: replay when scrolling into view
+                                    // this.replay();
+                                }
+                            });
+                        });
+
+                        observer.observe(this.element);
+                    }
+                }
+
+                // Initialize when DOM is ready
+                document.addEventListener('DOMContentLoaded', () => {
+                    new HandwritingAnimation('handwriting-animation');
+                });
+
+                // Export for potential external use
+                window.HandwritingAnimation = HandwritingAnimation;
+                </script>
+
+                <!-- old Header -->
+                <!-- <h1 class="hero-logo" id="handwriting-animation">AFKAR AL-TATWEER</h1>
+                <style>#handwriting-animation { font-family: 'Dancing Script', cursive; font-size: 1.8rem; font-weight: 700; color: #ffb400; position: relative; display: inline-block; margin: 30px 0; padding: 0 10px; overflow: hidden; white-space: nowrap; width: 0; animation: typing 4.5s steps(22) forwards, blink 0.7s infinite; text-shadow: 0 0 10px rgba(255, 180, 0, 0.5); } #handwriting-animation::after { content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%); height: 80%; width: 3px; background-color: #ffb400; animation: blink 0.7s infinite; box-shadow: 0 0 10px rgba(255, 180, 0, 0.8); } @keyframes typing { from { width: 0 } to { width: 100% } } @keyframes blink { from, to { opacity: 0 } 50% { opacity: 1 } }</style>
+                <script> function replayHandwritingAnimation() { const element = document.getElementById('handwriting-animation'); element.style.animation = 'none'; void element.offsetWidth; element.style.animation = 'typing 4.5s steps(22) forwards, blink 0.7s infinite'; }  document.getElementById('handwriting-animation').addEventListener('click', replayHandwritingAnimation); </script>
+ -->
+
+
+
                 <p class="hero-tagline">Building Excellence Beyond Premium Quality</p>
                 <div class="hero-cta">
                     <button class="btn btn-outline-light btn-lg me-3">Our Projects</button>
@@ -993,6 +1010,73 @@ window.HandwritingAnimation = HandwritingAnimation;
                 <path d="M12 5V19M12 19L19 12M12 19L5 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </div>
+    </section>
+
+    <!-- Gallery Section -->
+<!-- Gallery Section -->
+    <section id="gallery" style="margin-top: 120px;overflow: visible;width: 100%;">
+        <div class="box">
+            <span style="--i:1"><img src="assets/img1.jpg"></span>
+            <span style="--i:2"><img src="assets/img2.jpg"></span>
+            <span style="--i:3"><img src="assets/img3.jpg"></span>
+            <span style="--i:4"><img src="assets/img4.jpg"></span>
+            <span style="--i:5"><img src="assets/img5.jpg"></span>
+            <span style="--i:6"><img src="assets/img5.jpg"></span>
+        </div>
+        <style>
+            .box {
+                position: relative;
+                width: 200px;
+                height: 300px;
+                transform-style: preserve-3d;
+                animation: animate 20s linear infinite;
+
+            }
+
+            .box:hover{
+                animation-play-state: paused;
+            }
+
+
+            @keyframes animate {
+                0%{
+                    transform: perspective(1000px) rotateY(0deg);
+                }
+                100%{
+                    transform: perspective(1000px) rotateY(360deg);
+                }
+            }
+
+            .box span{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                transform-origin: center;
+                transform-style: preserve-3d;
+                transform: rotateY(calc(var(--i) * 36deg)) translateZ(450px);
+                -webkit-box-reflect: below 2px linear-gradient(transparent, transparent, rgba(4, 4, 4, 0.267));
+            }
+
+
+
+            .box span img{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 70%;
+                transition: 0.5s;
+                border-radius: 15px;
+                border: 4px double rgb(0, 0, 0);
+            }
+
+            img:hover{
+                transform: translateY(-2px);
+
+            }
+        </style>
     </section>
 
     <!-- About Section -->
@@ -1677,72 +1761,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 </button>
             </div>
         </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" style="margin-top: 100px;overflow: visible;width: 100%;">
-        <div class="box">
-            <span style="--i:1"><img src="assets/img1.jpg"></span>
-            <span style="--i:2"><img src="assets/img2.jpg"></span>
-            <span style="--i:3"><img src="assets/img3.jpg"></span>
-            <span style="--i:4"><img src="assets/img4.jpg"></span>
-            <span style="--i:5"><img src="assets/img5.jpg"></span>
-            <span style="--i:6"><img src="assets/img5.jpg"></span>
-        </div>
-        <style>
-            .box {
-                position: relative;
-                width: 200px;
-                height: 300px;
-                transform-style: preserve-3d;
-                animation: animate 20s linear infinite;
-
-            }
-
-            .box:hover{
-                animation-play-state: paused;
-            }
-
-
-            @keyframes animate {
-                0%{
-                    transform: perspective(1000px) rotateY(0deg);
-                }
-                100%{
-                    transform: perspective(1000px) rotateY(360deg);
-                }
-            }
-
-            .box span{
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                transform-origin: center;
-                transform-style: preserve-3d;
-                transform: rotateY(calc(var(--i) * 36deg)) translateZ(450px);
-                -webkit-box-reflect: below 2px linear-gradient(transparent, transparent, rgba(4, 4, 4, 0.267));
-            }
-
-
-
-            .box span img{
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                transition: 0.5s;
-                border-radius: 15px;
-                border: 4px double rgb(0, 0, 0);
-            }
-
-            img:hover{
-                transform: translateY(-2px);
-
-            }
-        </style>
     </section>
 
     <!-- Contact Section -->
