@@ -496,69 +496,231 @@
         }
         
         /* Contact Section */
-        .contact-form {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 3rem;
-            border-radius: 12px;
-            max-width: 600px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
+        .wrapper {
+          width: 100%;
+          height: 100%;
+          display: grid;
+          place-content: center;
+          background: black;
+          z-index: -2;
         }
-        
-        .in-view .contact-form {
-            opacity: 1;
-            transform: translateY(0);
+
+        .form {
+          padding: 2rem 3rem;
+          display: grid;
+          place-items: center;
+          gap: 3rem;
+          border: 1px solid transparent;
+          -o-border-image: linear-gradient(transparent, #ffe0a6, transparent) 1;
+          border-image: linear-gradient(transparent, #ffe0a6, transparent) 1;
+          border-width: 0 2px 0px 2px;
+          background: radial-gradient(
+              100% 61.73% at 100% 50%,
+              rgba(255, 224, 166, 0.05) 0%,
+              transparent 100%
+            ),
+            radial-gradient(
+              91.09% 56.23% at 0% 50%,
+              rgba(255, 224, 166, 0.05) 0%,
+              transparent 100%
+            );
+          position: relative;
         }
-        
-        .form-control {
-            /* background: rgba(255, 255, 255, 0.1); */
-            border: none;
-            border-radius: 4px;
-            color: var(--primary-color);
-            padding: 0.75rem 1rem;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
+        .form::before,
+        .form::after {
+          content: "";
+          position: absolute;
+          border: 1px solid transparent;
+          border: inherit;
+          z-index: -1;
         }
-        
-        .form-control:focus {
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 0 0.25rem rgba(255, 180, 0, 0.25);
-            color: var(--primary-color);
-            transform: translateY(-2px);
+        .form::before {
+          inset: -1rem;
+          opacity: 15%;
         }
-        
-        .btn-primary {
-            background-color: var(--accent-color);
-            border: none;
-            color: var(--dark-bg);
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        .form::after {
+          inset: -2rem;
+          opacity: 5%;
         }
-        
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
+        .form .title {
+          color: white;
+          font-size: 2rem;
+          font-weight: 700;
+          text-align: center;
+          letter-spacing: 1rem;
+          text-transform: uppercase;
+          background: linear-gradient(rgb(170, 170, 170), rgb(78, 78, 78));
+          color: transparent;
+          -webkit-background-clip: text;
+          background-clip: text;
         }
-        
-        .btn-primary:hover::before {
-            left: 100%;
+        .form .input-container {
+          display: flex;
+          align-items: center;
+          background: radial-gradient(
+            47.3% 73.08% at 50% 94.23%,
+            rgba(255, 255, 255, 0.1) 5%,
+            rgba(0, 0, 0, 0) 100%
+          );
+          border: 1px solid transparent;
+          -o-border-image: radial-gradient(
+              circle,
+              rgba(255, 255, 255, 0.445) 0%,
+              rgba(0, 0, 0, 0) 100%
+            )
+            1;
+          border-image: radial-gradient(
+              circle,
+              rgba(255, 255, 255, 0.445) 0%,
+              rgba(0, 0, 0, 0) 100%
+            )
+            1;
+          border-width: 0 0 1px 0;
         }
-        
-        .btn-primary:hover {
-            background-color: #ffa000;
-            transform: translateY(-2px);
+        .form .input-container svg {
+          stroke: grey;
         }
+        .form .input-container svg g {
+          transition: all 0.2s ease-in-out;
+        }
+        .form .input-container .input {
+          background: none;
+          border: none;
+          padding: 0.5rem 1rem;
+          color: white;
+        }
+        .form .input-container .input:focus {
+          outline: none;
+          color: #ffe0a6;
+        }
+        .form .input-container:focus-within {
+          background: radial-gradient(
+            47.3% 73.08% at 50% 94.23%,
+            rgba(255, 224, 166, 0.1) 5%,
+            rgba(0, 0, 0, 0) 100%
+          );
+          -o-border-image: radial-gradient(circle, #ffe0a6 0%, transparent 100%) 1;
+          border-image: radial-gradient(circle, #ffe0a6 0%, transparent 100%) 1;
+        }
+        .form .input-container:focus-within svg g {
+          stroke: #ffe0a6;
+        }
+        .form .login-button {
+          width: 100%;
+          position: relative;
+          transition: all 0.2s ease-in-out;
+        }
+        .form .login-button .input {
+          cursor: pointer;
+          padding: 1rem;
+          width: 100%;
+          background: radial-gradient(
+              100% 45% at 100% 50%,
+              rgba(255, 224, 166, 0.084) 0%,
+              rgba(115, 115, 115, 0) 100%
+            ),
+            radial-gradient(
+              100% 45% at 0% 50%,
+              rgba(255, 224, 166, 0.084) 0%,
+              rgba(115, 115, 115, 0) 100%
+            );
+          border: 1px solid transparent;
+          -o-border-image: linear-gradient(transparent, #ffe0a6, transparent) 1;
+          border-image: linear-gradient(transparent, #ffe0a6, transparent) 1;
+          border-width: 0 1px 0 1px;
+          text-align: center;
+          color: #ffe0a6;
+          font-size: 1rem;
+        }
+        .form .login-button::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          background-image: linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.3764705882) 0.5px,
+            transparent 0.5px
+          );
+          background-size: 0.1px 3px;
+          mix-blend-mode: soft-light;
+          -webkit-mask-image: radial-gradient(
+              40% 45% at 100% 50%,
+              white 0%,
+              transparent 100%
+            ),
+            radial-gradient(40% 45% at 0% 50%, white 0%, transparent 100%);
+          mask-image: radial-gradient(40% 45% at 100% 50%, white 0%, transparent 100%),
+            radial-gradient(40% 45% at 0% 50%, white 0%, transparent 100%);
+        }
+        .form .login-button:hover {
+          animation: flicker 0.5s infinite;
+          width: 105%;
+        }
+        .form .login-button:active {
+          width: 95%;
+        }
+        .form .texture {
+          position: absolute;
+          background-image: linear-gradient(0deg, #ffffff 1px, transparent 1px);
+          background-size: 1px 5px;
+          inset: 0;
+          mix-blend-mode: soft-light;
+          -webkit-mask-image: radial-gradient(
+              30% 45% at 100% 50%,
+              white 0%,
+              transparent 100%
+            ),
+            radial-gradient(30% 45% at 0% 50%, white 0%, transparent 100%);
+          mask-image: radial-gradient(30% 45% at 100% 50%, white 0%, transparent 100%),
+            radial-gradient(30% 45% at 0% 50%, white 0%, transparent 100%);
+          pointer-events: none;
+          animation: movingLines 1s linear infinite;
+        }
+
+        @keyframes flicker {
+          0% {
+            filter: brightness(100%);
+          }
+          10% {
+            filter: brightness(80%);
+          }
+          20% {
+            filter: brightness(120%);
+          }
+          30% {
+            filter: brightness(90%);
+          }
+          40% {
+            filter: brightness(110%);
+          }
+          50% {
+            filter: brightness(100%);
+          }
+          60% {
+            filter: brightness(85%);
+          }
+          70% {
+            filter: brightness(95%);
+          }
+          80% {
+            filter: brightness(105%);
+          }
+          90% {
+            filter: brightness(115%);
+          }
+          100% {
+            filter: brightness(100%);
+          }
+        }
+        @keyframes movingLines {
+          0% {
+            background-position: 0 0;
+          }
+          100% {
+            background-position: 0 5px;
+          }
+        } /*# sourceMappingURL=style.css.map */
         
         /* Footer */
         footer {
@@ -998,9 +1160,149 @@
 
                 <p class="hero-tagline">Building Excellence Beyond Premium Quality</p>
                 <div class="hero-cta">
-                    <button class="btn btn-outline-light btn-lg me-3">Our Projects</button>
+                    <button class="Btn">
+                        <a href="#projects" style="text-decoration: none;color:black;">Projects</a>
+                        <style>
+                            .Btn {
+                              width: 140px;
+                              height: 40px;
+                              border: none;
+                              border-radius: 10px;
+                              background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a);
+                              background-size: 250%;
+                              background-position: left;
+                              color: #ffd277;
+                              cursor: pointer;
+                              transition-duration: 1s;
+                              overflow: hidden;
+                            }
+
+                            .Btn::before {
+                              position: absolute;
+                              /* content: "Projects"; */
+                              color: #ffd277;
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                              width: 97%;
+                              height: 90%;
+                              border-radius: 8px;
+                              transition-duration: 1s;
+                              background-color: rgba(0, 0, 0, 0.842);
+                              background-size: 200%;
+                            }
+
+                            .Btn:hover {
+                              background-position: right;
+                              transition-duration: 1s;
+                            }
+
+                            .Btn:hover::before {
+                              background-position: right;
+                              transition-duration: 1s;
+                            }
+
+                            .Btn:active {
+                              transform: scale(0.95);
+                            }
+                        </style>
+                    </button>
                     <p><br></p>
-                    <button class="btn btn-primary btn-lg">Contact Us</button>
+                    <button class="learn-more">
+                      <span class="circle" aria-hidden="true">
+                      <span class="icon arrow"></span>
+                      </span>
+                      <span class="button-text"><a href="#contact" style="text-decoration: none;color:inherit;">Learn More</a></span>
+                      <style>
+                            button {
+                             position: relative;
+                             display: inline-block;
+                             cursor: pointer;
+                             outline: none;
+                             border: 0;
+                             vertical-align: middle;
+                             text-decoration: none;
+                             background: transparent;
+                             padding: 0;
+                             font-size: inherit;
+                             font-family: inherit;
+                            }
+
+                            button.learn-more {
+                             width: 12rem;
+                             height: auto;
+                            }
+
+                            button.learn-more .circle {
+                             transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+                             position: relative;
+                             display: block;
+                             margin: 0;
+                             width: 3rem;
+                             height: 3rem;
+                             background: #eed25d;
+                             border-radius: 1.625rem;
+                            }
+
+                            button.learn-more .circle .icon {
+                             transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+                             position: absolute;
+                             top: 0;
+                             bottom: 0;
+                             margin: auto;
+                             background: #fff;
+                            }
+
+                            button.learn-more .circle .icon.arrow {
+                             transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+                             left: 0.625rem;
+                             width: 1.125rem;
+                             height: 0.125rem;
+                             background: none;
+                            }
+
+                            button.learn-more .circle .icon.arrow::before {
+                             position: absolute;
+                             content: "";
+                             top: -0.29rem;
+                             right: 0.0625rem;
+                             width: 0.625rem;
+                             height: 0.625rem;
+                             border-top: 0.125rem solid #fff;
+                             border-right: 0.125rem solid #fff;
+                             transform: rotate(45deg);
+                            }
+
+                            button.learn-more .button-text {
+                             transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+                             position: absolute;
+                             top: 0;
+                             left: 0;
+                             right: 0;
+                             bottom: 0;
+                             padding: 0.75rem 0;
+                             margin: 0 0 0 1.85rem;
+                             color: #eed25d;
+                             font-weight: 700;
+                             line-height: 1.6;
+                             text-align: center;
+                             text-transform: uppercase;
+                            }
+
+                            button:hover .circle {
+                             width: 100%;
+                            }
+
+                            button:hover .circle .icon.arrow {
+                             background: #fff;
+                             transform: translate(1rem, 0);
+                            }
+
+                            button:hover .button-text {
+                             color: #fff;
+                            }
+                      </style>
+                    </button>
                 </div>
             </div>
         </div>
@@ -1012,9 +1314,508 @@
         </div>
     </section>
     
-    
+    <!-- About Company Section -->
+<section id="about-company">
+    <style>
+        /* Main Section */
+        #about-company {
+            margin-top: 80px;
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(30,30,30,0.9) 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
 
-<!-- Gallery Section -->
+        /* Typography Responsive */
+        .section-title {
+            color: #ffb400;
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .lead {
+            color: #f8f9fa;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Container Responsive */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Content Layout */
+        .about-content {
+            padding: 0 15px;
+        }
+
+        /* Company Highlights */
+        .company-highlights {
+            margin-bottom: 2rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-item:hover {
+            background: rgba(255,180,0,0.1);
+            transform: translateX(10px);
+        }
+
+        .highlight-icon {
+            color: #ffb400;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,180,0,0.1);
+            border-radius: 50%;
+        }
+
+        .highlight-item h5 {
+            color: #f8f9fa;
+            margin-bottom: 0.3rem;
+            font-size: clamp(1rem, 2vw, 1.1rem);
+        }
+
+        .highlight-item p {
+            color: #adb5bd;
+            margin-bottom: 0;
+            font-size: clamp(0.9rem, 1.8vw, 1rem);
+            line-height: 1.4;
+        }
+
+        /* Mission Vision Cards */
+        .mission-vision {
+            margin-top: 3rem;
+        }
+
+        .mission-vision .card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,180,0,0.3);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .mission-vision .card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,180,0,0.08);
+            border-color: rgba(255,180,0,0.5);
+        }
+
+        .mission-vision .card-title {
+            color: #ffb400;
+            font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+            margin-bottom: 1rem;
+        }
+
+        .mission-vision .card-text {
+            color: #f8f9fa;
+            line-height: 1.6;
+            font-size: clamp(0.9rem, 1.8vw, 1rem);
+        }
+
+        /* Image Section */
+        .about-image {
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .floating-elements {
+            position: relative;
+            width: 100%;
+            height: 400px;
+        }
+
+        .floating-element {
+            position: absolute;
+            animation-duration: 6s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            animation-name: float1;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            animation-name: float2;
+            animation-delay: 1s;
+            animation-duration: 8s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 15%;
+            animation-name: float3;
+            animation-delay: 2s;
+            animation-duration: 7s;
+        }
+
+        .element-icon {
+            width: clamp(60px, 8vw, 80px);
+            height: clamp(60px, 8vw, 80px);
+            background: rgba(255,180,0,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .element-icon i {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: #ffb400;
+        }
+
+        .main-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 80%;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: auto;
+            border: 3px solid #ffb400;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transition: transform 0.5s ease;
+        }
+
+        .main-image img:hover {
+            transform: scale(1.03);
+        }
+
+        /* Animations */
+        @keyframes float1 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(-3deg); }
+        }
+
+        @keyframes float3 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        /* Tablet Styles */
+        @media (max-width: 991.98px) {
+            #about-company {
+                padding: 60px 0;
+                margin-top: 60px;
+            }
+
+            .section-title {
+                text-align: center;
+            }
+
+            .lead {
+                text-align: center;
+            }
+
+            .about-image {
+                margin-top: 2rem;
+            }
+
+            .floating-elements {
+                height: 350px;
+            }
+
+            .mission-vision {
+                margin-top: 2rem;
+            }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 767.98px) {
+            #about-company {
+                padding: 40px 0;
+                min-height: 200vh;
+                margin-top: 40px;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .about-content {
+                padding: 0;
+            }
+
+            .highlight-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem 1rem;
+            }
+
+            .highlight-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+                align-self: center;
+            }
+
+            .floating-elements {
+                height: 300px;
+            }
+
+            .floating-element:nth-child(2) {
+                right: 5%;
+            }
+
+            .floating-element:nth-child(3) {
+                left: 10%;
+            }
+
+            .main-image {
+                width: 90%;
+            }
+
+            .mission-vision .row {
+                margin: 0;
+            }
+
+            .mission-vision .col-md-6 {
+                padding: 0 0 1rem 0;
+            }
+
+            .card-body {
+                padding: 1.5rem 1rem;
+                text-align: center;
+            }
+        }
+
+        /* Extra Small Mobile */
+        @media (max-width: 575.98px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .highlight-item {
+                margin-bottom: 1rem;
+                padding: 1rem 0.5rem;
+            }
+
+            .floating-elements {
+                height: 250px;
+            }
+
+            .element-icon {
+                width: 50px;
+            }
+
+            .main-image {
+                width: 95%;
+            }
+
+            .mission-vision .card {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Landscape Mobile */
+        @media (max-width: 767.98px) and (orientation: landscape) {
+            #about-company {
+                padding: 30px 0;
+            }
+
+            .floating-elements {
+                height: 200px;
+            }
+        }
+
+        /* High DPI Screens */
+        @media (-webkit-min-device-pixel-ratio: 2) {
+            .main-image img {
+                image-rendering: crisp-edges;
+            }
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            .highlight-item {
+                background: rgba(255,255,255,0.05);
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .floating-element {
+                animation: none;
+            }
+
+            .highlight-item {
+                transition: none;
+            }
+
+            .main-image img {
+                transition: none;
+            }
+
+            .mission-vision .card {
+                transition: none;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            #about-company {
+                background: white;
+                color: black;
+                margin-top: 0;
+                padding: 20px 0;
+            }
+
+            .section-title,
+            .highlight-icon i,
+            .mission-vision .card-title {
+                color: black;
+            }
+
+            .floating-element {
+                display: none;
+            }
+
+            .main-image img {
+                border: 1px solid black;
+            }
+        }
+    </style>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <div class="about-content">
+                        <h2 class="section-title mb-4">About Afkar Altatweer</h2>
+                        <p class="lead mb-4">
+                            Afkar Altatweer Contracting Co. (ATCC) is a premier construction company dedicated to 
+                            delivering excellence in every project we undertake. With a strong commitment to quality, 
+                            innovation, and customer satisfaction, we have established ourselves as a trusted partner 
+                            in the construction industry.
+                        </p>
+                        
+                        <div class="company-highlights mb-4">
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-award"></i>
+                                </div>
+                                <div>
+                                    <h5>Quality Excellence</h5>
+                                    <p>Multiple award-winning company with international standards</p>
+                                </div>
+                            </div>
+                            
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div>
+                                    <h5>Expert Team</h5>
+                                    <p>65+ skilled professionals including engineers, technicians, and specialists</p>
+                                </div>
+                            </div>
+                            
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <div>
+                                    <h5>Modern Equipment</h5>
+                                    <p>130+ state-of-the-art equipment units for all construction needs</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mission-vision mt-5">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h4 class="card-title"><i class="fas fa-bullseye me-2"></i>Our Mission</h4>
+                                            <p class="card-text">
+                                                To deliver exceptional construction services that exceed client expectations through 
+                                                innovative solutions, quality craftsmanship, and unwavering commitment to excellence.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h4 class="card-title"><i class="fas fa-eye me-2"></i>Our Vision</h4>
+                                            <p class="card-text">
+                                                To be the leading construction company recognized for quality, innovation, and 
+                                                sustainable development practices across Saudi Arabia and beyond.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <div class="about-image position-relative">
+                        <div class="floating-elements">
+                            <div class="floating-element">
+                                <div class="element-icon">
+                                    <i class="fas fa-hard-hat"></i>
+                                </div>
+                            </div>
+                            <div class="floating-element">
+                                <div class="element-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                            </div>
+                            <div class="floating-element">
+                                <div class="element-icon">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="main-image">
+                                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                     alt="ATCC Construction Site" 
+                                     loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
     <section id="gallery" style="margin-top: 120px;overflow: visible;width: 100%;display: flex;justify-content: center;align-items: center;flex-direction: column;">
         <div class="box">
             <span style="--i:1"><img src="assets/img1.jpg"></span>
@@ -1769,24 +2570,31 @@ document.addEventListener("DOMContentLoaded", () => {
         <video class="video-background" autoplay muted loop>
             <source src="https://assets.mixkit.co/videos/preview/mixkit-architect-in-modern-office-41364-large.mp4" type="video/mp4">
         </video>
-        <div class="section-overlay"></div>
-        <div class="content-container">
-            <h2 class=" mb-5">Get In Touch</h2>
-            <div class="contact-form">
-                <form>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="Your Name">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="email" class="form-control" placeholder="Your Email">
-                        </div>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Subject">
-                    <textarea class="form-control" rows="5" placeholder="Your Message"></textarea>
-                    <button type="submit" class="btn btn-primary w-100">Send Message</button>
-                </form>
+        <!-- From Uiverse.io by Smit-Prajapati --> 
+        <div class="wrapper">
+          <form class="form">
+            <span class="title">Get in Touch</span>
+
+            <div class="input-container">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 6H5m2 3H5m2 3H5m2 3H5m2 3H5m11-1a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2M7 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Zm8 7a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
+                </svg>
+              <input class="input" type="text" placeholder="Name" />
             </div>
+        
+            <div class="input-container">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-6.616l-2.88 2.592C8.537 20.461 7 19.776 7 18.477V17H5a2 2 0 0 1-2-2V6Zm4 2a1 1 0 0 0 0 2h5a1 1 0 1 0 0-2H7Zm8 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2Zm-8 3a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H7Zm5 0a1 1 0 1 0 0 2h5a1 1 0 1 0 0-2h-5Z" clip-rule="evenodd"/>
+                </svg>
+              <input class="input" type="message" placeholder="Message" />
+            </div>
+        
+            <div class="login-button">
+              <input class="input" type="submit" value="submit" />
+            </div>
+        
+            <div class="texture"></div>
+          </form>
         </div>
     </section>
 
