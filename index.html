@@ -1998,50 +1998,42 @@
   <!-- Content -->
   <div class="content-container">
     <div class="about-header text-center">
-      <h2 class="section-title">Our Commitment</h2>
+      <h2 class="">Our Commitment</h2>
       <p class="section-subtitle">Building with excellence, integrity, and innovation</p>
     </div>
 
-    <div class="values-grid d-flex flex-column align-items-center">
-  <div class="row justify-content-center mb-3 gap-3">
-    <div class="value-card col-5 text-center">
-      <i class="fas fa-check-circle"></i>
-      <h5>Quality Services</h5>
+    <div class="values-grid">
+      <div class="value-card text-center">
+        <i class="fas fa-check-circle"></i>
+        <h5>Quality Services</h5>
+      </div>
+      <div class="value-card text-center">
+        <i class="fas fa-users"></i>
+        <h5>Customer Satisfaction</h5>
+      </div>
+      <div class="value-card text-center">
+        <i class="fas fa-globe"></i>
+        <h5>International Standards</h5>
+      </div>
+      <div class="value-card text-center">
+        <i class="fas fa-balance-scale"></i>
+        <h5>Ethical Leadership</h5>
+      </div>
+      <div class="value-card text-center">
+        <i class="fas fa-lightbulb"></i>
+        <h5>Innovative Solutions</h5>
+      </div>
+      <div class="value-card text-center">
+        <i class="fas fa-seedling"></i>
+        <h5>Sustainability</h5>
+      </div>
     </div>
-    <div class="value-card col-5 text-center">
-      <i class="fas fa-users"></i>
-      <h5>Customer Satisfaction</h5>
-    </div>
-  </div>
-
-  <div class="row justify-content-center mb-3 gap-3">
-    <div class="value-card col-5 text-center">
-      <i class="fas fa-globe"></i>
-      <h5>International Standards</h5>
-    </div>
-    <div class="value-card col-5 text-center">
-      <i class="fas fa-balance-scale"></i>
-      <h5>Ethical Leadership</h5>
-    </div>
-  </div>
-
-  <div class="row justify-content-center mb-3 gap-3">
-    <div class="value-card col-5 text-center">
-      <i class="fas fa-lightbulb"></i>
-      <h5>Innovative Solutions</h5>
-    </div>
-    <div class="value-card col-5 text-center">
-      <i class="fas fa-seedling"></i>
-      <h5>Sustainability</h5>
-    </div>
-  </div>
-</div>
-
   </div>
 </section>
 
 <style>
-    .about-section {
+/* About section */
+.about-section {
   position: relative;
   width: 100%;
   min-height: 100vh;
@@ -2053,7 +2045,6 @@
   font-family: 'Poppins', sans-serif;
 }
 
-/* Background video */
 .video-background {
   position: absolute;
   top: 0;
@@ -2064,7 +2055,6 @@
   z-index: -2;
 }
 
-/* Dark overlay */
 .section-overlay {
   position: absolute;
   top: 0;
@@ -2075,7 +2065,6 @@
   z-index: -1;
 }
 
-/* Content wrapper */
 .content-container {
   position: relative;
   max-width: 1200px;
@@ -2083,7 +2072,6 @@
   text-align: center;
 }
 
-/* Titles */
 .section-title {
   font-size: 2.8rem;
   font-weight: 700;
@@ -2101,27 +2089,17 @@
 /* Values grid */
 .values-grid {
   display: grid;
-  justify-content: center;   
-  align-items: center;       
-  gap: 30px; 
-  max-width: 1100px; 
-  margin: 0 auto;   
-  text-align: center;
-  grid-template-columns: 1fr; /* default = 1 column (mobile) */
+  grid-template-columns: repeat(2, 1fr); /* default: 2 per row for responsive */
+  gap: 25px;
+  justify-content: center;
+  align-items: stretch;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .values-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 per row on tablets */
+    grid-template-columns: repeat(6, 1fr); /* all 6 in one row on desktop & tablets */
   }
 }
-
-@media (min-width: 1200px) {
-  .values-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 per row on desktops */
-  }
-}
-
 
 /* Value cards */
 .value-card {
@@ -2148,33 +2126,13 @@
   margin-bottom: 8px;
 }
 
-.value-card p {
-  font-size: 0.95rem;
-  color: #eee;
-  line-height: 1.5;
-}
-
-/* Responsive */
+/* Responsive titles */
 @media (max-width: 768px) {
-  .section-title {
-    font-size: 2rem;
-  }
-  .section-subtitle {
-    font-size: 1rem;
-  }
-}
-.values-grid {
-  display: grid;
-  grid-template-columns: 1fr; /* default: 1 per row (mobile) */
-  gap: 25px;
-}
-
-@media (min-width: 768px) {
-  .values-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 per row on tablets & desktops */
-  }
+  .section-title { font-size: 2rem; }
+  .section-subtitle { font-size: 1rem; }
 }
 </style>
+
 
     <!-- MoHG Section -->
      <div></div>
@@ -2907,17 +2865,17 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </section> -->
     <!-- From Uiverse.io by jack0237 --> 
-    <section id="contact" style="padding: 20px;margin-top: 100px;height: auto;">
-        <div class="form-container">
+    <!-- <section id="contact" style="padding: 20px;margin-top: 100px;height: auto;">
+        <div class="form-container col-lg-3 col-sm-12 col-md-6">
           <form class="form">
             <span class="heading">Contact Us</span>
         
-            <div class="form-group" style="min-width: 100%;">
+            <div class="form-group">
               <input class="form-input" required="" type="text" />
               <label>Name</label>
             </div>
         
-            <div class="form-group" style="min-width: 100%;">
+            <div class="form-group">
               <textarea class="form-input" rows="5" required></textarea>
               <label>Message</label>
             </div>
@@ -3003,7 +2961,120 @@ document.addEventListener("DOMContentLoaded", () => {
             <button class="conbtn">SUBMIT</button>
           </form>
         </div>
-    </section>
+    </section> -->
+<section id="contact" style="padding: 40px 20px; margin-top: 0px; display: flex; justify-content: center; align-items: center; max-height: 60vh;">
+  <div class="form-container col-12 col-sm-10 col-md-8 col-lg-4">
+    <form class="form">
+      <span class="heading">Contact Us</span>
+
+      <div class="form-group">
+        <input class="form-input" required type="text" />
+        <label>Name</label>
+      </div>
+
+      <div class="form-group">
+        <textarea class="form-input" rows="5" required></textarea>
+        <label>Message</label>
+      </div>
+
+      <button class="conbtn">SUBMIT</button>
+    </form>
+  </div>
+
+  <style>
+    .form-container {
+      background: linear-gradient(#212121, #212121) padding-box,
+                  linear-gradient(120deg, transparent 10%, #cea539, #ffc020) border-box;
+      border: 2px solid transparent;
+      padding: 32px;
+      font-size: 14px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+      box-sizing: border-box;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .heading {
+      font-size: 24px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .form-input {
+      color: white;
+      background: transparent;
+      border: 1px solid #414141;
+      border-radius: 5px;
+      padding: 10px;
+      outline: none;
+    }
+
+    .conbtn {
+      border-radius: 5px;
+      padding: 10px;
+      background: #ffffff14;
+      color: #c7c5c5;
+      border: 1px solid #414141;
+      transition: 0.3s;
+    }
+
+    .conbtn:hover {
+      background: #212121;
+      cursor: pointer;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      position: relative;
+    }
+
+    .form-group label {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      pointer-events: none;
+      color: #bdb8b8;
+      transition: 0.3s;
+      font-size: 14px;
+    }
+
+    .form-group input:focus ~ label,
+    .form-group input:valid ~ label,
+    .form-group textarea:focus ~ label,
+    .form-group textarea:valid ~ label {
+      top: -16px;
+      left: 0;
+      background: #212121 padding-box;
+      padding: 0 5px;
+      font-size: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .form-container {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .form-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</section>
 
 
     <!-- Footer -->
