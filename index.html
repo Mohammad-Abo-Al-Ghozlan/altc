@@ -58,6 +58,14 @@
             align-items: center;
         }
         
+        .brand-text p {
+          margin: 0;
+          line-height: 1.2;
+          font-size: 14px;
+          font-weight: 600;
+          color: #cea539;
+        }
+        
         .navbar-brand img {
             height: 40px;
             margin-right: 10px;
@@ -888,8 +896,11 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="assets/atcc-logo-.png" alt="ATCE Logo">
-                ATCC
+              <img src="assets/atcc-logo-.png" alt="ATCC Logo">
+              <div class="brand-text">
+                <p style="font-size:medium;">أفكار التطوير</p>
+                <p style="font-size:medium;">Afkar Altatweer</p>
+              </div>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -1955,7 +1966,7 @@
     </section> -->
 
     <!-- About Section -->
-    <section id="about">
+    <!-- <section id="about">
         <video class="video-background" autoplay muted loop>
             <source src="https://assets.mixkit.co/videos/preview/mixkit-architect-reviewing-blueprints-41363-large.mp4" type="video/mp4">
         </video>
@@ -1972,7 +1983,197 @@
                 </ul>
             </div>
         </div>
-    </section>
+    </section> -->
+    <!-- About Section -->
+<section id="about" class="about-section">
+  <!-- Background video -->
+  <video class="video-background" autoplay muted loop playsinline>
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-architect-reviewing-blueprints-41363-large.mp4" type="video/mp4">
+  </video>
+
+  <!-- Overlay -->
+  <div class="section-overlay"></div>
+
+  <!-- Content -->
+  <div class="content-container">
+    <div class="about-header text-center">
+      <h2 class="section-title">Our Commitment</h2>
+      <p class="section-subtitle">Building with excellence, integrity, and innovation</p>
+    </div>
+
+    <div class="values-grid d-flex flex-column align-items-center">
+  <div class="row justify-content-center mb-3 gap-3">
+    <div class="value-card col-5 text-center">
+      <i class="fas fa-check-circle"></i>
+      <h5>Quality Services</h5>
+    </div>
+    <div class="value-card col-5 text-center">
+      <i class="fas fa-users"></i>
+      <h5>Customer Satisfaction</h5>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-3 gap-3">
+    <div class="value-card col-5 text-center">
+      <i class="fas fa-globe"></i>
+      <h5>International Standards</h5>
+    </div>
+    <div class="value-card col-5 text-center">
+      <i class="fas fa-balance-scale"></i>
+      <h5>Ethical Leadership</h5>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-3 gap-3">
+    <div class="value-card col-5 text-center">
+      <i class="fas fa-lightbulb"></i>
+      <h5>Innovative Solutions</h5>
+    </div>
+    <div class="value-card col-5 text-center">
+      <i class="fas fa-seedling"></i>
+      <h5>Sustainability</h5>
+    </div>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<style>
+    .about-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Background video */
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* Dark overlay */
+.section-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.65);
+  z-index: -1;
+}
+
+/* Content wrapper */
+.content-container {
+  position: relative;
+  max-width: 1200px;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+/* Titles */
+.section-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: #ddd;
+  margin-bottom: 50px;
+}
+
+/* Values grid */
+.values-grid {
+  display: grid;
+  justify-content: center;   
+  align-items: center;       
+  gap: 30px; 
+  max-width: 1100px; 
+  margin: 0 auto;   
+  text-align: center;
+  grid-template-columns: 1fr; /* default = 1 column (mobile) */
+}
+
+@media (min-width: 768px) {
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 per row on tablets */
+  }
+}
+
+@media (min-width: 1200px) {
+  .values-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 per row on desktops */
+  }
+}
+
+
+/* Value cards */
+.value-card {
+  background: rgba(255,255,255,0.08);
+  padding: 30px 20px;
+  border-radius: 12px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255,255,255,0.15);
+}
+
+.value-card i {
+  font-size: 2rem;
+  color: #f1c40f;
+  margin-bottom: 12px;
+}
+
+.value-card h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.value-card p {
+  font-size: 0.95rem;
+  color: #eee;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  .section-subtitle {
+    font-size: 1rem;
+  }
+}
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* default: 1 per row (mobile) */
+  gap: 25px;
+}
+
+@media (min-width: 768px) {
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 per row on tablets & desktops */
+  }
+}
+</style>
 
     <!-- MoHG Section -->
      <div></div>
@@ -2565,7 +2766,42 @@ document.addEventListener("DOMContentLoaded", () => {
     </section>
 
     <!-- Stats Section -->
-    <section id="stats">
+     <section id="stats" class="position-relative py-5" style="max-width: none;">
+  <div class="section-overlay position-absolute w-100 h-100"></div>
+
+  <div class="container text-center position-relative">
+    <h2 class="mb-5">Our Achievements</h2>
+
+    <div class="row justify-content-center g-4">
+      <div class="col-12 col-md-3">
+        <div class="stat-item p-3 bg-opacity-10 rounded">
+          <div class="stat-number fs-2 fw-bold" data-count="100">0</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class="stat-item p-3 bg-opacity-10 rounded">
+          <div class="stat-number fs-2 fw-bold" data-count="65">0</div>
+          <div class="stat-label">Team Members</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class="stat-item p-3 bg-opacity-10 rounded">
+          <div class="stat-number fs-2 fw-bold" data-count="15">0</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class="stat-item p-3 bg-opacity-10 rounded">
+          <div class="stat-number fs-2 fw-bold" data-count="130">0</div>
+          <div class="stat-label">Equipment Units</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- <section id="stats" style="max-width:none;">
         <div class="section-overlay"></div>
         <div class="content-container">
             <h2 class=" mb-5">Our Achievements</h2>
@@ -2588,7 +2824,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Projects Section -->
     <section id="projects">
