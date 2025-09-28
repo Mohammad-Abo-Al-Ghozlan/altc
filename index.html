@@ -962,8 +962,8 @@
         <a class="navbar-brand" href="#">
           <img src="assets/atcc-logo-.png" alt="ATCC Logo" />
           <div class="brand-text">
-            <p style="font-size: small">شركـة افـكـار التـطـوير للـمـقاولات</p>
-            <p style="font-size: xx-small">Afkar Altatweer Contracting Co.</p>
+            <p style="font-size: medium">شركـة افـكـار التـطـوير للمـقاولات</p>
+            <p style="font-size: x-small">Afkar Altatweer Contracting Co.</p>
           </div>
         </a>
         <button
@@ -1006,13 +1006,25 @@
             <source src="assets/flag.mp4" type="video/mp4">
         </video> -->
         <!-- <img src="assets/bg.jpeg" class="video-background" style="opacity: 0.6;">  -->
-         <picture>
-  <!-- Mobile / small screens -->
-  <source srcset="assets/bg-res1.jpg" media="(max-width: 768px)">
-  
-  <!-- Default (desktop & tablet) -->
-  <img src="assets/bg.jpeg" class="video-background" style="opacity: 0.6;" alt="Background">
-</picture>
+         <div class="fullscreen-bg" aria-hidden="true"></div>
+
+<style>
+  .fullscreen-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url("assets/bg.jpeg") no-repeat center center;
+    background-size: cover;   /* desktop/tablet */
+    opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    .fullscreen-bg {
+      background-size: 120% 100%; /* stretch both horizontally & vertically */
+    }
+  }
+</style>
+
 
       <div class="section-overlay"></div>
 
