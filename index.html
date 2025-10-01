@@ -1006,24 +1006,28 @@
             <source src="assets/flag.mp4" type="video/mp4">
         </video> -->
         <!-- <img src="assets/bg.jpeg" class="video-background" style="opacity: 0.6;">  -->
-         <div class="fullscreen-bg" aria-hidden="true"></div>
+<div class="fullscreen-bg" aria-hidden="true"></div>
 
 <style>
   .fullscreen-bg {
-    position: fixed;
+    position: absolute;
     inset: 0;
     z-index: -1;
-    background: url("assets/bg.jpeg") no-repeat center center;
-    background-size: cover;   /* desktop/tablet */
+    background: url("assets/bg.jpeg") no-repeat center center; /* ✅ default (desktop/tablet) */
+    background-size: cover;
     opacity: 0.6;
+    height: 100vh; /* only cover landing screen */
   }
 
   @media (max-width: 768px) {
     .fullscreen-bg {
-      background-size: 120% 100%; /* stretch both horizontally & vertically */
+      background: url("assets/bg-res1.jpg") no-repeat center center; /* ✅ mobile image */
+      background-size: cover;
     }
   }
 </style>
+
+
 
 
       <div class="section-overlay"></div>
