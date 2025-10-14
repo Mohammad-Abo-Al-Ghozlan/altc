@@ -949,6 +949,15 @@
         .construction-element {
           font-size: 2rem;
         }
+
+        .navbar-collapse{
+          background-color: #282824;
+          box-shadow: 0 8px 32px 0 rgba(135, 125, 31, 0.37);
+          backdrop-filter: blur(8.5px);
+          -webkit-backdrop-filter: blur(8.5px);
+          border-radius: 10px;
+          border: 1px solid rgba(255, 255, 255, 0.18);
+        }
       }
     </style>
   </head>
@@ -960,10 +969,10 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
-          <img src="assets/atcc-logo-n.png" alt="ATCC Logo" />
+          <img src="assets/atcc-logo-.png" alt="ATCC Logo" />
           <div class="brand-text">
             <p style="font-size: small">شركـة افـكـار الـتـطـويـر للمقاولات</p>
-            <p style="font-size: x-small">Afkar Altatweer Contracting Co.</p>
+            <p style="font-size: x-small" data-translate="brand_english">Afkar Altatweer Contracting Co.</p>
           </div>
         </a>
         <button
@@ -977,23 +986,60 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#hero">Home</a>
+              <a class="nav-link" href="#hero" data-translate="nav_home">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
+              <a class="nav-link" href="#about" data-translate="nav_about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#services">Services</a>
+              <a class="nav-link" href="#services" data-translate="nav_services">Services</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#stats">Achievements</a>
+              <a class="nav-link" href="#stats" data-translate="nav_achievements">Achievements</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#projects">Projects</a>
+              <a class="nav-link" href="#projects" data-translate="nav_projects">Projects</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact</a>
+              <a class="nav-link" href="#contact" data-translate="nav_contact">Contact</a>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-translate="language_label">
+                🌐 Language
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                <li><a class="dropdown-item lang-select" data-lang="en" href="#" data-translate="lang_en">English</a></li>
+                <li><a class="dropdown-item lang-select" data-lang="ar" href="#" data-translate="lang_ar">العربية</a></li>
+              </ul>
+            </li>
+            <script>
+              document.querySelectorAll('.lang-select').forEach(item => {
+                item.addEventListener('click', e => {
+                  e.preventDefault();
+                  const lang = item.getAttribute('data-lang');
+                  if (lang === 'ar') {
+                    document.documentElement.setAttribute('dir', 'rtl');
+                    document.body.style.textAlign = 'right';
+                  } else {
+                    document.documentElement.removeAttribute('dir');
+                    document.body.style.textAlign = 'left';
+                  }
+                  // Optional: reload page or trigger translation logic here
+                  alert(`Language switched to: ${lang === 'ar' ? 'Arabic' : 'English'}`);
+                });
+              });
+            </script>
+            <style>
+              .dropdown-menu {
+                background-color: #1a1a1a;
+              }
+              .dropdown-item {
+                color: #fff;
+              }
+              .dropdown-item:hover {
+                background-color: #fff;
+              }
+            </style>
           </ul>
         </div>
       </div>
@@ -1059,8 +1105,8 @@
           <br>
 
           <br />
-          <h1 class="hero-logo" id="handwriting-animation">AFKAR AL-TATWEER</h1>
-          <h2 style="color: #fff">ATCC</h2>
+          <h1 class="hero-logo" id="handwriting-animation" data-translate="hero_title">AFKAR AL-TATWEER</h1>
+          <h2 style="color: #fff" data-translate="hero_short">ATCC</h2>
           <!-- <h2 style="color: #cea539">ATCC</h2> -->
 
           <style>
@@ -1283,12 +1329,12 @@
           </script>
 
           <!-- old Header -->
-          <!-- <h1 class="hero-logo" id="handwriting-animation">AFKAR AL-TATWEER</h1>
+          <!-- <h1 class="hero-logo" id="handwriting-animation" data-translate="hero_title">AFKAR AL-TATWEER</h1>
                 <style>#handwriting-animation { font-family: 'Dancing Script', cursive; font-size: 1.8rem; font-weight: 700; color: #ffb400; position: relative; display: inline-block; margin: 30px 0; padding: 0 10px; overflow: hidden; white-space: nowrap; width: 0; animation: typing 4.5s steps(22) forwards, blink 0.7s infinite; text-shadow: 0 0 10px rgba(255, 180, 0, 0.5); } #handwriting-animation::after { content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%); height: 80%; width: 3px; background-color: #ffb400; animation: blink 0.7s infinite; box-shadow: 0 0 10px rgba(255, 180, 0, 0.8); } @keyframes typing { from { width: 0 } to { width: 100% } } @keyframes blink { from, to { opacity: 0 } 50% { opacity: 1 } }</style>
                 <script> function replayHandwritingAnimation() { const element = document.getElementById('handwriting-animation'); element.style.animation = 'none'; void element.offsetWidth; element.style.animation = 'typing 4.5s steps(22) forwards, blink 0.7s infinite'; }  document.getElementById('handwriting-animation').addEventListener('click', replayHandwritingAnimation); </script>
  -->
 
-          <p class="hero-tagline">Building Excellence Beyond Premium Quality</p>
+          <p class="hero-tagline" data-translate="hero_tagline">Building Excellence Beyond Premium Quality</p>
           <div class="hero-cta">
             <button class="Btn">
               <a href="#projects" style="text-decoration: none; color: black"
@@ -1979,14 +2025,8 @@
                 align-items: center;
               "
             >
-              <h2 class="section-title mb-4">About Afkar Altatweer</h2>
-              <p class="lead mb-4">
-                Afkar Altatweer Contracting Co. (ATCC) is a premier construction
-                company dedicated to delivering excellence in every project we
-                undertake. With a strong commitment to quality, innovation, and
-                customer satisfaction, we have established ourselves as a
-                trusted partner in the construction industry.
-              </p>
+              <h2 class="section-title mb-4" data-translate="about_title_alt">About Afkar Altatweer</h2>
+              <p class="lead mb-4" data-translate="about_paragraph">Afkar Altatweer Contracting Co. (ATCC) is a premier construction company dedicated to delivering excellence in every project we undertake. With a strong commitment to quality, innovation, and customer satisfaction, we have established ourselves as a trusted partner in the construction industry.</p>
 
               <div class="company-highlights mb-4">
                 <style>
@@ -2052,14 +2092,9 @@
                     <div class="card h-100">
                       <div class="card-body">
                         <h4 class="card-title">
-                          <i class="fas fa-bullseye me-2"></i>Our Mission
+                          <i class="fas fa-bullseye me-2"></i><span data-translate="mission_title">Our Mission</span>
                         </h4>
-                        <p class="card-text">
-                          To deliver exceptional construction services that
-                          exceed client expectations through innovative
-                          solutions, quality craftsmanship, and unwavering
-                          commitment to excellence.
-                        </p>
+                        <p class="card-text" data-translate="mission_text">To deliver exceptional construction services that exceed client expectations through innovative solutions, quality craftsmanship, and unwavering commitment to excellence.</p>
                       </div>
                     </div>
                   </div>
@@ -2067,13 +2102,9 @@
                     <div class="card h-100">
                       <div class="card-body">
                         <h4 class="card-title">
-                          <i class="fas fa-eye me-2"></i>Our Vision
+                          <i class="fas fa-eye me-2"></i><span data-translate="vision_title">Our Vision</span>
                         </h4>
-                        <p class="card-text">
-                          To be the leading construction company recognized for
-                          quality, innovation, and sustainable development
-                          practices across Saudi Arabia and beyond.
-                        </p>
+                        <p class="card-text" data-translate="vision_text">To be the leading construction company recognized for quality, innovation, and sustainable development practices across Saudi Arabia and beyond.</p>
                       </div>
                     </div>
                   </div>
@@ -2214,36 +2245,34 @@
       <!-- Content -->
       <div class="content-container">
         <div class="about-header text-center">
-          <h2 class="">Our Commitment</h2>
-          <p class="section-subtitle">
-            Building with excellence, integrity, and innovation
-          </p>
+          <h2 class="" data-translate="commitment_title">Our Commitment</h2>
+          <p class="section-subtitle" data-translate="commitment_subtitle">Building with excellence, integrity, and innovation</p>
         </div>
 
         <div class="values-grid">
           <div class="value-card text-center">
             <i class="fas fa-check-circle"></i>
-            <h5>Quality Services</h5>
+            <h5 data-translate="quality_services">Quality Services</h5>
           </div>
           <div class="value-card text-center">
             <i class="fas fa-users"></i>
-            <h5>Customer Satisfaction</h5>
+            <h5 data-translate="customer_satisfaction">Customer Satisfaction</h5>
           </div>
           <div class="value-card text-center">
             <i class="fas fa-globe"></i>
-            <h5>International Standards</h5>
+            <h5 data-translate="international_standards">International Standards</h5>
           </div>
           <div class="value-card text-center">
             <i class="fas fa-balance-scale"></i>
-            <h5>Ethical Leadership</h5>
+            <h5 data-translate="ethical_leadership">Ethical Leadership</h5>
           </div>
           <div class="value-card text-center">
             <i class="fas fa-lightbulb"></i>
-            <h5>Innovative Solutions</h5>
+            <h5 data-translate="innovative_solutions">Innovative Solutions</h5>
           </div>
           <div class="value-card text-center">
             <i class="fas fa-seedling"></i>
-            <h5>Sustainability</h5>
+            <h5 data-translate="sustainability">Sustainability</h5>
           </div>
         </div>
       </div>
@@ -4003,5 +4032,109 @@
         });
       }
     </script>
-  </body>
+  
+<script>
+const translations = {
+  en: {
+    nav_home: "Home",
+    nav_about: "About",
+    nav_services: "Services",
+    nav_achievements: "Achievements",
+    nav_projects: "Projects",
+    nav_contact: "Contact",
+    language_label: "🌐 Language",
+    lang_en: "English",
+    lang_ar: "العربية",
+    brand_english: "Afkar Altatweer Contracting Co.",
+    hero_title: "AFKAR AL-TATWEER",
+    hero_short: "ATCC",
+    hero_tagline: "Building Excellence Beyond Premium Quality",
+    projects: "Projects",
+    learn_more: "Learn More",
+    about_title: "About Afkar Altatweer",
+    about_paragraph: "Afkar Altatweer Contracting Co. (ATCC) is a premier construction company dedicated to delivering excellence in every project we undertake. With a strong commitment to quality, innovation, and customer satisfaction, we have established ourselves as a trusted partner in the construction industry.",
+    mission_title: "Our Mission",
+    mission_text: "To deliver exceptional construction services that exceed client expectations through innovative solutions, quality craftsmanship, and unwavering commitment to excellence.",
+    vision_title: "Our Vision",
+    vision_text: "To be the leading construction company recognized for quality, innovation, and sustainable development practices across Saudi Arabia and beyond.",
+    commitment_title: "Our Commitment",
+    commitment_subtitle: "Building with excellence, integrity, and innovation",
+    quality_services: "Quality Services",
+    customer_satisfaction: "Customer Satisfaction",
+    international_standards: "International Standards",
+    ethical_leadership: "Ethical Leadership",
+    innovative_solutions: "Innovative Solutions",
+    sustainability: "Sustainability"
+  },
+  ar: {
+    nav_home: "الرئيسية",
+    nav_about: "من نحن",
+    nav_services: "الخدمات",
+    nav_achievements: "الإنجازات",
+    nav_projects: "المشاريع",
+    nav_contact: "تواصل معنا",
+    language_label: "🌐 اللغة",
+    lang_en: "English",
+    lang_ar: "العربية",
+    brand_english: "Afkar Altatweer Contracting Co.",
+    hero_title: "أفكار التطوير",
+    hero_short: "ATCC",
+    hero_tagline: "نبني التميز بجودة تفوق الممتاز",
+    projects: "المشاريع",
+    learn_more: "اعرف المزيد",
+    about_title: "عن أفكار التطوير",
+    about_paragraph: "شركة أفكار التطوير للمقاولات (ATCC) هي شركة مقاولات رائدة مكرسة لتقديم التميز في كل مشروع نقوم به. مع التزام قوي بالجودة والابتكار ورضا العملاء، لقد أثبتنا أنفسنا كشريك موثوق في صناعة البناء.",
+    mission_title: "مهمتنا",
+    mission_text: "تقديم خدمات إنشائية استثنائية تتجاوز توقعات العملاء من خلال حلول مبتكرة، وحرفية عالية، والتزام ثابت بالتميز.",
+    vision_title: "رؤيتنا",
+    vision_text: "أن نكون الشركة الرائدة في البناء والمعترف بها للجودة والابتكار والممارسات المستدامة في المملكة العربية السعودية وخارجها.",
+    commitment_title: "التزامنا",
+    commitment_subtitle: "نبني بالتميز والنزاهة والابتكار",
+    quality_services: "خدمات عالية الجودة",
+    customer_satisfaction: "رضا العملاء",
+    international_standards: "المعايير الدولية",
+    ethical_leadership: "القيادة الأخلاقية",
+    innovative_solutions: "حلول مبتكرة",
+    sustainability: "الاستدامة"
+  }
+};
+
+function setLanguage(lang) {
+  if (!translations[lang]) return;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.body.style.textAlign = lang === 'ar' ? 'right' : 'left';
+
+  document.querySelectorAll('[data-translate]').forEach(el => {
+    const key = el.getAttribute('data-translate');
+    const txt = translations[lang][key];
+    if (txt !== undefined) {
+      // Preserve innerHTML structure if the element contains child elements (icons etc.)
+      if (el.children.length === 0) {
+        el.textContent = txt;
+      } else {
+        // If element has children, try to replace only text nodes
+        Array.from(el.childNodes).forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) node.textContent = txt;
+        });
+      }
+    }
+  });
+}
+
+// Hook dropdown
+document.querySelectorAll('.lang-select').forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    const lang = item.getAttribute('data-lang');
+    setLanguage(lang);
+  });
+});
+
+// Set default language: English
+setLanguage('en');
+</script>
+</body>
+</html>
+
 </html>
