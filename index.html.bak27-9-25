@@ -1,0 +1,3982 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Afkar Altatweer Contracting Co. | Building Excellence</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.min.js"></script>
+    <style>
+      :root {
+        --primary-color: #f8f9fa;
+        --accent-color: #ffb400;
+        --dark-bg: #0a0a0a;
+        --overlay-dark: rgba(10, 10, 10, 0.75);
+        --overlay-darker: rgba(10, 10, 10, 0.85);
+        --saudi-green: #006c35;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        color: var(--primary-color);
+        background-color: var(--dark-bg);
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      /* Navigation */
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 1.5rem 2rem;
+        transition: all 0.5s ease;
+      }
+
+      .navbar-scrolled {
+        background-color: var(--overlay-darker);
+        backdrop-filter: blur(10px);
+        padding: 1rem 2rem;
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+      }
+
+      .brand-text p {
+        margin: 0;
+        line-height: 1.2;
+        font-size: 14px;
+        font-weight: 600;
+        color: #cea539;
+      }
+
+      .navbar-brand img {
+        height: 40px;
+        margin-right: 10px;
+      }
+
+      .nav-link {
+        color: var(--primary-color);
+        font-weight: 500;
+        margin: 0 1rem;
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--accent-color);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      /* 3D Scene Containers */
+      #three-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      .three-scene {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease;
+      }
+
+      .three-scene.active {
+        opacity: 1;
+      }
+
+      /* Sections Common Styles */
+      section {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .section-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--overlay-dark);
+        z-index: 1;
+      }
+
+      .content-container {
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 10%;
+      }
+
+      /* Video Background */
+      .video-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+      }
+
+      /* Hero Section - Enhanced */
+      #hero {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        /* background-image: url('testbg2.png'); */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+      }
+
+      .hero-background-elements {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .floating-logo {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.2;
+        animation: float 15s infinite ease-in-out;
+      }
+
+      .saudi-flag {
+        position: absolute;
+        width: 300px;
+        height: 200px;
+        top: 20%;
+        right: 10%;
+        opacity: 0.2;
+        animation: wave 20s infinite linear;
+        transform-origin: center;
+      }
+
+      .construction-elements {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .construction-element {
+        position: absolute;
+        font-size: 3rem;
+        opacity: 0.1;
+        color: var(--accent-color);
+      }
+
+      .ce-1 {
+        top: 15%;
+        left: 10%;
+        animation: bounce 8s infinite ease-in-out;
+      }
+      .ce-2 {
+        top: 25%;
+        right: 15%;
+        animation: bounce 10s infinite ease-in-out 1s;
+      }
+      .ce-3 {
+        bottom: 30%;
+        left: 20%;
+        animation: bounce 12s infinite ease-in-out 2s;
+      }
+      .ce-4 {
+        bottom: 20%;
+        right: 25%;
+        animation: bounce 9s infinite ease-in-out 3s;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 3;
+      }
+
+      .hero-logo {
+        font-size: 5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        animation: fadeInUp 1.5s forwards 0.5s;
+        position: relative;
+        display: inline-block;
+      }
+
+      .hero-logo::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 0;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent-color),
+          transparent
+        );
+        animation: lineExpand 2s forwards 1.5s;
+      }
+
+      .hero-tagline {
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-bottom: 2rem;
+        opacity: 0;
+        animation: fadeInUp 1.5s forwards 1s;
+      }
+
+      .hero-cta {
+        opacity: 0;
+        animation: fadeIn 1.5s forwards 1.5s;
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: bounce 2s infinite;
+        z-index: 3;
+      }
+
+      /* Particle Animation */
+      .particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+
+      .particle {
+        position: absolute;
+        background-color: var(--accent-color);
+        border-radius: 50%;
+        opacity: 0.3;
+      }
+
+      /* About Section */
+      #about {
+        display: flex;
+        align-items: center;
+      }
+
+      .about-content {
+        max-width: 800px;
+      }
+
+      .section-title {
+        font-size: 3rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 2rem;
+        opacity: 0;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        color: white;
+        left: 0;
+        width: 0;
+        height: 4px;
+        background-color: var(--accent-color);
+        transition: width 1s ease;
+      }
+
+      .in-view .section-title::after {
+        width: 100%;
+      }
+
+      .values-list {
+        list-style: none;
+        margin-bottom: 2rem;
+      }
+
+      .values-list li {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        opacity: 0;
+        position: relative;
+        padding-left: 2rem;
+        transform: translateX(-20px);
+        transition: all 0.5s ease;
+      }
+
+      .values-list li::before {
+        content: "•";
+        color: var(--accent-color);
+        font-size: 2rem;
+        position: absolute;
+        left: 0;
+        top: -0.5rem;
+      }
+
+      .in-view .values-list li {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* Services Section */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        height: 100%;
+      }
+
+      .service-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        cursor: pointer;
+        height: 100%;
+        transform: translateY(50px);
+        opacity: 0;
+        transition: all 0.5s ease;
+      }
+
+      .in-view .service-item {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .service-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .service-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, var(--overlay-darker), transparent);
+        display: flex;
+        align-items: flex-end;
+        padding: 2rem;
+        opacity: 0;
+        transition: all 0.5s ease;
+      }
+
+      .service-item:hover .service-bg {
+        transform: scale(1.1);
+      }
+
+      .service-item:hover .service-overlay {
+        opacity: 1;
+      }
+
+      .service-name {
+        font-size: 1.5rem;
+        font-weight: 600;
+        transform: translateY(20px);
+        transition: transform 0.5s ease;
+      }
+
+      .service-item:hover .service-name {
+        transform: translateY(0);
+      }
+
+      /* Stats Section */
+      .stats-container {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+      }
+
+      .stat-item {
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.5s ease;
+      }
+
+      .in-view .stat-item {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .stat-number {
+        font-size: 4rem;
+        font-weight: 700;
+        color: var(--accent-color);
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      /* Projects Section */
+      .project-slider {
+        height: 100%;
+        position: relative;
+      }
+
+      .project-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease;
+      }
+
+      .project-slide.active {
+        opacity: 1;
+      }
+
+      .project-info {
+        position: absolute;
+        bottom: 10%;
+        left: 10%;
+        max-width: 600px;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1s ease;
+      }
+
+      .project-slide.active .project-info {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .project-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .project-nav {
+        position: absolute;
+        bottom: 10%;
+        right: 10%;
+        z-index: 10;
+      }
+
+      /* 3D Model Viewer */
+      .model-viewer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+
+      /* Contact Section */
+      .wrapper {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-content: center;
+        background: black;
+        z-index: -2;
+      }
+
+      .form {
+        padding: 2rem 3rem;
+        display: grid;
+        place-items: center;
+        gap: 3rem;
+        border: 1px solid transparent;
+        -o-border-image: linear-gradient(transparent, #ffe0a6, transparent) 1;
+        border-image: linear-gradient(transparent, #ffe0a6, transparent) 1;
+        border-width: 0 2px 0px 2px;
+        background: radial-gradient(
+            100% 61.73% at 100% 50%,
+            rgba(255, 224, 166, 0.05) 0%,
+            transparent 100%
+          ),
+          radial-gradient(
+            91.09% 56.23% at 0% 50%,
+            rgba(255, 224, 166, 0.05) 0%,
+            transparent 100%
+          );
+        position: relative;
+      }
+      .form::before,
+      .form::after {
+        content: "";
+        position: absolute;
+        border: 1px solid transparent;
+        border: inherit;
+        z-index: -1;
+      }
+      .form::before {
+        inset: -1rem;
+        opacity: 15%;
+      }
+      .form::after {
+        inset: -2rem;
+        opacity: 5%;
+      }
+      .form .title {
+        color: white;
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+        letter-spacing: 1rem;
+        text-transform: uppercase;
+        background: linear-gradient(rgb(170, 170, 170), rgb(78, 78, 78));
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+      .form .input-container {
+        display: flex;
+        align-items: center;
+        background: radial-gradient(
+          47.3% 73.08% at 50% 94.23%,
+          rgba(255, 255, 255, 0.1) 5%,
+          rgba(0, 0, 0, 0) 100%
+        );
+        border: 1px solid transparent;
+        -o-border-image: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.445) 0%,
+            rgba(0, 0, 0, 0) 100%
+          )
+          1;
+        border-image: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.445) 0%,
+            rgba(0, 0, 0, 0) 100%
+          )
+          1;
+        border-width: 0 0 1px 0;
+      }
+      .form .input-container svg {
+        stroke: grey;
+      }
+      .form .input-container svg g {
+        transition: all 0.2s ease-in-out;
+      }
+      .form .input-container .input {
+        background: none;
+        border: none;
+        padding: 0.5rem 1rem;
+        color: white;
+      }
+      .form .input-container .input:focus {
+        outline: none;
+        color: #ffe0a6;
+      }
+      .form .input-container:focus-within {
+        background: radial-gradient(
+          47.3% 73.08% at 50% 94.23%,
+          rgba(255, 224, 166, 0.1) 5%,
+          rgba(0, 0, 0, 0) 100%
+        );
+        -o-border-image: radial-gradient(circle, #ffe0a6 0%, transparent 100%) 1;
+        border-image: radial-gradient(circle, #ffe0a6 0%, transparent 100%) 1;
+      }
+      .form .input-container:focus-within svg g {
+        stroke: #ffe0a6;
+      }
+      .form .login-button {
+        width: 100%;
+        position: relative;
+        transition: all 0.2s ease-in-out;
+      }
+      .form .login-button .input {
+        cursor: pointer;
+        padding: 1rem;
+        width: 100%;
+        background: radial-gradient(
+            100% 45% at 100% 50%,
+            rgba(255, 224, 166, 0.084) 0%,
+            rgba(115, 115, 115, 0) 100%
+          ),
+          radial-gradient(
+            100% 45% at 0% 50%,
+            rgba(255, 224, 166, 0.084) 0%,
+            rgba(115, 115, 115, 0) 100%
+          );
+        border: 1px solid transparent;
+        -o-border-image: linear-gradient(transparent, #ffe0a6, transparent) 1;
+        border-image: linear-gradient(transparent, #ffe0a6, transparent) 1;
+        border-width: 0 1px 0 1px;
+        text-align: center;
+        color: #ffe0a6;
+        font-size: 1rem;
+      }
+      .form .login-button::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.3764705882) 0.5px,
+          transparent 0.5px
+        );
+        background-size: 0.1px 3px;
+        mix-blend-mode: soft-light;
+        -webkit-mask-image: radial-gradient(
+            40% 45% at 100% 50%,
+            white 0%,
+            transparent 100%
+          ),
+          radial-gradient(40% 45% at 0% 50%, white 0%, transparent 100%);
+        mask-image: radial-gradient(
+            40% 45% at 100% 50%,
+            white 0%,
+            transparent 100%
+          ),
+          radial-gradient(40% 45% at 0% 50%, white 0%, transparent 100%);
+      }
+      .form .login-button:hover {
+        animation: flicker 0.5s infinite;
+        width: 105%;
+      }
+      .form .login-button:active {
+        width: 95%;
+      }
+      .form .texture {
+        position: absolute;
+        background-image: linear-gradient(0deg, #ffffff 1px, transparent 1px);
+        background-size: 1px 5px;
+        inset: 0;
+        mix-blend-mode: soft-light;
+        -webkit-mask-image: radial-gradient(
+            30% 45% at 100% 50%,
+            white 0%,
+            transparent 100%
+          ),
+          radial-gradient(30% 45% at 0% 50%, white 0%, transparent 100%);
+        mask-image: radial-gradient(
+            30% 45% at 100% 50%,
+            white 0%,
+            transparent 100%
+          ),
+          radial-gradient(30% 45% at 0% 50%, white 0%, transparent 100%);
+        pointer-events: none;
+        animation: movingLines 1s linear infinite;
+      }
+
+      @keyframes flicker {
+        0% {
+          filter: brightness(100%);
+        }
+        10% {
+          filter: brightness(80%);
+        }
+        20% {
+          filter: brightness(120%);
+        }
+        30% {
+          filter: brightness(90%);
+        }
+        40% {
+          filter: brightness(110%);
+        }
+        50% {
+          filter: brightness(100%);
+        }
+        60% {
+          filter: brightness(85%);
+        }
+        70% {
+          filter: brightness(95%);
+        }
+        80% {
+          filter: brightness(105%);
+        }
+        90% {
+          filter: brightness(115%);
+        }
+        100% {
+          filter: brightness(100%);
+        }
+      }
+      @keyframes movingLines {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 0 5px;
+        }
+      } /*# sourceMappingURL=style.css.map */
+
+      /* Footer */
+      footer {
+        padding: 3rem 0;
+        text-align: center;
+        background-color: var(--overlay-darker);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .contact-info {
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .footer-bg-element {
+        position: absolute;
+        font-size: 15rem;
+        opacity: 0.03;
+        color: var(--accent-color);
+        z-index: 1;
+      }
+
+      .fe-1 {
+        top: 10%;
+        left: 10%;
+        animation: rotate 30s infinite linear;
+      }
+      .fe-2 {
+        bottom: 10%;
+        right: 10%;
+        animation: rotate 20s infinite linear reverse;
+      }
+
+      /* 3D Parallax Elements */
+      .parallax-element {
+        position: absolute;
+        will-change: transform;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-20px);
+        }
+        60% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translate(-50%, -50%) translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translate(-50%, -50%) translateY(-20px) rotate(5deg);
+        }
+      }
+
+      @keyframes wave {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        25% {
+          transform: rotate(2deg);
+        }
+        75% {
+          transform: rotate(-2deg);
+        }
+      }
+
+      @keyframes lineExpand {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes particleMove {
+        0% {
+          transform: translateY(0) translateX(0);
+          opacity: 0.3;
+        }
+        100% {
+          transform: translateY(var(--move-y)) translateX(var(--move-x));
+          opacity: 0;
+        }
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 992px) {
+        .hero-logo {
+          font-size: 3.5rem;
+        }
+
+        .services-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .stats-container {
+          flex-direction: column;
+          gap: 2rem;
+        }
+
+        .saudi-flag {
+          width: 200px;
+          height: 133px;
+          right: 5%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-logo {
+          font-size: 2.5rem;
+        }
+
+        .hero-tagline {
+          font-size: 1.2rem;
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .section-title {
+          color: white;
+          font-size: 2rem;
+        }
+
+        .content-container {
+          padding: 0 5%;
+        }
+
+        .floating-logo {
+          width: 150px;
+          height: 150px;
+        }
+
+        .construction-element {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 3D Background Container -->
+    <div id="three-container"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="assets/atcc-logo-.png" alt="ATCC Logo" />
+          <div class="brand-text">
+            <p style="font-size: medium">أفــــكـــــار الـــــتطويـــــر</p>
+            <p style="font-size: medium">Afkar Altatweer</p>
+          </div>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#hero">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#stats">Achievements</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section - Enhanced -->
+    <section id="hero">
+      <div></div>
+      <!-- <video class="" autoplay muted loop style="opacity: 0.2;position: absolute;height: 70%;top: 0;left: 0;width: 100%;z-index: 0;">
+            <source src="assets/flag.mp4" type="video/mp4">
+        </video> -->
+        <img src="bg.jpeg" class="video-background" style="opacity: 0.6;"> 
+      <div class="section-overlay"></div>
+
+      <div class="hero-background-elements">
+        <img
+          class="floating-logo"
+          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmI0MDAiIHN0cm9rZS13aWR0aD0iMyIvPjxwYXRoIGQ9Ik03MCA3MEgxMzBWMTMwSjcwVjcwWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZiNDAwIiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNNzAgNzBMMTMwIDEzMCIgc3Ryb2tlPSIjZmZiNDAwIiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNMTMwIDcwTDcwIDEzMCIgc3Ryb2tlPSIjZmZiNDAwIiBzdHJva2Utd2lkdGg9IjMiLz48L3N2Zz4="
+          alt="Logo"
+        />
+
+        <div class="construction-elements">
+          <i class="construction-element ce-1 fas fa-hard-hat"></i>
+          <i class="construction-element ce-2 fas fa-tools"></i>
+          <i class="construction-element ce-3 fas fa-truck-pickup"></i>
+          <i class="construction-element ce-4 fas fa-building"></i>
+        </div>
+
+        <div class="particles" id="particles-container"></div>
+      </div>
+
+      <div class="content-container">
+        <div class="hero-content">
+          <img
+            src="assets/atcc-logo-.png"
+            style="height: 150px; margin-bottom: 1rem"
+            alt="ATCE Logo"
+          />
+
+          <br />
+          <h1 class="hero-logo" id="handwriting-animation">AFKAR AL-TATWEER</h1>
+          <h2 style="color: #fff">ATCC</h2>
+          <!-- <h2 style="color: #cea539">ATCC</h2> -->
+
+          <style>
+            @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
+
+            #handwriting-animation {
+              font-family: "Playfair Display", serif;
+              font-weight: 700;
+              color: #f5d248;
+              position: relative;
+              display: inline-block;
+              margin: 40px 0;
+              padding: 0 15px;
+              overflow: hidden;
+              white-space: nowrap;
+              width: 0;
+              animation: typing 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+              text-shadow: 0 2px 4px rgba(26, 54, 93, 0.1);
+              letter-spacing: 2px;
+              background: linear-gradient(135deg, #eed25d 0%, #cda337 100%);
+              background-clip: text;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-size: 200% 200%;
+              animation: typing 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+                gradientShift 6s ease-in-out infinite;
+            }
+
+            #handwriting-animation::before {
+              content: "";
+              position: absolute;
+              bottom: -2px;
+              left: 0;
+              right: 0;
+              height: 3px;
+              background: linear-gradient(
+                90deg,
+                transparent 0%,
+                #eed25d 20%,
+                #cda337 80%,
+                transparent 100%
+              );
+              transform: scaleX(0);
+              transform-origin: left;
+              animation: underlineGrow 3.5s cubic-bezier(0.4, 0, 0.2, 1)
+                forwards 0.5s;
+              border-radius: 2px;
+              box-shadow: 0 0 10px rgba(255, 180, 0, 0.8);
+            }
+
+            #handwriting-animation::after {
+              content: "";
+              position: absolute;
+              right: 0;
+              top: 50%;
+              transform: translateY(-50%);
+              height: 85%;
+              width: 3px;
+              background: linear-gradient(135deg, #eed25d, #cda337);
+              animation: cursorBlink 1s ease-in-out infinite;
+              border-radius: 2px;
+              box-shadow: 0 0 10px rgba(255, 180, 0, 0.8);
+            }
+
+            @keyframes typing {
+              from {
+                width: 0;
+                opacity: 0.7;
+              }
+              to {
+                width: 100%;
+                opacity: 1;
+              }
+            }
+
+            @keyframes cursorBlink {
+              0%,
+              50% {
+                opacity: 1;
+              }
+              51%,
+              100% {
+                opacity: 0.3;
+              }
+            }
+
+            @keyframes underlineGrow {
+              from {
+                transform: scaleX(0);
+                opacity: 0;
+              }
+              to {
+                transform: scaleX(1);
+                opacity: 1;
+              }
+            }
+
+            @keyframes gradientShift {
+              0% {
+                background-position: 0% 50%;
+              }
+              50% {
+                background-position: 100% 50%;
+              }
+              100% {
+                background-position: 0% 50%;
+              }
+            }
+
+            /* Hover effects for interactivity */
+            #handwriting-animation:hover {
+              transform: translateY(-2px);
+              transition: transform 0.3s ease;
+              filter: brightness(1.1);
+            }
+
+            #handwriting-animation:hover::before {
+              box-shadow: 0 0 10px rgba(255, 180, 0, 0.8);
+            }
+
+            /* Responsive design */
+            @media (max-width: 768px) {
+              #handwriting-animation {
+                font-size: 2rem;
+                margin: 30px 0;
+                letter-spacing: 1px;
+              }
+            }
+
+            @media (max-width: 480px) {
+              #handwriting-animation {
+                font-size: 1.6rem;
+                margin: 20px 0;
+              }
+            }
+          </style>
+
+          <script>
+            class HandwritingAnimation {
+              constructor(elementId) {
+                this.element = document.getElementById(elementId);
+                this.isAnimating = false;
+                this.init();
+              }
+
+              init() {
+                if (this.element) {
+                  this.element.addEventListener("click", () => this.replay());
+
+                  // Add intersection observer for scroll-based replay
+                  this.setupIntersectionObserver();
+
+                  // Add accessibility
+                  this.element.setAttribute("role", "banner");
+                  this.element.setAttribute(
+                    "aria-label",
+                    "AFKAR AL-TATWEER company logo with typing animation"
+                  );
+                }
+              }
+
+              replay() {
+                if (this.isAnimating) return;
+
+                this.isAnimating = true;
+
+                // Reset animations with improved performance
+                this.element.style.animation = "none";
+                this.element.offsetHeight; // Force reflow
+
+                this.element.style.animation = `
+                            typing 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+                            gradientShift 6s ease-in-out infinite
+                        `;
+
+                // Reset the pseudo-element animations
+                this.resetPseudoElements();
+
+                setTimeout(() => {
+                  this.isAnimating = false;
+                }, 4000);
+              }
+
+              resetPseudoElements() {
+                // Create temporary style to reset pseudo-elements
+                const style = document.createElement("style");
+                style.textContent = `
+                            #handwriting-animation::before {
+                                animation: none !important;
+                            }
+                        `;
+                document.head.appendChild(style);
+
+                setTimeout(() => {
+                  document.head.removeChild(style);
+                }, 10);
+              }
+
+              setupIntersectionObserver() {
+                const observer = new IntersectionObserver((entries) => {
+                  entries.forEach((entry) => {
+                    if (entry.isIntersecting && !this.isAnimating) {
+                      // Optional: replay when scrolling into view
+                      // this.replay();
+                    }
+                  });
+                });
+
+                observer.observe(this.element);
+              }
+            }
+
+            // Initialize when DOM is ready
+            document.addEventListener("DOMContentLoaded", () => {
+              new HandwritingAnimation("handwriting-animation");
+            });
+
+            // Export for potential external use
+            window.HandwritingAnimation = HandwritingAnimation;
+          </script>
+
+          <!-- old Header -->
+          <!-- <h1 class="hero-logo" id="handwriting-animation">AFKAR AL-TATWEER</h1>
+                <style>#handwriting-animation { font-family: 'Dancing Script', cursive; font-size: 1.8rem; font-weight: 700; color: #ffb400; position: relative; display: inline-block; margin: 30px 0; padding: 0 10px; overflow: hidden; white-space: nowrap; width: 0; animation: typing 4.5s steps(22) forwards, blink 0.7s infinite; text-shadow: 0 0 10px rgba(255, 180, 0, 0.5); } #handwriting-animation::after { content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%); height: 80%; width: 3px; background-color: #ffb400; animation: blink 0.7s infinite; box-shadow: 0 0 10px rgba(255, 180, 0, 0.8); } @keyframes typing { from { width: 0 } to { width: 100% } } @keyframes blink { from, to { opacity: 0 } 50% { opacity: 1 } }</style>
+                <script> function replayHandwritingAnimation() { const element = document.getElementById('handwriting-animation'); element.style.animation = 'none'; void element.offsetWidth; element.style.animation = 'typing 4.5s steps(22) forwards, blink 0.7s infinite'; }  document.getElementById('handwriting-animation').addEventListener('click', replayHandwritingAnimation); </script>
+ -->
+
+          <p class="hero-tagline">Building Excellence Beyond Premium Quality</p>
+          <div class="hero-cta">
+            <button class="Btn">
+              <a href="#projects" style="text-decoration: none; color: black"
+                >Projects</a
+              >
+              <style>
+                .Btn {
+                  width: 140px;
+                  height: 40px;
+                  border: none;
+                  border-radius: 10px;
+                  background: linear-gradient(
+                    to right,
+                    #77530a,
+                    #ffd277,
+                    #77530a,
+                    #77530a,
+                    #ffd277,
+                    #77530a
+                  );
+                  background-size: 250%;
+                  background-position: left;
+                  color: #ffd277;
+                  cursor: pointer;
+                  transition-duration: 1s;
+                  overflow: hidden;
+                }
+
+                .Btn::before {
+                  position: absolute;
+                  /* content: "Projects"; */
+                  color: #ffd277;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 97%;
+                  height: 90%;
+                  border-radius: 8px;
+                  transition-duration: 1s;
+                  background-color: rgba(0, 0, 0, 0.842);
+                  background-size: 200%;
+                }
+
+                .Btn:hover {
+                  background-position: right;
+                  transition-duration: 1s;
+                }
+
+                .Btn:hover::before {
+                  background-position: right;
+                  transition-duration: 1s;
+                }
+
+                .Btn:active {
+                  transform: scale(0.95);
+                }
+              </style>
+            </button>
+            <p><br /></p>
+            <button class="learn-more">
+              <span class="circle" aria-hidden="true">
+                <span class="icon arrow"></span>
+              </span>
+              <span class="button-text"
+                ><a
+                  href="#contact"
+                  style="text-decoration: none; color: inherit"
+                  >Learn More</a
+                ></span
+              >
+              <style>
+                button {
+                  position: relative;
+                  display: inline-block;
+                  cursor: pointer;
+                  outline: none;
+                  border: 0;
+                  vertical-align: middle;
+                  text-decoration: none;
+                  background: transparent;
+                  padding: 0;
+                  font-size: inherit;
+                  font-family: inherit;
+                }
+
+                button.learn-more {
+                  width: 12rem;
+                  height: auto;
+                }
+
+                button.learn-more .circle {
+                  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+                  position: relative;
+                  display: block;
+                  margin: 0;
+                  width: 3rem;
+                  height: 3rem;
+                  background: #eed25d;
+                  border-radius: 1.625rem;
+                }
+
+                button.learn-more .circle .icon {
+                  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+                  position: absolute;
+                  top: 0;
+                  bottom: 0;
+                  margin: auto;
+                  background: #fff;
+                }
+
+                button.learn-more .circle .icon.arrow {
+                  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+                  left: 0.625rem;
+                  width: 1.125rem;
+                  height: 0.125rem;
+                  background: none;
+                }
+
+                button.learn-more .circle .icon.arrow::before {
+                  position: absolute;
+                  content: "";
+                  top: -0.29rem;
+                  right: 0.0625rem;
+                  width: 0.625rem;
+                  height: 0.625rem;
+                  border-top: 0.125rem solid #fff;
+                  border-right: 0.125rem solid #fff;
+                  transform: rotate(45deg);
+                }
+
+                button.learn-more .button-text {
+                  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  padding: 0.75rem 0;
+                  margin: 0 0 0 1.85rem;
+                  color: #eed25d;
+                  font-weight: 700;
+                  line-height: 1.6;
+                  text-align: center;
+                  text-transform: uppercase;
+                }
+
+                button:hover .circle {
+                  width: 100%;
+                }
+
+                button:hover .circle .icon.arrow {
+                  background: #fff;
+                  transform: translate(1rem, 0);
+                }
+
+                button:hover .button-text {
+                  color: #fff;
+                }
+              </style>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-indicator">
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 5V19M12 19L19 12M12 19L5 12"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+    </section>
+
+    <!-- About Company Section -->
+    <section id="about-company" style="height: auto; margin-top: 0px">
+      <style>
+        /* Main Section */
+        #about-company {
+          margin-top: 80px;
+          padding: 80px 0;
+          background: linear-gradient(
+            135deg,
+            rgba(10, 10, 10, 0.95) 0%,
+            rgba(30, 30, 30, 0.9) 100%
+          );
+          height: 100vh;
+          display: flex;
+          align-items: center;
+        }
+
+        /* Typography Responsive */
+        .section-title {
+          color: #ffb400;
+          font-size: clamp(2rem, 5vw, 2.5rem);
+          font-weight: 700;
+          margin-bottom: 1.5rem;
+          text-align: center;
+        }
+
+        .lead {
+          color: #f8f9fa;
+          font-size: clamp(1rem, 2.5vw, 1.2rem);
+          line-height: 1.6;
+          margin-bottom: 2rem;
+          text-align: center;
+        }
+
+        /* Container Responsive */
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 15px;
+        }
+
+        /* Content Layout */
+        .about-content {
+          padding: 0 15px;
+        }
+
+        /* Company Highlights */
+        .company-highlights {
+          margin-bottom: 2rem;
+        }
+
+        .highlight-item {
+          display: flex;
+          align-items: flex-start;
+          margin-bottom: 1.5rem;
+          padding: 1rem;
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 10px;
+          transition: all 0.3s ease;
+        }
+
+        .highlight-item:hover {
+          background: rgba(255, 180, 0, 0.1);
+          transform: translateX(10px);
+        }
+
+        .highlight-icon {
+          color: #ffb400;
+          font-size: 1.5rem;
+          margin-right: 1rem;
+          flex-shrink: 0;
+          width: 50px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 180, 0, 0.1);
+          border-radius: 50%;
+        }
+
+        .highlight-item h5 {
+          color: #f8f9fa;
+          margin-bottom: 0.3rem;
+          font-size: clamp(1rem, 2vw, 1.1rem);
+        }
+
+        .highlight-item p {
+          color: #adb5bd;
+          margin-bottom: 0;
+          font-size: clamp(0.9rem, 1.8vw, 1rem);
+          line-height: 1.4;
+        }
+
+        /* Mission Vision Cards */
+        .mission-vision {
+          margin-top: 3rem;
+        }
+
+        .mission-vision .card {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 180, 0, 0.3);
+          border-radius: 15px;
+          transition: all 0.3s ease;
+          height: 100%;
+        }
+
+        .mission-vision .card:hover {
+          transform: translateY(-5px);
+          background: rgba(255, 180, 0, 0.08);
+          border-color: rgba(255, 180, 0, 0.5);
+        }
+
+        .mission-vision .card-title {
+          color: #ffb400;
+          font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+          margin-bottom: 1rem;
+        }
+
+        .mission-vision .card-text {
+          color: #f8f9fa;
+          line-height: 1.6;
+          font-size: clamp(0.9rem, 1.8vw, 1rem);
+        }
+
+        /* Image Section */
+        .about-image {
+          position: relative;
+          margin-top: 3rem;
+        }
+
+        .floating-elements {
+          position: relative;
+          width: 100%;
+          height: 400px;
+        }
+
+        .floating-element {
+          position: absolute;
+          animation-duration: 6s;
+          padding: 0px;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: infinite;
+        }
+
+        .floating-element:nth-child(1) {
+          top: 10%;
+          left: 5%;
+          animation-name: float1;
+        }
+
+        .floating-element:nth-child(2) {
+          top: 60%;
+          right: 10%;
+          animation-name: float2;
+          animation-delay: 1s;
+          animation-duration: 8s;
+        }
+
+        .floating-element:nth-child(3) {
+          bottom: 20%;
+          left: 15%;
+          animation-name: float3;
+          animation-delay: 2s;
+          animation-duration: 7s;
+        }
+
+        .element-icon {
+          width: clamp(60px, 8vw, 80px);
+          height: clamp(60px, 8vw, 80px);
+          background: rgba(255, 180, 0, 0.1);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          backdrop-filter: blur(10px);
+        }
+
+        .element-icon i {
+          font-size: clamp(1.5rem, 3vw, 2rem);
+          color: #ffb400;
+        }
+
+        .main-image {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 2;
+          width: 80%;
+        }
+
+        .main-image img {
+          width: 100%;
+          height: auto;
+          border: 3px solid #ffb400;
+          border-radius: 15px;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+          transition: transform 0.5s ease;
+        }
+
+        .main-image img:hover {
+          transform: scale(1.03);
+        }
+
+        /* Animations */
+        @keyframes float1 {
+          0%,
+          100% {
+            transform: translateY(0) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-20px) rotate(5deg);
+          }
+        }
+
+        @keyframes float2 {
+          0%,
+          100% {
+            transform: translateY(0) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-25px) rotate(-3deg);
+          }
+        }
+
+        @keyframes float3 {
+          0%,
+          100% {
+            transform: translateY(0) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-15px) rotate(2deg);
+          }
+        }
+
+        /* Tablet Styles */
+        @media (max-width: 991.98px) {
+          #about-company {
+            padding: 60px 0;
+            margin-top: 60px;
+          }
+
+          .section-title {
+            text-align: center;
+          }
+
+          .lead {
+            text-align: center;
+          }
+
+          .about-image {
+            margin-top: 2rem;
+          }
+
+          .floating-elements {
+            height: 350px;
+          }
+
+          .mission-vision {
+            margin-top: 2rem;
+          }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 767.98px) {
+          #about-company {
+            padding: 40px 0;
+            min-height: 200vh;
+            /*margin-top: 40px;*/
+          }
+
+          .container {
+            padding: 0 20px;
+          }
+
+          .about-content {
+            padding: 0;
+          }
+
+          .highlight-item {
+            flex-direction: column;
+            text-align: center;
+            padding: 1.5rem 1rem;
+          }
+
+          .highlight-icon {
+            margin-right: 0;
+            margin-bottom: 1rem;
+            align-self: center;
+          }
+
+          .floating-elements {
+            height: 300px;
+          }
+
+          .floating-element:nth-child(2) {
+            right: 5%;
+          }
+
+          .floating-element:nth-child(3) {
+            left: 10%;
+          }
+
+          .main-image {
+            width: 90%;
+          }
+
+          .mission-vision .row {
+            margin: 0;
+          }
+
+          .mission-vision .col-md-6 {
+            padding: 0 0 1rem 0;
+          }
+
+          .card-body {
+            padding: 1.5rem 1rem;
+            text-align: center;
+          }
+        }
+
+        /* Extra Small Mobile */
+        @media (max-width: 575.98px) {
+          .container {
+            padding: 0 15px;
+          }
+
+          .highlight-item {
+            margin-bottom: 1rem;
+            padding: 1rem 0.5rem;
+          }
+
+          .floating-elements {
+            height: 250px;
+          }
+
+          .element-icon {
+            width: 50px;
+          }
+
+          .main-image {
+            width: 95%;
+          }
+
+          .mission-vision .card {
+            margin-bottom: 1rem;
+          }
+        }
+
+        /* Landscape Mobile */
+        @media (max-width: 767.98px) and (orientation: landscape) {
+          #about-company {
+            padding: 30px 0;
+          }
+
+          .floating-elements {
+            height: 200px;
+          }
+        }
+
+        /* High DPI Screens */
+        @media (-webkit-min-device-pixel-ratio: 2) {
+          .main-image img {
+            image-rendering: crisp-edges;
+          }
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+          .highlight-item {
+            background: rgba(255, 255, 255, 0.05);
+          }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+          .floating-element {
+            animation: none;
+          }
+
+          .highlight-item {
+            transition: none;
+          }
+
+          .main-image img {
+            transition: none;
+          }
+
+          .mission-vision .card {
+            transition: none;
+          }
+        }
+
+        /* Print Styles */
+        @media print {
+          #about-company {
+            background: white;
+            color: black;
+            margin-top: 0;
+            padding: 20px 0;
+          }
+
+          .section-title,
+          .highlight-icon i,
+          .mission-vision .card-title {
+            color: black;
+          }
+
+          .floating-element {
+            display: none;
+          }
+
+          .main-image img {
+            border: 1px solid black;
+          }
+        }
+      </style>
+      <div class="container">
+        <div class="row align-items-center">
+          <div
+            class="col-lg-12 order-2 order-lg-1"
+            style="padding-top: 0px; margin-top: -135px"
+          >
+            <div
+              class="container"
+              style="text-align: center; padding-top: 0px; margin-top: 0px"
+            >
+              <div
+                class="orbit-gallery"
+                style="
+                  display: grid;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <span style="--i: 1"
+                  ><img src="assets/img1.jpg" alt="Image 1"
+                /></span>
+                <span style="--i: 2"
+                  ><img src="assets/img2.jpg" alt="Image 2"
+                /></span>
+                <span style="--i: 3"
+                  ><img src="assets/img3.jpg" alt="Image 3"
+                /></span>
+                <span style="--i: 4"
+                  ><img src="assets/img4.jpg" alt="Image 4"
+                /></span>
+                <span style="--i: 5"
+                  ><img src="assets/img5.jpg" alt="Image 5"
+                /></span>
+                <span style="--i: 6"
+                  ><img src="assets/img6.jpg" alt="Image 6"
+                /></span>
+              </div>
+            </div>
+
+            <style>
+              .orbit-gallery {
+                position: relative;
+                width: 400px;
+                height: 400px;
+                margin: auto;
+                transform-style: preserve-3d;
+                animation: spin 15s linear infinite;
+              }
+
+              .orbit-gallery span {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 180px;
+                height: 200px;
+                transform-origin: center;
+                transform: rotateY(calc(var(--i) * 60deg)) translateZ(350px);
+              }
+
+              .orbit-gallery img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 20px;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+                transition: transform 0.5s ease, filter 0.5s ease;
+              }
+
+              .orbit-gallery img:hover {
+                transform: scale(1.15);
+                filter: brightness(1.3);
+              }
+
+              @keyframes spin {
+                0% {
+                  transform: rotateY(0deg);
+                }
+                100% {
+                  transform: rotateY(360deg);
+                }
+              }
+            </style>
+            <div
+              class="about-content"
+              style="
+                display: contents;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <h2 class="section-title mb-4">About Afkar Altatweer</h2>
+              <p class="lead mb-4">
+                Afkar Altatweer Contracting Co. (ATCC) is a premier construction
+                company dedicated to delivering excellence in every project we
+                undertake. With a strong commitment to quality, innovation, and
+                customer satisfaction, we have established ourselves as a
+                trusted partner in the construction industry.
+              </p>
+
+              <div class="company-highlights mb-4">
+                <style>
+                  .company-highlights {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 5px;
+                    flex-wrap: wrap;
+                  }
+
+                  .highlight-item {
+                    flex: 1 1 30%;
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    padding: 15px;
+                    border-radius: 10px;
+                  }
+                </style>
+                <div class="highlight-item">
+                  <div class="highlight-icon">
+                    <i class="fas fa-award"></i>
+                  </div>
+                  <div>
+                    <h5>Quality Excellence</h5>
+                    <p>
+                      Multiple award-winning company with international
+                      standards
+                    </p>
+                  </div>
+                </div>
+
+                <div class="highlight-item">
+                  <div class="highlight-icon">
+                    <i class="fas fa-users"></i>
+                  </div>
+                  <div>
+                    <h5>Expert Team</h5>
+                    <p>
+                      65+ skilled professionals including engineers,
+                      technicians, and specialists
+                    </p>
+                  </div>
+                </div>
+
+                <div class="highlight-item">
+                  <div class="highlight-icon">
+                    <i class="fas fa-tools"></i>
+                  </div>
+                  <div>
+                    <h5>Modern Equipment</h5>
+                    <p>
+                      130+ state-of-the-art equipment units for all construction
+                      needs
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mission-vision mt-5">
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <i class="fas fa-bullseye me-2"></i>Our Mission
+                        </h4>
+                        <p class="card-text">
+                          To deliver exceptional construction services that
+                          exceed client expectations through innovative
+                          solutions, quality craftsmanship, and unwavering
+                          commitment to excellence.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <i class="fas fa-eye me-2"></i>Our Vision
+                        </h4>
+                        <p class="card-text">
+                          To be the leading construction company recognized for
+                          quality, innovation, and sustainable development
+                          practices across Saudi Arabia and beyond.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="col-lg-6 order-1 order-lg-2">
+                    <div class="about-image position-relative">
+                        <div class="floating-elements">
+                            <div class="floating-element">
+                                <div class="element-icon">
+                                    <i class="fas fa-hard-hat"></i>
+                                </div>
+                            </div>
+                            <div class="floating-element">
+                                <div class="element-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                            </div>
+                            <div class="floating-element">
+                                <div class="element-icon">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="main-image">
+                                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                     alt="ATCC Construction Site" 
+                                     loading="lazy">
+                            </div> 
+                        </div>
+                    </div>
+                </div> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <!-- <section id="gallery" style="margin-top: 120px;overflow: visible;width: 100%;display: flex;justify-content: center;align-items: center;flex-direction: column;">
+        <div class="box">
+            <span style="--i:1"><img src="assets/img1.jpg"></span>
+            <span style="--i:2"><img src="assets/img2.jpg"></span>
+            <span style="--i:3"><img src="assets/img3.jpg"></span>
+            <span style="--i:4"><img src="assets/img4.jpg"></span>
+            <span style="--i:5"><img src="assets/img5.jpg"></span>
+            <span style="--i:6"><img src="assets/img5.jpg"></span>
+        </div>
+        <style>
+            .box {
+                position: relative;
+                width: 200px;
+                height: 300px;
+                transform-style: preserve-3d;
+                animation: animate 20s linear infinite;
+
+            }
+
+            .box:hover{
+                animation-play-state: paused;
+            }
+
+
+            @keyframes animate {
+                0%{
+                    transform: perspective(1000px) rotateY(0deg);
+                }
+                100%{
+                    transform: perspective(1000px) rotateY(360deg);
+                }
+            }
+
+            .box span{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                transform-origin: center;
+                transform-style: preserve-3d;
+                transform: rotateY(calc(var(--i) * 36deg)) translateZ(450px);
+                -webkit-box-reflect: below 2px linear-gradient(transparent, transparent, rgba(4, 4, 4, 0.267));
+            }
+
+
+
+            .box span img{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 70%;
+                transition: 0.5s;
+                border-radius: 15px;
+                border: 4px double rgb(0, 0, 0);
+            }
+
+            img:hover{
+                transform: translateY(-2px);
+
+            }
+        </style>
+    </section> -->
+
+    <!-- About Section -->
+    <!-- <section id="about">
+        <video class="video-background" autoplay muted loop>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-architect-reviewing-blueprints-41363-large.mp4" type="video/mp4">
+        </video>
+        <div class="section-overlay"></div>
+        <div class="content-container">
+            <div class="about-content">
+                <h2 class="">Our Commitment</h2>
+                <ul class="values-list">
+                    <li>Quality Services</li>
+                    <li>Customer Satisfaction</li>
+                    <li>International Standards</li>
+                    <li>Ethical Leadership</li>
+                    <li>Innovative Solutions</li>
+                </ul>
+            </div>
+        </div>
+    </section> -->
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <!-- Background video -->
+      <video class="video-background" autoplay muted loop playsinline>
+        <source
+          src="https://assets.mixkit.co/videos/preview/mixkit-architect-reviewing-blueprints-41363-large.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      <!-- Overlay -->
+      <div class="section-overlay"></div>
+
+      <!-- Content -->
+      <div class="content-container">
+        <div class="about-header text-center">
+          <h2 class="">Our Commitment</h2>
+          <p class="section-subtitle">
+            Building with excellence, integrity, and innovation
+          </p>
+        </div>
+
+        <div class="values-grid">
+          <div class="value-card text-center">
+            <i class="fas fa-check-circle"></i>
+            <h5>Quality Services</h5>
+          </div>
+          <div class="value-card text-center">
+            <i class="fas fa-users"></i>
+            <h5>Customer Satisfaction</h5>
+          </div>
+          <div class="value-card text-center">
+            <i class="fas fa-globe"></i>
+            <h5>International Standards</h5>
+          </div>
+          <div class="value-card text-center">
+            <i class="fas fa-balance-scale"></i>
+            <h5>Ethical Leadership</h5>
+          </div>
+          <div class="value-card text-center">
+            <i class="fas fa-lightbulb"></i>
+            <h5>Innovative Solutions</h5>
+          </div>
+          <div class="value-card text-center">
+            <i class="fas fa-seedling"></i>
+            <h5>Sustainability</h5>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      /* About section */
+      .about-section {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        color: #fff;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .video-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -2;
+      }
+
+      .section-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.65);
+        z-index: -1;
+      }
+
+      .content-container {
+        position: relative;
+        max-width: 1200px;
+        padding: 60px 20px;
+        text-align: center;
+      }
+
+      .section-title {
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .section-subtitle {
+        font-size: 1.2rem;
+        color: #ddd;
+        margin-bottom: 50px;
+      }
+
+      /* Values grid */
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(
+          2,
+          1fr
+        ); /* default: 2 per row for responsive */
+        gap: 25px;
+        justify-content: center;
+        align-items: stretch;
+      }
+
+      @media (min-width: 992px) {
+        .values-grid {
+          grid-template-columns: repeat(
+            6,
+            1fr
+          ); /* all 6 in one row on desktop & tablets */
+        }
+      }
+
+      /* Value cards */
+      .value-card {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 30px 20px;
+        border-radius: 12px;
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+
+      .value-card:hover {
+        transform: translateY(-8px);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .value-card i {
+        font-size: 2rem;
+        color: #f1c40f;
+        margin-bottom: 12px;
+      }
+
+      .value-card h5 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      /* Responsive titles */
+      @media (max-width: 768px) {
+        .section-title {
+          font-size: 2rem;
+        }
+        .section-subtitle {
+          font-size: 1rem;
+        }
+      }
+    </style>
+
+    <!-- MoHG Section -->
+    <div></div>
+
+    <!-- Work Section -->
+    <section id="Work">
+      <div class="slider-container">
+        <div class="accordion-slider">
+          <div
+            class="slide"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            "
+          >
+            <div class="slide-content">
+              <div class="slide-number">01</div>
+              <div class="car-brand">Core Values</div>
+              <div class="car-name">Confidentiality</div>
+              <div class="car-subtitle">
+                Protecting Client Information & Trust
+              </div>
+              <div class="car-specs">
+                <div class="spec-row">
+                  <span class="spec-label">Data Security:</span>
+                  <span class="spec-value">ISO 27001 Compliant</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Client Privacy:</span>
+                  <span class="spec-value">100% Protected</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Documentation:</span>
+                  <span class="spec-value">Secure Storage</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Access Control:</span>
+                  <span class="spec-value">Authorized Personnel Only</span>
+                </div>
+              </div>
+              <div class="performance-badges">
+                <div class="badge">
+                  <div class="badge-icon"></div>
+                  <span>NDA Compliance</span>
+                </div>
+                <div class="badge">
+                  <div class="badge-icon"></div>
+                  <span>Encrypted Communication</span>
+                </div>
+                <div class="badge">
+                  <div class="badge-icon"></div>
+                  <span>Trusted Partner</span>
+                </div>
+              </div>
+            </div>
+            <div class="add-button"></div>
+          </div>
+
+          <div
+            class="slide"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');
+            "
+          >
+            <div class="slide-content">
+              <div class="slide-number">02</div>
+              <div class="car-brand">Core Values</div>
+              <div class="car-name">Integrity</div>
+              <div class="car-subtitle">
+                Honest & Transparent Business Practices
+              </div>
+              <div class="car-specs">
+                <div class="spec-row">
+                  <span class="spec-label">Ethics:</span>
+                  <span class="spec-value">Code of Conduct</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Transparency:</span>
+                  <span class="spec-value">Clear Communication</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Accountability:</span>
+                  <span class="spec-value">Full Responsibility</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Trust:</span>
+                  <span class="spec-value">Long-term Relationships</span>
+                </div>
+              </div>
+              <div class="performance-badges">
+                <div class="badge">
+                  <div class="badge-icon"></div>
+                  <span>Ethical Standards</span>
+                </div>
+                <div class="badge">
+                  <div class="badge-icon"></div>
+                  <span>Fair Dealing</span>
+                </div>
+                <div class="badge">
+                  <div class="badge-icon"></div>
+                  <span>Honest Reporting</span>
+                </div>
+              </div>
+            </div>
+            <div class="add-button"></div>
+          </div>
+
+          <div
+            class="slide"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            "
+          >
+            <div class="slide-content">
+              <div class="slide-number">03</div>
+              <div class="car-brand">Core Values</div>
+              <div class="car-name">Excellence</div>
+              <div class="car-subtitle">
+                Delivering Superior Quality Results
+              </div>
+              <div class="car-specs">
+                <div class="spec-row">
+                  <span class="spec-label">Quality Management:</span>
+                  <span class="spec-value">ISO 9001:2015</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Standards:</span>
+                  <span class="spec-value">International Best Practices</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Performance:</span>
+                  <span class="spec-value">Exceeds Expectations</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Innovation:</span>
+                  <span class="spec-value">Continuous Improvement</span>
+                </div>
+              </div>
+              <div class="performance-badges">
+                <div class="badge">
+                  <div class="badge-icon"></div>
+                  <span>Quality Assurance</span>
+                </div>
+                <div class="badge">
+                  <div class="badge-icon"></div>
+                  <span>Premium Delivery</span>
+                </div>
+                <div class="badge">
+                  <div class="badge-icon"></div>
+                  <span>Customer Satisfaction</span>
+                </div>
+              </div>
+            </div>
+            <div class="add-button"></div>
+          </div>
+
+          <div
+            class="slide"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            "
+          >
+            <div class="slide-content">
+              <div class="slide-number">04</div>
+              <div class="car-brand">Core Values</div>
+              <div class="car-name">Innovation</div>
+              <div class="car-subtitle">
+                Embracing Technology & Modern Solutions
+              </div>
+              <div class="car-specs">
+                <div class="spec-row">
+                  <span class="spec-label">Technology:</span>
+                  <span class="spec-value">Latest Construction Tech</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Methods:</span>
+                  <span class="spec-value">Advanced Techniques</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Equipment:</span>
+                  <span class="spec-value">State-of-the-art Machinery</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Research:</span>
+                  <span class="spec-value">Continuous Development</span>
+                </div>
+              </div>
+              <div class="performance-badges">
+                <div class="badge">
+                  <div class="badge-icon"></div>
+                  <span>Smart Solutions</span>
+                </div>
+                <div class="badge">
+                  <div class="badge-icon"></div>
+                  <span>Future-Ready</span>
+                </div>
+                <div class="badge">
+                  <div class="badge-icon"></div>
+                  <span>Industry Leadership</span>
+                </div>
+              </div>
+            </div>
+            <div class="add-button"></div>
+          </div>
+        </div>
+
+        <button class="navigation-arrows nav-prev">‹</button>
+        <button class="navigation-arrows nav-next">›</button>
+      </div>
+      <style>
+        .slider-container {
+          width: 100%;
+          height: 100vh;
+          position: relative;
+          overflow: hidden;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .now-showing {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          color: #9fff6b;
+          font-size: 14px;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          z-index: 10;
+        }
+
+        .now-showing::before {
+          content: "";
+          width: 6px;
+          height: 6px;
+          background: #9fff6b;
+          border-radius: 50%;
+        }
+
+        .accordion-slider {
+          display: flex;
+          height: 100%;
+          position: relative;
+        }
+
+        .slide {
+          flex: 1;
+          position: relative;
+          cursor: pointer;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+          overflow: hidden;
+          filter: grayscale(1);
+        }
+
+        .slide:hover {
+          filter: grayscale(0);
+        }
+
+        .slide.active {
+          flex: 2.5;
+          filter: grayscale(0);
+        }
+
+        .slide::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(
+            180deg,
+            transparent 0%,
+            rgba(0, 0, 0, 0.8) 80%
+          );
+        }
+
+        .slide-content {
+          position: absolute;
+          bottom: 30px;
+          left: 30px;
+          right: 30px;
+          color: white;
+          z-index: 2;
+        }
+
+        .slide.active .slide-content {
+          bottom: 80px;
+          transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+        }
+
+        .slide-number {
+          font-size: 64px;
+          font-weight: 300;
+          color: rgba(255, 255, 255, 0.6);
+          line-height: 1;
+          position: absolute;
+          bottom: 30px;
+          left: 30px;
+          transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active .slide-number {
+          bottom: auto;
+          top: -50px;
+          font-size: 48px;
+          left: 0;
+        }
+
+        .car-brand {
+          font-size: 16px;
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.8);
+          margin-bottom: 5px;
+          transform: rotate(-90deg);
+          transform-origin: left bottom;
+          position: absolute;
+          bottom: 100px;
+          left: 30px;
+          white-space: nowrap;
+          transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active .car-brand {
+          transform: rotate(0deg);
+          position: static;
+          transform-origin: unset;
+        }
+
+        .car-name {
+          font-size: 28px;
+          font-weight: 700;
+          margin-bottom: 8px;
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          transition-delay: 0s;
+        }
+
+        .slide.active .car-name {
+          opacity: 1;
+          transform: translateY(0);
+          transition-delay: 0.3s;
+        }
+
+        .car-subtitle {
+          font-size: 16px;
+          color: rgba(255, 255, 255, 0.8);
+          margin-bottom: 20px;
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          transition-delay: 0s;
+        }
+
+        .slide.active .car-subtitle {
+          opacity: 1;
+          transform: translateY(0);
+          transition-delay: 0.4s;
+        }
+
+        .car-specs {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          transition-delay: 0s;
+        }
+
+        .slide.active .car-specs {
+          opacity: 1;
+          transform: translateY(0);
+          transition-delay: 0.5s;
+        }
+
+        .spec-row {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 6px;
+          font-size: 14px;
+          opacity: 0;
+          transform: translateX(-20px);
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active .spec-row {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        .slide.active .spec-row:nth-child(1) {
+          transition-delay: 0.6s;
+        }
+        .slide.active .spec-row:nth-child(2) {
+          transition-delay: 0.65s;
+        }
+        .slide.active .spec-row:nth-child(3) {
+          transition-delay: 0.7s;
+        }
+        .slide.active .spec-row:nth-child(4) {
+          transition-delay: 0.75s;
+        }
+
+        .spec-label {
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        .spec-value {
+          color: white;
+          font-weight: 600;
+        }
+
+        .performance-badges {
+          display: flex;
+          gap: 12px;
+          margin-top: 15px;
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          transition-delay: 0s;
+        }
+
+        .slide.active .performance-badges {
+          opacity: 1;
+          transform: translateY(0);
+          transition-delay: 0.8s;
+        }
+
+        .badge {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 4px 8px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 12px;
+          font-size: 12px;
+          font-weight: 500;
+          opacity: 0;
+          transform: scale(0.8);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active .badge {
+          opacity: 1;
+          transform: scale(1);
+        }
+
+        .slide.active .badge:nth-child(1) {
+          transition-delay: 0.85s;
+        }
+        .slide.active .badge:nth-child(2) {
+          transition-delay: 0.9s;
+        }
+        .slide.active .badge:nth-child(3) {
+          transition-delay: 0.95s;
+        }
+
+        .badge-icon {
+          width: 8px;
+          height: 8px;
+          background: #9fff6b;
+          border-radius: 50%;
+        }
+
+        .add-button {
+          position: absolute;
+          bottom: 30px;
+          right: 30px;
+          width: 32px;
+          height: 32px;
+          background: transparent;
+          border: 2px solid #9fff6b;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.4s ease;
+          z-index: 3;
+        }
+
+        .add-button::before,
+        .add-button::after {
+          content: "";
+          position: absolute;
+          background: #9fff6b;
+          transition: all 0.4s ease;
+        }
+
+        .add-button::before {
+          width: 12px;
+          height: 2px;
+        }
+
+        .add-button::after {
+          width: 2px;
+          height: 12px;
+          transform: rotate(0deg);
+        }
+
+        .slide.active .add-button::before {
+          transform: rotate(0deg);
+        }
+
+        .slide.active .add-button::after {
+          opacity: 0;
+          transform: scale(0);
+        }
+
+        .navigation-arrows {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 50px;
+          height: 50px;
+          background: rgba(255, 255, 255, 0.1);
+          border: none;
+          border-radius: 50%;
+          color: white;
+          cursor: pointer;
+          font-size: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+          z-index: 4;
+          backdrop-filter: blur(10px);
+        }
+
+        .nav-prev {
+          left: 20px;
+        }
+
+        .nav-next {
+          right: 20px;
+        }
+
+        .navigation-arrows:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+          .accordion-slider {
+            flex-direction: column;
+          }
+
+          .slide {
+            flex: 1;
+            min-height: 80px;
+          }
+
+          .slide.active {
+            flex: 2;
+          }
+
+          .slide-number {
+            font-size: 32px;
+          }
+
+          .car-brand {
+            transform: none;
+            position: static;
+          }
+        }
+      </style>
+      <script>
+        class AccordionSlider {
+          constructor() {
+            this.slides = document.querySelectorAll(".slide");
+            this.prevBtn = document.querySelector(".nav-prev");
+            this.nextBtn = document.querySelector(".nav-next");
+            this.currentIndex = -1;
+
+            this.init();
+          }
+
+          init() {
+            this.slides.forEach((slide, index) => {
+              slide.addEventListener("click", () => this.setActiveSlide(index));
+            });
+
+            this.prevBtn.addEventListener("click", () => this.previousSlide());
+            this.nextBtn.addEventListener("click", () => this.nextSlide());
+
+            document.addEventListener("keydown", (e) => {
+              if (e.key === "ArrowLeft") this.previousSlide();
+              if (e.key === "ArrowRight") this.nextSlide();
+            });
+          }
+
+          setActiveSlide(index) {
+            if (this.currentIndex === index) {
+              this.slides.forEach((slide) => slide.classList.remove("active"));
+              this.currentIndex = -1;
+            } else {
+              this.slides.forEach((slide) => slide.classList.remove("active"));
+              this.slides[index].classList.add("active");
+              this.currentIndex = index;
+            }
+          }
+
+          nextSlide() {
+            const nextIndex =
+              this.currentIndex === -1
+                ? 0
+                : (this.currentIndex + 1) % this.slides.length;
+            this.setActiveSlide(nextIndex);
+          }
+
+          previousSlide() {
+            const prevIndex =
+              this.currentIndex === -1
+                ? this.slides.length - 1
+                : (this.currentIndex - 1 + this.slides.length) %
+                  this.slides.length;
+            this.setActiveSlide(prevIndex);
+          }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+          new AccordionSlider();
+        });
+      </script>
+    </section>
+
+    <!-- Stats Section -->
+    <section
+      id="stats"
+      class="position-relative py-5"
+      style="max-width: none; max-height: max-content"
+    >
+      <div class="section-overlay position-absolute w-100 h-100"></div>
+
+      <div class="container text-center position-relative">
+        <h2 class="mb-5">Our Achievements</h2>
+
+        <div class="row justify-content-center g-4">
+          <div class="col-12 col-md-3">
+            <div class="stat-item p-3 bg-opacity-10 rounded">
+              <div class="stat-number fw-bold" data-count="100">0</div>
+              <div class="stat-label">Projects Completed</div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="stat-item p-3 bg-opacity-10 rounded">
+              <div class="stat-number fw-bold" data-count="65">0</div>
+              <div class="stat-label">Team Members</div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="stat-item p-3 bg-opacity-10 rounded">
+              <div class="stat-number fw-bold" data-count="15">0</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="stat-item p-3 bg-opacity-10 rounded">
+              <div class="stat-number fw-bold" data-count="130">0</div>
+              <div class="stat-label">Equipment Units</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section id="stats" style="max-width:none;">
+        <div class="section-overlay"></div>
+        <div class="content-container">
+            <h2 class=" mb-5">Our Achievements</h2>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="100">0</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="65">0</div>
+                    <div class="stat-label">Team Members</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="15">0</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="130">0</div>
+                    <div class="stat-label">Equipment Units</div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <div class="project-slider">
+        <div class="project-slide active">
+          <video class="video-background" autoplay muted loop>
+            <source src="assets/proj1.mp4" type="video/mp4" />
+          </video>
+          <div class="section-overlay"></div>
+          <div class="project-info">
+            <h3 class="project-title">Yanbu Commercial Port</h3>
+            <p>Marine quay construction for Global Marine</p>
+          </div>
+        </div>
+        <div class="project-slide">
+          <video class="video-background" autoplay muted loop>
+            <source src="assets/proj2.mp4" type="video/mp4" />
+          </video>
+          <div class="section-overlay"></div>
+          <div class="project-info">
+            <h3 class="project-title">Ministry Building</h3>
+            <p>Commerce and Investment Ministry in Yanbu</p>
+          </div>
+        </div>
+        <div class="project-slide">
+          <video class="video-background" autoplay muted loop>
+            <source src="assets/proj3.mp4" type="video/mp4" />
+          </video>
+          <div class="section-overlay"></div>
+          <div class="project-info">
+            <h3 class="project-title">King Khalid Road</h3>
+            <p>Road construction and expansion for Ministry of Transport</p>
+          </div>
+        </div>
+        <div class="project-nav">
+          <button class="btn btn-outline-light me-2 project-prev">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 18L9 12L15 6"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <button class="btn btn-outline-light project-next">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 18L15 12L9 6"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <!-- <section id="contact">
+        <video class="video-background" autoplay muted loop>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-architect-in-modern-office-41364-large.mp4" type="video/mp4">
+        </video>
+        <div class="wrapper">
+          <form class="form">
+            <span class="title">Get in Touch</span>
+
+            <div class="input-container">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 6H5m2 3H5m2 3H5m2 3H5m2 3H5m11-1a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2M7 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Zm8 7a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
+                </svg>
+              <input class="input" type="text" placeholder="Name" />
+            </div>
+        
+            <div class="input-container">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-6.616l-2.88 2.592C8.537 20.461 7 19.776 7 18.477V17H5a2 2 0 0 1-2-2V6Zm4 2a1 1 0 0 0 0 2h5a1 1 0 1 0 0-2H7Zm8 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2Zm-8 3a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H7Zm5 0a1 1 0 1 0 0 2h5a1 1 0 1 0 0-2h-5Z" clip-rule="evenodd"/>
+                </svg>
+              <input class="input" type="message" placeholder="Message" />
+            </div>
+        
+            <div class="login-button">
+              <input class="input" type="submit" value="submit" />
+            </div>
+        
+            <div class="texture"></div>
+          </form>
+        </div>
+    </section> -->
+    <!-- <section id="contact" style="padding: 20px;margin-top: 100px;height: auto;">
+        <div class="form-container col-lg-3 col-sm-12 col-md-6">
+          <form class="form">
+            <span class="heading">Contact Us</span>
+        
+            <div class="form-group">
+              <input class="form-input" required="" type="text" />
+              <label>Name</label>
+            </div>
+        
+            <div class="form-group">
+              <textarea class="form-input" rows="5" required></textarea>
+              <label>Message</label>
+            </div>
+        
+            <style>
+                .form-container {
+                  background: linear-gradient(#212121, #212121) padding-box,
+                    linear-gradient(120deg, transparent 10%, #cea539, #ffc020) border-box;
+                  border: 2px solid transparent;
+                  padding: 32px;
+                  font-size: 14px;
+                  color: white;
+                  display: flex;
+                  justify-content: center;
+                  flex-direction: column;
+                  gap: 20px;
+                  box-sizing: border-box;
+                  border-radius: 16px;
+                }
+            
+                .form {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 20px;
+                }
+            
+                .heading {
+                  font-size: 20px;
+                  font-weight: 600;
+                }
+            
+                .form-input {
+                  color: white;
+                  background: transparent;
+                  border: 1px solid #414141;
+                  border-radius: 5px;
+                  padding: 8px;
+                  outline: none;
+                }
+            
+                .conbtn {
+                  border-radius: 5px;
+                  padding: 6px;
+                  background: #ffffff14;
+                  color: #c7c5c5;
+                  border: 1px solid #414141;
+                }
+            
+                .conbtn:hover {
+                  background: #212121;
+                  cursor: pointer;
+                }
+            
+                .form-group {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 5px;
+                  color: #414141;
+                  position: relative;
+                }
+            
+                .form-group label {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  padding: 5px;
+                  pointer-events: none;
+                  transition: 0.5s;
+                }
+            
+                .form-group input:focus ~ label,
+                .form-group input:valid ~ label {
+                  top: -16px;
+                  left: 0;
+                  background: #212121 padding-box;
+                  padding: 10px 0 0 0;
+                  color: #bdb8b8;
+                
+                  font-size: 12px;
+                }
+            </style>
+            <button class="conbtn">SUBMIT</button>
+          </form>
+        </div>
+    </section> -->
+    <!-- <section
+      id="contact"
+      style="
+        padding: 40px 20px;
+        margin-top: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-height: 60vh;
+      "
+    >
+      <div class="form-container col-12 col-sm-10 col-md-8 col-lg-4">
+        <form class="form">
+          <span class="heading">Contact Us</span>
+
+          <div class="form-group">
+            <input class="form-input" required type="text" />
+            <label>Name</label>
+          </div>
+
+          <div class="form-group">
+            <textarea class="form-input" rows="5" required></textarea>
+            <label>Message</label>
+          </div>
+
+          <button class="conbtn">SUBMIT</button>
+        </form>
+      </div>
+
+      <style>
+        .form-container {
+          background: linear-gradient(#212121, #212121) padding-box,
+            linear-gradient(120deg, transparent 10%, #cea539, #ffc020)
+              border-box;
+          border: 2px solid transparent;
+          padding: 32px;
+          font-size: 14px;
+          color: white;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          gap: 20px;
+          box-sizing: border-box;
+          border-radius: 16px;
+          width: 100%;
+          max-width: 500px;
+        }
+
+        .form {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .heading {
+          font-size: 24px;
+          font-weight: 600;
+          text-align: center;
+        }
+
+        .form-input {
+          color: white;
+          background: transparent;
+          border: 1px solid #414141;
+          border-radius: 5px;
+          padding: 10px;
+          outline: none;
+        }
+
+        .conbtn {
+          border-radius: 5px;
+          padding: 10px;
+          background: #ffffff14;
+          color: #c7c5c5;
+          border: 1px solid #414141;
+          transition: 0.3s;
+        }
+
+        .conbtn:hover {
+          background: #212121;
+          cursor: pointer;
+        }
+
+        .form-group {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          position: relative;
+        }
+
+        .form-group label {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          pointer-events: none;
+          color: #bdb8b8;
+          transition: 0.3s;
+          font-size: 14px;
+        }
+
+        .form-group input:focus ~ label,
+        .form-group input:valid ~ label,
+        .form-group textarea:focus ~ label,
+        .form-group textarea:valid ~ label {
+          top: -16px;
+          left: 0;
+          background: #212121 padding-box;
+          padding: 0 5px;
+          font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+          .form-container {
+            padding: 24px;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .form-container {
+            padding: 20px;
+          }
+        }
+      </style>
+    </section> -->
+    <section id="contact" class="contact-section">
+      <div class="form-container">
+        <form class="form">
+          <span class="heading">Contact Us</span>
+        
+          <div class="form-group col-12">
+            <input class="form-input" required type="text" />
+            <label>Name</label>
+          </div>
+      
+          <div class="form-group col-12">
+            <input class="form-input" required type="email" />
+            <label>Email</label>
+          </div>
+      
+          <div class="form-group col-12">
+            <textarea class="form-input" rows="5" required></textarea>
+            <label>Message</label>
+          </div>
+      
+          <button class="conbtn">Send Message</button>
+        </form>
+      </div>
+    </section>
+    
+    <style>
+      /* Background */
+      .contact-section {
+        padding: 60px 20px;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background: linear-gradient(135deg, #0f0f0f, #1a1a1a, #212121); */
+        position: relative;
+        overflow: hidden;
+      }
+  
+      /* Floating shapes */
+      .contact-section::before,
+      .contact-section::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.3;
+      }
+      .contact-section::before {
+        width: 200px;
+        height: 200px;
+        background: #ffc020;
+        top: -80px;
+        left: -100px;
+      }
+      .contact-section::after {
+        width: 200px;
+        height: 200px;
+        background: #cea539;
+        bottom: -80px;
+        right: -80px;
+      }
+  
+      /* Form Container */
+      .form-container {
+        background: rgba(33, 33, 33, 0.85);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 40px 30px;
+        border-radius: 20px;
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        animation: fadeIn 1s ease-in-out;
+      }
+  
+      .form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+  
+      .heading {
+        font-size: 28px;
+        font-weight: 700;
+        text-align: center;
+        background: linear-gradient(45deg, #cea539, #ffc020);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 15px;
+      }
+  
+      /* Input Fields */
+      .form-input {
+        color: #fff;
+        background: transparent;
+        border: 1px solid #555;
+        border-radius: 8px;
+        padding: 14px;
+        font-size: 15px;
+        outline: none;
+        transition: 0.3s ease;
+      }
+      .form-input:focus {
+        border-color: #ffc020;
+        box-shadow: 0 0 8px #ffc02033;
+      }
+  
+      /* Labels */
+      .form-group {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      .form-group label {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        color: #aaa;
+        pointer-events: none;
+        transition: 0.3s ease;
+        font-size: 14px;
+      }
+      .form-group input:focus ~ label,
+      .form-group input:valid ~ label,
+      .form-group textarea:focus ~ label,
+      .form-group textarea:valid ~ label {
+        top: -10px;
+        left: 10px;
+        background: #282824;
+        padding: 0 6px;
+        font-size: 12px;
+        color: #ffc020;
+      }
+  
+      /* Button */
+      .conbtn {
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        background: linear-gradient(45deg, #cea539, #ffc020);
+        color: #212121;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+      .conbtn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 192, 32, 0.5);
+      }
+  
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+  
+      /* Responsive */
+      @media (max-width: 576px) {
+        .form-container {
+          padding: 30px 20px;
+        }
+        .heading {
+          font-size: 24px;
+        }
+      }
+    </style>
+
+    <!-- Footer -->
+    <footer style="background-color: #1a1300">
+      <div class="footer-bg-element fe-1">
+        <i class="fas fa-building"></i>
+      </div>
+      <div class="footer-bg-element fe-2">
+        <i class="fas fa-tools"></i>
+      </div>
+      <div class="container">
+        <div class="contact-info">
+          <p>Mobile: 0544777959 | 05336999619</p>
+          <p>Saudi Arabia</p>
+          <p>VAT: 310198822200003 | C.R: 4700116838</p>
+        </div>
+        <p>&copy; 2025 Afkar Altatweer Contracting Co. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Three.js variables
+      let scene, camera, renderer, controls;
+      let currentScene = "hero";
+      let scenes = {};
+
+      // Initialize Three.js
+      function initThreeJS() {
+        // Set up the container
+        const container = document.getElementById("three-container");
+
+        // Create scene
+        scene = new THREE.Scene();
+
+        // Create camera
+        camera = new THREE.PerspectiveCamera(
+          75,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000
+        );
+        camera.position.z = 5;
+
+        // Create renderer
+        renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // Create scenes for each section
+        createHeroScene();
+        createAboutScene();
+        createServicesScene();
+        createStatsScene();
+        createProjectsScene();
+        createContactScene();
+
+        // Set initial scene
+        showScene("hero");
+
+        // Handle window resize
+        window.addEventListener("resize", onWindowResize);
+
+        // Start animation loop
+        animate();
+      }
+
+      // Create hero scene
+      function createHeroScene() {
+        const heroScene = new THREE.Scene();
+
+        // Add ambient light
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        heroScene.add(ambientLight);
+
+        // Add directional light
+        const directionalLight = new THREE.DirectionalLight(0xffb400, 1);
+        directionalLight.position.set(5, 5, 5);
+        heroScene.add(directionalLight);
+
+        // Create floating 3D elements
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const material = new THREE.MeshPhongMaterial({
+          color: 0xffb400,
+          emissive: 0x000000,
+          specular: 0xffffff,
+          shininess: 100,
+          transparent: true,
+          opacity: 0.7,
+        });
+
+        // Add multiple floating elements
+        for (let i = 0; i < 15; i++) {
+          const cube = new THREE.Mesh(geometry, material.clone());
+          cube.position.x = (Math.random() - 0.5) * 10;
+          cube.position.y = (Math.random() - 0.5) * 10;
+          cube.position.z = (Math.random() - 0.5) * 10;
+          cube.rotation.x = Math.random() * Math.PI;
+          cube.rotation.y = Math.random() * Math.PI;
+          cube.scale.setScalar(Math.random() * 0.5 + 0.3);
+          heroScene.add(cube);
+
+          // Store animation properties
+          cube.userData = {
+            speed: Math.random() * 0.01 + 0.005,
+            rotationSpeed: {
+              x: Math.random() * 0.02 - 0.01,
+              y: Math.random() * 0.02 - 0.01,
+              z: Math.random() * 0.02 - 0.01,
+            },
+          };
+        }
+
+        scenes.hero = heroScene;
+      }
+
+      // Create about scene
+      function createAboutScene() {
+        const aboutScene = new THREE.Scene();
+
+        // Add lights
+        const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+        aboutScene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(1, 1, 1);
+        aboutScene.add(directionalLight);
+
+        // Create blueprint-like grid
+        const gridHelper = new THREE.GridHelper(20, 20, 0x006c35, 0x444444);
+        gridHelper.rotation.x = Math.PI / 2;
+        aboutScene.add(gridHelper);
+
+        // Create floating text elements (simplified with geometries)
+        const values = [
+          "Quality",
+          "Satisfaction",
+          "Standards",
+          "Leadership",
+          "Innovation",
+        ];
+
+        values.forEach((value, i) => {
+          // Using boxes as placeholders for text geometries
+          const textGeometry = new THREE.BoxGeometry(1.5, 0.2, 0.2);
+          const textMaterial = new THREE.MeshPhongMaterial({
+            color: 0xffb400,
+            emissive: 0x222222,
+            specular: 0xffffff,
+          });
+
+          const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+          textMesh.position.y = i * 1 - 2;
+          textMesh.position.x = -5;
+          textMesh.userData = {
+            originalX: textMesh.position.x,
+            targetX: 0,
+            speed: 0.05,
+          };
+          aboutScene.add(textMesh);
+        });
+
+        scenes.about = aboutScene;
+      }
+
+      // Create other scenes (simplified for brevity)
+      function createServicesScene() {
+        scenes.services = new THREE.Scene();
+        // Add service-related 3D elements
+      }
+
+      function createStatsScene() {
+        scenes.stats = new THREE.Scene();
+        // Add stats-related 3D elements
+      }
+
+      function createProjectsScene() {
+        scenes.projects = new THREE.Scene();
+        // Add projects-related 3D elements
+      }
+
+      function createContactScene() {
+        scenes.contact = new THREE.Scene();
+        // Add contact-related 3D elements
+      }
+
+      // Show specific scene
+      function showScene(sceneName) {
+        currentScene = sceneName;
+        scene = scenes[sceneName];
+      }
+
+      // Handle window resize
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+
+        // Animate based on current scene
+        if (currentScene === "hero" && scenes.hero) {
+          scenes.hero.children.forEach((child) => {
+            if (child.userData && child.userData.speed) {
+              child.rotation.x += child.userData.rotationSpeed.x;
+              child.rotation.y += child.userData.rotationSpeed.y;
+              child.rotation.z += child.userData.rotationSpeed.z;
+
+              // Floating animation
+              child.position.y +=
+                Math.sin(Date.now() * 0.001 * child.userData.speed) * 0.01;
+            }
+          });
+        }
+
+        if (currentScene === "about" && scenes.about) {
+          // Animate text elements
+          scenes.about.children.forEach((child) => {
+            if (child.userData && child.userData.originalX !== undefined) {
+              // Move toward target position
+              child.position.x +=
+                (child.userData.targetX - child.position.x) *
+                child.userData.speed;
+            }
+          });
+        }
+
+        renderer.render(scene, camera);
+      }
+
+      // Navbar scroll effect
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("navbar-scrolled");
+        } else {
+          navbar.classList.remove("navbar-scrolled");
+        }
+
+        // Change 3D scene based on scroll position
+        const sections = document.querySelectorAll("section");
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          if (
+            rect.top < window.innerHeight / 2 &&
+            rect.bottom > window.innerHeight / 2
+          ) {
+            const sectionId = section.id;
+            showScene(sectionId);
+          }
+        });
+      });
+
+      // Create particles for hero section
+      function createParticles() {
+        const container = document.getElementById("particles-container");
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement("div");
+          particle.classList.add("particle");
+
+          const size = Math.random() * 5 + 2;
+          const posX = Math.random() * 100;
+          const posY = Math.random() * 100;
+
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+          particle.style.left = `${posX}%`;
+          particle.style.top = `${posY}%`;
+
+          const moveX = (Math.random() - 0.5) * 100;
+          const moveY = (Math.random() - 0.5) * 100;
+
+          particle.style.setProperty("--move-x", `${moveX}px`);
+          particle.style.setProperty("--move-y", `${moveY}px`);
+
+          const duration = Math.random() * 10 + 5;
+          particle.style.animation = `particleMove ${duration}s linear infinite`;
+
+          container.appendChild(particle);
+        }
+      }
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.3,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+
+            if (entry.target.classList.contains("section-title")) {
+              entry.target.style.animation = "fadeInUp 0.5s forwards";
+            }
+
+            if (entry.target.id === "about") {
+              const values = document.querySelectorAll(".values-list li");
+              values.forEach((value, index) => {
+                setTimeout(() => {
+                  value.style.transitionDelay = `${index * 0.2}s`;
+                }, index * 200);
+              });
+            }
+
+            if (entry.target.id === "stats") {
+              const counters = document.querySelectorAll(".stat-number");
+              counters.forEach((counter) => {
+                const target = +counter.getAttribute("data-count");
+                const count = +counter.innerText;
+                const increment = target / 100;
+
+                if (count < target) {
+                  const updateCount = () => {
+                    const current = +counter.innerText;
+                    if (current < target) {
+                      counter.innerText = Math.ceil(current + increment);
+                      setTimeout(updateCount, 15);
+                    } else {
+                      counter.innerText = target;
+                    }
+                  };
+                  updateCount();
+                }
+              });
+            }
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements
+      document.querySelectorAll("section").forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Project slider
+      const slides = document.querySelectorAll(".project-slide");
+      const prevBtn = document.querySelector(".project-prev");
+      const nextBtn = document.querySelector(".project-next");
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        slides.forEach((slide) => slide.classList.remove("active"));
+        slides[index].classList.add("active");
+      }
+
+      prevBtn.addEventListener("click", () => {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+      });
+
+      nextBtn.addEventListener("click", () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      });
+
+      // Auto slide every 5 seconds
+      setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }, 5000);
+
+      // Initialize particles
+      createParticles();
+
+      // Initialize Three.js
+      initThreeJS();
+    </script>
+    <style>
+      .service-item {
+        perspective: 1000px;
+        transition: transform 0.6s ease, box-shadow 0.6s ease;
+      }
+      .service-item:hover {
+        transform: rotateY(15deg) rotateX(5deg) scale(1.05);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      }
+      .service-overlay {
+        transform: translateZ(50px);
+      }
+    </style>
+    <script>
+      // Hero scene with advanced effects
+      function createHeroScene() {
+        const heroScene = new THREE.Scene();
+
+        // Lighting
+        const ambient = new THREE.AmbientLight(0xffffff, 0.3);
+        heroScene.add(ambient);
+
+        const spot = new THREE.SpotLight(0xffb400, 2, 50, Math.PI / 6, 0.5);
+        spot.position.set(10, 15, 10);
+        heroScene.add(spot);
+
+        // Particle galaxy
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 2000;
+        const posArray = new Float32Array(particlesCount * 3);
+        for (let i = 0; i < particlesCount * 3; i++) {
+          posArray[i] = (Math.random() - 0.5) * 20;
+        }
+        particlesGeometry.setAttribute(
+          "position",
+          new THREE.BufferAttribute(posArray, 3)
+        );
+
+        const particlesMaterial = new THREE.PointsMaterial({
+          size: 0.05,
+          color: 0xffb400,
+          transparent: true,
+          opacity: 0.7,
+          blending: THREE.AdditiveBlending,
+        });
+
+        const particlesMesh = new THREE.Points(
+          particlesGeometry,
+          particlesMaterial
+        );
+        heroScene.add(particlesMesh);
+
+        // Rotating torus (symbolic construction ring)
+        const torusGeo = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
+        const torusMat = new THREE.MeshStandardMaterial({
+          color: 0x006c35,
+          metalness: 0.7,
+          roughness: 0.2,
+          emissive: 0x112211,
+        });
+        const torus = new THREE.Mesh(torusGeo, torusMat);
+        heroScene.add(torus);
+
+        // Animate
+        torus.userData = { rotateSpeed: 0.01 };
+        particlesMesh.userData = { rotateSpeed: -0.001 };
+
+        scenes.hero = heroScene;
+      }
+
+      // Animate loop addition
+      if (currentScene === "hero") {
+        scenes.hero.traverse((obj) => {
+          if (obj.userData.rotateSpeed) {
+            obj.rotation.y += obj.userData.rotateSpeed;
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

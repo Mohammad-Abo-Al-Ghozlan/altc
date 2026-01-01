@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMAA - Innovative Engineering Solutions</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        /* Reset and Base Styles */
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        :root {
+          --primary-blue: #0066cc;
+          --primary-blue-dark: #004d99;
+          --accent-orange: #ff6b35;
+          --bg-dark: #0a0e27;
+          --bg-darker: #060920;
+          --text-light: #ffffff;
+          --text-gray: #a0a0a0;
+          --card-bg: rgba(255, 255, 255, 0.05);
+          --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          background: var(--bg-dark);
+          color: var(--text-light);
+          line-height: 1.6;
+          overflow-x: hidden;
+        }
+
+        /* Smooth Scrolling */
+        html {
+          scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        .navbar {
+          background: rgba(10, 14, 39, 0.95);
+          backdrop-filter: blur(10px);
+          padding: 1rem 0;
+          transition: all 0.3s ease;
+          z-index: 1000;
+        }
+
+        .navbar.scrolled {
+          background: rgba(10, 14, 39, 0.98);
+          box-shadow: 0 2px 20px rgba(0, 102, 204, 0.2);
+        }
+
+        .brand-text {
+          font-size: 1.8rem;
+          font-weight: 700;
+          color: var(--text-light);
+          letter-spacing: 2px;
+        }
+
+        .nav-link {
+          color: var(--text-gray) !important;
+          font-weight: 500;
+          padding: 0.5rem 1rem !important;
+          transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+          color: var(--primary-blue) !important;
+        }
+
+        /* Hero Section */
+        .hero-section {
+          position: relative;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+
+        #hero-canvas {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+        }
+
+        .hero-content {
+          position: relative;
+          z-index: 2;
+          text-align: center;
+        }
+
+        .hero-title {
+          font-size: clamp(2.5rem, 5vw, 4rem);
+          font-weight: 700;
+          margin-bottom: 1.5rem;
+          line-height: 1.2;
+          background: linear-gradient(135deg, var(--text-light), var(--primary-blue));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .hero-subtitle {
+          font-size: clamp(1rem, 2vw, 1.25rem);
+          color: var(--text-gray);
+          margin-bottom: 2rem;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .hero-buttons {
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn-primary {
+          background: var(--accent-orange);
+          border: none;
+          padding: 0.75rem 2rem;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          border-radius: 50px;
+        }
+
+        .btn-primary:hover {
+          background: #e55a2a;
+          transform: translateY(-2px);
+          box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-outline-light {
+          border: 2px solid var(--text-light);
+          padding: 0.75rem 2rem;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          border-radius: 50px;
+          color: var(--text-light);
+        }
+
+        .btn-outline-light:hover {
+          background: var(--text-light);
+          color: var(--bg-dark);
+          transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+          position: relative;
+        }
+
+        .about-section {
+          background: var(--bg-darker);
+        }
+
+        .services-section {
+          background: var(--bg-dark);
+        }
+
+        .projects-section {
+          background: var(--bg-darker);
+        }
+
+        .team-section {
+          background: var(--bg-dark);
+        }
+
+        .contact-section {
+          background: var(--bg-darker);
+        }
+
+        /* Section Titles */
+        .section-title {
+          font-size: clamp(2rem, 4vw, 3rem);
+          font-weight: 700;
+          margin-bottom: 1rem;
+          color: var(--text-light);
+        }
+
+        .section-subtitle {
+          font-size: clamp(1rem, 2vw, 1.25rem);
+          color: var(--text-gray);
+          margin-bottom: 2rem;
+        }
+
+        /* About Section */
+        .about-text {
+          color: var(--text-gray);
+          margin-bottom: 1rem;
+          line-height: 1.8;
+        }
+
+        .about-3d-container {
+          width: 100%;
+          height: 400px;
+          border-radius: 20px;
+          overflow: hidden;
+          background: var(--card-bg);
+          border: 1px solid var(--card-border);
+        }
+
+        #about-canvas {
+          width: 100%;
+          height: 100%;
+        }
+
+        /* Service Cards */
+        .service-card {
+          background: var(--card-bg);
+          border: 1px solid var(--card-border);
+          border-radius: 20px;
+          padding: 2rem;
+          transition: all 0.3s ease;
+          height: 100%;
+          cursor: pointer;
+        }
+
+        .service-card:hover {
+          transform: translateY(-10px);
+          background: rgba(0, 102, 204, 0.1);
+          border-color: var(--primary-blue);
+        }
+
+        .service-icon {
+          width: 64px;
+          height: 64px;
+          background: linear-gradient(135deg, var(--primary-blue), var(--accent-orange));
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 1.5rem;
+        }
+
+        .service-icon svg {
+          color: var(--text-light);
+        }
+
+        .service-title {
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
+          color: var(--text-light);
+        }
+
+        .service-description {
+          color: var(--text-gray);
+          line-height: 1.6;
+        }
+
+        /* Project Cards */
+        .project-card {
+          background: var(--card-bg);
+          border: 1px solid var(--card-border);
+          border-radius: 20px;
+          overflow: hidden;
+          transition: all 0.3s ease;
+          height: 100%;
+        }
+
+        .project-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 40px rgba(0, 102, 204, 0.2);
+        }
+
+        .project-3d {
+          width: 100%;
+          height: 250px;
+          background: linear-gradient(135deg, rgba(0, 102, 204, 0.2), rgba(255, 107, 53, 0.2));
+          position: relative;
+        }
+
+        .project-canvas {
+          width: 100%;
+          height: 100%;
+        }
+
+        .project-content {
+          padding: 1.5rem;
+        }
+
+        .project-title {
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin-bottom: 0.75rem;
+          color: var(--text-light);
+        }
+
+        .project-description {
+          color: var(--text-gray);
+          margin-bottom: 1rem;
+          line-height: 1.6;
+        }
+
+        .project-tags {
+          display: flex;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+        }
+
+        .tag {
+          background: rgba(0, 102, 204, 0.2);
+          color: var(--primary-blue);
+          padding: 0.25rem 0.75rem;
+          border-radius: 20px;
+          font-size: 0.875rem;
+          font-weight: 500;
+        }
+
+        /* Team Section */
+        .team-card {
+          text-align: center;
+          padding: 1.5rem;
+          background: var(--card-bg);
+          border: 1px solid var(--card-border);
+          border-radius: 20px;
+          transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+          transform: translateY(-10px);
+          background: rgba(0, 102, 204, 0.1);
+        }
+
+        .team-avatar {
+          width: 180px;
+          height: 180px;
+          margin: 0 auto 1.5rem;
+          border-radius: 50%;
+          overflow: hidden;
+          background: linear-gradient(135deg, var(--primary-blue), var(--accent-orange));
+          padding: 3px;
+        }
+
+        .avatar-canvas {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+
+        .team-name {
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+          color: var(--text-light);
+        }
+
+        .team-role {
+          color: var(--primary-blue);
+          font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact-form .form-control {
+          background: var(--card-bg);
+          border: 1px solid var(--card-border);
+          color: var(--text-light);
+          padding: 0.75rem 1rem;
+          border-radius: 10px;
+          transition: all 0.3s ease;
+        }
+
+        .contact-form .form-control:focus {
+          background: rgba(0, 102, 204, 0.1);
+          border-color: var(--primary-blue);
+          box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+          color: var(--text-light);
+        }
+
+        .contact-form .form-control::placeholder {
+          color: var(--text-gray);
+        }
+
+        .contact-3d-container {
+          width: 100%;
+          height: 500px;
+          border-radius: 20px;
+          overflow: hidden;
+          background: var(--card-bg);
+          border: 1px solid var(--card-border);
+        }
+
+        #contact-canvas {
+          width: 100%;
+          height: 100%;
+        }
+
+        /* Footer */
+        .footer {
+          background: var(--bg-darker);
+          border-top: 1px solid var(--card-border);
+          color: var(--text-gray);
+        }
+
+        .footer-link {
+          color: var(--text-gray);
+          text-decoration: none;
+          transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+          color: var(--primary-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .hero-title {
+            font-size: 2rem;
+          }
+      
+          .hero-subtitle {
+            font-size: 1rem;
+          }
+      
+          .section-title {
+            font-size: 2rem;
+          }
+      
+          .about-3d-container,
+          .contact-3d-container {
+            height: 300px;
+          }
+      
+          .project-3d {
+            height: 200px;
+          }
+      
+          .team-avatar {
+            width: 150px;
+            height: 150px;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .navbar-brand {
+            font-size: 1.5rem;
+          }
+      
+          .service-card,
+          .project-card,
+          .team-card {
+            margin-bottom: 1rem;
+          }
+      
+          .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+          }
+      
+          .btn {
+            width: 100%;
+            max-width: 300px;
+          }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <span class="brand-text">IMAA</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with 3D Background -->
+    <section id="home" class="hero-section">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 text-center">
+                        <h1 class="hero-title">Innovative Engineering Solutions</h1>
+                        <p class="hero-subtitle">Transforming ideas into reality with cutting-edge technology and creative expertise</p>
+                        <div class="hero-buttons">
+                            <a href="#services" class="btn btn-primary btn-lg me-3">Our Services</a>
+                            <a href="#contact" class="btn btn-outline-light btn-lg">Get in Touch</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="section-title">About IMAA</h2>
+                    <p class="section-subtitle">Building the future through innovation and excellence</p>
+                    <p class="about-text">IMAA is a premier engineering and technology firm specializing in innovative solutions for architecture, construction, and digital transformation projects. Our team of highly skilled professionals combines technical expertise with creative thinking to deliver exceptional results.</p>
+                    <p class="about-text">Since our inception, we've successfully completed over 50 projects across multiple sectors, earning a reputation for quality, reliability, and forward-thinking solutions. Our approach integrates the latest technologies with sustainable practices to create impactful solutions.</p>
+                    <a href="#services" class="btn btn-primary mt-3">Explore Our Services</a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-3d-container">
+                        <canvas id="about-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">Comprehensive solutions tailored to your business needs</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card" data-tilt>
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Web Development</h3>
+                        <p class="service-description">Modern, responsive websites built with cutting-edge technologies and best practices.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card" data-tilt>
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                                <line x1="12" y1="18" x2="12" y2="18"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Mobile Applications</h3>
+                        <p class="service-description">Native and cross-platform mobile apps that deliver exceptional user experiences.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card" data-tilt>
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Enterprise Software</h3>
+                        <p class="service-description">Scalable enterprise solutions designed to streamline your business operations.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card" data-tilt>
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Data Analytics</h3>
+                        <p class="service-description">Transform your data into actionable insights with advanced analytics solutions.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card" data-tilt>
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Cloud Solutions</h3>
+                        <p class="service-description">Secure and scalable cloud infrastructure tailored to your needs.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card" data-tilt>
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 16v-4M12 8h.01"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">AI & Machine Learning</h3>
+                        <p class="service-description">Intelligent solutions powered by artificial intelligence and machine learning.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Our Projects</h2>
+                <p class="section-subtitle">Delivering excellence across diverse industries</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-3d" data-project="pharma">
+                            <canvas class="project-canvas"></canvas>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Pharmaceutical Management System</h3>
+                            <p class="project-description">Complete inventory and distribution management system for pharmaceutical companies.</p>
+                            <div class="project-tags">
+                                <span class="tag">Web App</span>
+                                <span class="tag">Enterprise</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-3d" data-project="erp">
+                            <canvas class="project-canvas"></canvas>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Enterprise ERP Solution</h3>
+                            <p class="project-description">Integrated ERP system streamlining operations for manufacturing businesses.</p>
+                            <div class="project-tags">
+                                <span class="tag">ERP</span>
+                                <span class="tag">Cloud</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-3d" data-project="school">
+                            <canvas class="project-canvas"></canvas>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">School Management Platform</h3>
+                            <p class="project-description">Comprehensive platform for educational institutions with student and staff management.</p>
+                            <div class="project-tags">
+                                <span class="tag">Education</span>
+                                <span class="tag">Mobile</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Our Team</h2>
+                <p class="section-subtitle">Meet the experts behind our success</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <canvas class="avatar-canvas"></canvas>
+                        </div>
+                        <h4 class="team-name">Sarah Johnson</h4>
+                        <p class="team-role">Chief Technology Officer</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <canvas class="avatar-canvas"></canvas>
+                        </div>
+                        <h4 class="team-name">Michael Chen</h4>
+                        <p class="team-role">Lead Engineer</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <canvas class="avatar-canvas"></canvas>
+                        </div>
+                        <h4 class="team-name">Emily Rodriguez</h4>
+                        <p class="team-role">UX Director</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <canvas class="avatar-canvas"></canvas>
+                        </div>
+                        <h4 class="team-name">David Kim</h4>
+                        <p class="team-role">Project Manager</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="section-title">Get in Touch</h2>
+                    <p class="section-subtitle mb-4">Let's discuss how we can help transform your ideas into reality</p>
+                    <form id="contact-form" class="contact-form">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Subject" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-3d-container">
+                        <canvas id="contact-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0">&copy; 2025 IMAA. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="footer-link me-3">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Three.js initialization
+        import * as THREE from "three"
+        import bootstrap from "bootstrap"
+            
+        let heroScene,
+          heroCamera,
+          heroRenderer,
+          heroMeshes = []
+        let aboutScene, aboutCamera, aboutRenderer, aboutMesh
+        let contactScene,
+          contactCamera,
+          contactRenderer,
+          contactMeshes = []
+        const projectScenes = []
+            
+        // Initialize all 3D scenes
+        document.addEventListener("DOMContentLoaded", () => {
+          initHeroScene()
+          initAboutScene()
+          initProjectScenes()
+          initTeamAvatars()
+          initContactScene()
+          initScrollEffects()
+          initNavbarScroll()
+          initFormSubmit()
+        })
+        
+        // Hero Section 3D Background
+        function initHeroScene() {
+          const canvas = document.getElementById("hero-canvas")
+          if (!canvas) return
+        
+          heroScene = new THREE.Scene()
+          heroCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+          heroRenderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true })
+          heroRenderer.setSize(window.innerWidth, window.innerHeight)
+          heroRenderer.setPixelRatio(window.devicePixelRatio)
+        
+          // Create floating geometric shapes
+          const geometries = [
+            new THREE.BoxGeometry(1, 1, 1),
+            new THREE.OctahedronGeometry(0.7),
+            new THREE.TetrahedronGeometry(0.8),
+            new THREE.IcosahedronGeometry(0.6),
+          ]
+        
+          const material = new THREE.MeshPhongMaterial({
+            color: 0x0066cc,
+            shininess: 100,
+            transparent: true,
+            opacity: 0.8,
+          })
+      
+          for (let i = 0; i < 15; i++) {
+            const geometry = geometries[Math.floor(Math.random() * geometries.length)]
+            const mesh = new THREE.Mesh(geometry, material.clone())
+        
+            mesh.position.x = (Math.random() - 0.5) * 20
+            mesh.position.y = (Math.random() - 0.5) * 20
+            mesh.position.z = (Math.random() - 0.5) * 20
+        
+            mesh.rotation.x = Math.random() * Math.PI
+            mesh.rotation.y = Math.random() * Math.PI
+        
+            mesh.userData.velocity = {
+              x: (Math.random() - 0.5) * 0.01,
+              y: (Math.random() - 0.5) * 0.01,
+              rotation: (Math.random() - 0.5) * 0.02,
+            }
+        
+            heroScene.add(mesh)
+            heroMeshes.push(mesh)
+          }
+      
+          // Lighting
+          const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+          heroScene.add(ambientLight)
+      
+          const pointLight = new THREE.PointLight(0xff6b35, 1, 100)
+          pointLight.position.set(5, 5, 5)
+          heroScene.add(pointLight)
+      
+          const pointLight2 = new THREE.PointLight(0x0066cc, 1, 100)
+          pointLight2.position.set(-5, -5, 5)
+          heroScene.add(pointLight2)
+      
+          heroCamera.position.z = 10
+      
+          animateHero()
+        }
+        
+        function animateHero() {
+          requestAnimationFrame(animateHero)
+        
+          heroMeshes.forEach((mesh) => {
+            mesh.rotation.x += mesh.userData.velocity.rotation
+            mesh.rotation.y += mesh.userData.velocity.rotation
+        
+            mesh.position.x += mesh.userData.velocity.x
+            mesh.position.y += mesh.userData.velocity.y
+        
+            if (Math.abs(mesh.position.x) > 10) mesh.userData.velocity.x *= -1
+            if (Math.abs(mesh.position.y) > 10) mesh.userData.velocity.y *= -1
+          })
+      
+          heroRenderer.render(heroScene, heroCamera)
+        }
+        
+        // About Section 3D Workspace
+        function initAboutScene() {
+          const canvas = document.getElementById("about-canvas")
+          if (!canvas) return
+        
+          aboutScene = new THREE.Scene()
+          aboutCamera = new THREE.PerspectiveCamera(75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000)
+          aboutRenderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true })
+          aboutRenderer.setSize(canvas.offsetWidth, canvas.offsetHeight)
+          aboutRenderer.setPixelRatio(window.devicePixelRatio)
+        
+          // Create rotating cube structure
+          const geometry = new THREE.BoxGeometry(2, 2, 2)
+          const edges = new THREE.EdgesGeometry(geometry)
+          const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0066cc, linewidth: 2 })
+          aboutMesh = new THREE.LineSegments(edges, lineMaterial)
+          aboutScene.add(aboutMesh)
+        
+          // Add particles
+          const particleGeometry = new THREE.BufferGeometry()
+          const particleCount = 100
+          const positions = new Float32Array(particleCount * 3)
+        
+          for (let i = 0; i < particleCount * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 10
+          }
+      
+          particleGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3))
+          const particleMaterial = new THREE.PointsMaterial({ color: 0xff6b35, size: 0.05 })
+          const particles = new THREE.Points(particleGeometry, particleMaterial)
+          aboutScene.add(particles)
+      
+          aboutCamera.position.z = 5
+      
+          animateAbout()
+        }
+        
+        function animateAbout() {
+          requestAnimationFrame(animateAbout)
+        
+          if (aboutMesh) {
+            aboutMesh.rotation.x += 0.005
+            aboutMesh.rotation.y += 0.005
+          }
+      
+          aboutRenderer.render(aboutScene, aboutCamera)
+        }
+        
+        // Project Cards 3D
+        function initProjectScenes() {
+          const projectCanvases = document.querySelectorAll(".project-canvas")
+        
+          projectCanvases.forEach((canvas, index) => {
+            const scene = new THREE.Scene()
+            const camera = new THREE.PerspectiveCamera(75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000)
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true })
+        
+            renderer.setSize(canvas.offsetWidth, canvas.offsetHeight)
+            renderer.setPixelRatio(window.devicePixelRatio)
+        
+            // Create different shapes for each project
+            const geometries = [
+              new THREE.TorusGeometry(1, 0.4, 16, 100),
+              new THREE.SphereGeometry(1, 32, 32),
+              new THREE.ConeGeometry(1, 2, 32),
+            ]
+        
+            const geometry = geometries[index % geometries.length]
+            const material = new THREE.MeshPhongMaterial({
+              color: 0x0066cc,
+              shininess: 100,
+              transparent: true,
+              opacity: 0.9,
+            })
+        
+            const mesh = new THREE.Mesh(geometry, material)
+            scene.add(mesh)
+        
+            const light = new THREE.PointLight(0xff6b35, 1, 100)
+            light.position.set(5, 5, 5)
+            scene.add(light)
+        
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+            scene.add(ambientLight)
+        
+            camera.position.z = 3
+        
+            projectScenes.push({ scene, camera, renderer, mesh })
+        
+            function animate() {
+              requestAnimationFrame(animate)
+              mesh.rotation.x += 0.01
+              mesh.rotation.y += 0.01
+              renderer.render(scene, camera)
+            }
+            animate()
+          })
+        }
+        
+        // Team Avatars 3D
+        function initTeamAvatars() {
+          const avatarCanvases = document.querySelectorAll(".avatar-canvas")
+        
+          avatarCanvases.forEach((canvas, index) => {
+            const scene = new THREE.Scene()
+            const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000)
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true })
+        
+            renderer.setSize(canvas.offsetWidth, canvas.offsetHeight)
+            renderer.setPixelRatio(window.devicePixelRatio)
+        
+            // Create sphere with wireframe
+            const geometry = new THREE.SphereGeometry(1, 32, 32)
+            const material = new THREE.MeshPhongMaterial({
+              color: 0x0066cc,
+              wireframe: false,
+              shininess: 100,
+            })
+        
+            const mesh = new THREE.Mesh(geometry, material)
+            scene.add(mesh)
+        
+            const wireframeGeometry = new THREE.SphereGeometry(1.05, 16, 16)
+            const wireframeMaterial = new THREE.MeshBasicMaterial({
+              color: 0xff6b35,
+              wireframe: true,
+            })
+            const wireframeMesh = new THREE.Mesh(wireframeGeometry, wireframeMaterial)
+            scene.add(wireframeMesh)
+        
+            const light = new THREE.PointLight(0xffffff, 1, 100)
+            light.position.set(5, 5, 5)
+            scene.add(light)
+        
+            camera.position.z = 2.5
+        
+            function animate() {
+              requestAnimationFrame(animate)
+              mesh.rotation.y += 0.005
+              wireframeMesh.rotation.y -= 0.003
+              renderer.render(scene, camera)
+            }
+            animate()
+          })
+        }
+        
+        // Contact Section 3D
+        function initContactScene() {
+          const canvas = document.getElementById("contact-canvas")
+          if (!canvas) return
+        
+          contactScene = new THREE.Scene()
+          contactCamera = new THREE.PerspectiveCamera(75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000)
+          contactRenderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true })
+          contactRenderer.setSize(canvas.offsetWidth, canvas.offsetHeight)
+          contactRenderer.setPixelRatio(window.devicePixelRatio)
+        
+          // Create floating rings
+          for (let i = 0; i < 3; i++) {
+            const geometry = new THREE.TorusGeometry(1 + i * 0.5, 0.1, 16, 100)
+            const material = new THREE.MeshPhongMaterial({
+              color: i % 2 === 0 ? 0x0066cc : 0xff6b35,
+              transparent: true,
+              opacity: 0.6,
+            })
+            const mesh = new THREE.Mesh(geometry, material)
+            mesh.rotation.x = Math.PI / 2
+            mesh.position.y = i * 0.3 - 0.3
+            contactScene.add(mesh)
+            contactMeshes.push(mesh)
+          }
+      
+          const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+          contactScene.add(ambientLight)
+      
+          const pointLight = new THREE.PointLight(0xffffff, 1, 100)
+          pointLight.position.set(5, 5, 5)
+          contactScene.add(pointLight)
+      
+          contactCamera.position.z = 5
+      
+          animateContact()
+        }
+        
+        function animateContact() {
+          requestAnimationFrame(animateContact)
+        
+          contactMeshes.forEach((mesh, index) => {
+            mesh.rotation.z += 0.01 * (index + 1)
+          })
+      
+          contactRenderer.render(contactScene, contactCamera)
+        }
+        
+        // Scroll Effects
+        function initScrollEffects() {
+          const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -100px 0px",
+          }
+      
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = "1"
+                entry.target.style.transform = "translateY(0)"
+              }
+            })
+          }, observerOptions)
+      
+          const animatedElements = document.querySelectorAll(".service-card, .project-card, .team-card")
+          animatedElements.forEach((el) => {
+            el.style.opacity = "0"
+            el.style.transform = "translateY(30px)"
+            el.style.transition = "opacity 0.6s ease, transform 0.6s ease"
+            observer.observe(el)
+          })
+        }
+        
+        // Navbar Scroll Effect
+        function initNavbarScroll() {
+          const navbar = document.querySelector(".navbar")
+        
+          window.addEventListener("scroll", () => {
+            if (window.scrollY > 100) {
+              navbar.classList.add("scrolled")
+            } else {
+              navbar.classList.remove("scrolled")
+            }
+          })
+      
+          // Smooth scroll for nav links
+          document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener("click", function (e) {
+              e.preventDefault()
+              const target = document.querySelector(this.getAttribute("href"))
+              if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "start" })
+            
+                // Close mobile menu if open
+                const navbarCollapse = document.querySelector(".navbar-collapse")
+                if (navbarCollapse.classList.contains("show")) {
+                  bootstrap.Collapse.getInstance(navbarCollapse).hide()
+                }
+              }
+            })
+          })
+        }
+        
+        // Form Submit
+        function initFormSubmit() {
+          const form = document.getElementById("contact-form")
+          if (form) {
+            form.addEventListener("submit", (e) => {
+              e.preventDefault()
+              alert("Thank you for your message! We will get back to you soon.")
+              form.reset()
+            })
+          }
+        }
+        
+        // Responsive Resize
+        window.addEventListener("resize", () => {
+          // Hero
+          if (heroCamera && heroRenderer) {
+            heroCamera.aspect = window.innerWidth / window.innerHeight
+            heroCamera.updateProjectionMatrix()
+            heroRenderer.setSize(window.innerWidth, window.innerHeight)
+          }
+      
+          // About
+          const aboutCanvas = document.getElementById("about-canvas")
+          if (aboutCamera && aboutRenderer && aboutCanvas) {
+            aboutCamera.aspect = aboutCanvas.offsetWidth / aboutCanvas.offsetHeight
+            aboutCamera.updateProjectionMatrix()
+            aboutRenderer.setSize(aboutCanvas.offsetWidth, aboutCanvas.offsetHeight)
+          }
+      
+          // Contact
+          const contactCanvas = document.getElementById("contact-canvas")
+          if (contactCamera && contactRenderer && contactCanvas) {
+            contactCamera.aspect = contactCanvas.offsetWidth / contactCanvas.offsetHeight
+            contactCamera.updateProjectionMatrix()
+            contactRenderer.setSize(contactCanvas.offsetWidth, contactCanvas.offsetHeight)
+          }
+      
+          // Projects
+          projectScenes.forEach(({ camera, renderer }) => {
+            const canvas = renderer.domElement
+            camera.aspect = canvas.offsetWidth / canvas.offsetHeight
+            camera.updateProjectionMatrix()
+            renderer.setSize(canvas.offsetWidth, canvas.offsetHeight)
+          })
+        })
+    </script>
+</body>
+</html>
