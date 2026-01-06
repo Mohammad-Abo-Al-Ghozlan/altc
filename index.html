@@ -19,6 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.min.js"></script>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <style>
       :root {
         --primary-color: #f8f9fa;
@@ -1940,24 +1941,26 @@
               >
                 <!-- Updated orbit gallery to use actual project images -->
                 <span style="--i: 1"
-                  ><img src="assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/WhatsApp Image 2026-01-01 at 10.27.29 AM.jpeg" alt="Asphalt Work Project" data-project="asphalt"
+                  ><img src="assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/main.png" alt="Asphalt Work Project" data-project="asphalt"
                 /></span>
                 <span style="--i: 2"
-                  ><img src="assets/faced mock-up The line  Neom project- Concrete work/WhatsApp Image 2026-01-01 at 10.26.37 AM (1).jpeg" alt="Neom Concrete Project" data-project="neom"
+                  ><img src="assets/faced mock-up The line  Neom project- Concrete work/main.jpeg" alt="Neom Concrete Project" data-project="neom"
                 /></span>
                 <span style="--i: 3"
-                  ><img src="assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/WhatsApp Image 2026-01-01 at 10.27.39 AM (1).jpeg" alt="Jeddah Stadium Project" data-project="jeddah"
+                  ><img src="assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/main.jpeg" alt="Jeddah Stadium Project" data-project="jeddah"
                 /></span>
                 <span style="--i: 4"
-                  ><img src="assets/The line/WhatsApp Image 2026-01-01 at 10.26.46 AM.jpeg" alt="The Line Project" data-project="theline"
+                  ><img src="assets/The line/main.jpeg" alt="The Line Project" data-project="theline"
                 /></span>
                 <span style="--i: 5"
-                  ><img src="assets/Water and sewage networks works/WhatsApp Image 2026-01-01 at 10.30.19 AM.jpeg" alt="Water Networks Project" data-project="water"
+                  ><img src="assets/Water and sewage networks works/main.jpeg" alt="Water Networks Project" data-project="water"
                 /></span>
                 <span style="--i: 6"
-                  ><img src="assets/img1.jpg" alt="General Project" data-project="general"
+                  ><img src="assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/main.jpg" alt="General Project" data-project="general"
                 /></span>
               </div>
+
+              <br><p style="justify-content: center; text-align: center;color: rgba(255, 180, 0, 0.8);"><br>Click on any image to view it in magnified view</p>
               
               <!-- Updated magnified gallery structure -->
               <div id="magnified-gallery" style="display: none; margin-top: 40px; padding: 20px;">
@@ -1969,6 +1972,16 @@
                     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
                   "/>
                 </div>
+                <h3 id="magnified-project-title" style="
+                  text-align: center;
+                  color: #d4af37;
+                  margin-bottom: 20px;
+                  font-size: clamp(1.3rem, 3vw, 1.8rem);
+                  font-weight: 700;
+                  letter-spacing: 1px;
+                ">
+                </h3>
+
                 <div id="thumbnail-gallery" style="
                   display: flex;
                   justify-content: center;
@@ -2061,54 +2074,73 @@
                 transform: translateY(-2px);
                 box-shadow: 0 7px 20px rgba(212, 175, 55, 0.6);
               }
+
+              #magnified-project-title {
+                white-space: pre-line;
+              }
             </style>
+            
             
             <!-- Updated JavaScript to handle project-based image galleries -->
             <script>
               (function() {
+                const projectTitles = {
+                  asphalt: 'Project for the construction of concrete structures for the Jeddah Central Stadium and surrounding buildings',
+                  neom: 'Neom -18 NIC CONNECTOR - Concrete Works',
+                  jeddah: 'Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/110KV',
+                  theline: 'Execution of concrete works for model buildings in The Line Neom project',
+                  water: 'Infrastructure works - AL Madinah AL Munawwarah\nWater and sewage networks works',
+                  general: 'Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/110KV'
+                };
+
                 // Define project galleries with all images for each project
                 const projectGalleries = {
                   asphalt: [
-                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/WhatsApp Image 2026-01-01 at 10.27.29 AM.jpeg',
-                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/WhatsApp Image 2026-01-01 at 10.27.30 AM (1).jpeg',
-                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/WhatsApp Image 2026-01-01 at 10.27.30 AM (2).jpeg',
-                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/WhatsApp Image 2026-01-01 at 10.27.30 AM.jpeg'
+                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/main.png',
+                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work2.jpeg',
+                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work3.jpeg',
+                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work4.jpeg',
+                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work5.jpeg',
+                    // 'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work6.jpeg'
                   ],
                   neom: [
-                    'assets/faced mock-up The line  Neom project- Concrete work/WhatsApp Image 2026-01-01 at 10.26.37 AM (1).jpeg',
-                    'assets/faced mock-up The line  Neom project- Concrete work/WhatsApp Image 2026-01-01 at 10.26.37 AM.jpeg',
-                    'assets/faced mock-up The line  Neom project- Concrete work/WhatsApp Image 2026-01-01 at 10.26.41 AM.jpeg',
-                    'assets/faced mock-up The line  Neom project- Concrete work/WhatsApp Image 2026-01-01 at 10.26.42 AM.jpeg',
-                    'assets/faced mock-up The line  Neom project- Concrete work/WhatsApp Image 2026-01-01 at 10.26.43 AM (1).jpeg',
-                    'assets/faced mock-up The line  Neom project- Concrete work/WhatsApp Image 2026-01-01 at 10.26.43 AM.jpeg'
+                    'assets/faced mock-up The line  Neom project- Concrete work/main.jpeg',
+                    'assets/faced mock-up The line  Neom project- Concrete work/neom2.jpeg',
+                    'assets/faced mock-up The line  Neom project- Concrete work/neom3.jpeg',
+                    'assets/faced mock-up The line  Neom project- Concrete work/neom4.jpeg',
+                    'assets/faced mock-up The line  Neom project- Concrete work/neom5.jpeg',
+                    // 'assets/faced mock-up The line  Neom project- Concrete work/neom6.jpeg'
                   ],
                   jeddah: [
-                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/WhatsApp Image 2026-01-01 at 10.27.39 AM (1).jpeg',
-                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/WhatsApp Image 2026-01-01 at 10.27.39 AM.jpeg',
-                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/WhatsApp Image 2026-01-01 at 10.29.08 AM (1).jpeg',
-                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/WhatsApp Image 2026-01-01 at 10.29.08 AM (2).jpeg',
-                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/WhatsApp Image 2026-01-01 at 10.29.08 AM (3).jpeg',
-                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/WhatsApp Image 2026-01-01 at 10.29.08 AM.jpeg'
+                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/main.jpeg',
+                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img2.jpeg',
+                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img3.jpeg',
+                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img4.jpeg',
+                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img5.jpeg',
+                    // 'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img6.jpeg'
                   ],
                   theline: [
-                    'assets/The line/WhatsApp Image 2026-01-01 at 10.26.46 AM.jpeg',
+                    'assets/The line/main.jpeg',
                     'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM.jpeg',
-                    'assets/The line/WhatsApp Image 2026-01-01 at 10.26.58 AM.jpeg'
+                    'assets/The line/WhatsApp Image 2026-01-01 at 10.26.58 AM.jpeg',
+                    'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM (1).jpeg',
+                    'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM (3).jpeg',
+                    // 'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM (4).jpeg',
                   ],
                   water: [
-                    'assets/Water and sewage networks works/WhatsApp Image 2026-01-01 at 10.30.19 AM.jpeg',
-                    'assets/Water and sewage networks works/WhatsApp Image 2026-01-01 at 10.30.20 AM.jpeg',
-                    'assets/Water and sewage networks works/WhatsApp Image 2026-01-01 at 10.30.21 AM (1).jpeg',
-                    'assets/Water and sewage networks works/WhatsApp Image 2026-01-01 at 10.30.21 AM.jpeg',
-                    'assets/Water and sewage networks works/WhatsApp Image 2026-01-01 at 10.30.22 AM.jpeg'
+                    'assets/Water and sewage networks works/main.jpeg',
+                    'assets/Water and sewage networks works/water2.jpeg',
+                    'assets/Water and sewage networks works/water3.jpeg',
+                    'assets/Water and sewage networks works/water4.jpeg',
+                    'assets/Water and sewage networks works/water5.jpeg',
+                    // 'assets/Water and sewage networks works/water6.jpeg'
                   ],
                   general: [
-                    'assets/img1.jpg',
-                    'assets/img2.jpg',
-                    'assets/img3.jpg',
-                    'assets/img4.jpg',
-                    'assets/img5.jpg',
-                    'assets/img6.jpg'
+                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/main.jpg',
+                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asph1.jpeg',
+                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asp2.jpeg',
+                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asph3.jpeg',
+                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asp4.jpeg',
                   ]
                 };
                 
@@ -2130,55 +2162,47 @@
                 });
                 
                 function openMagnifiedGallery(projectKey, clickedImageSrc) {
-                  // Pause the orbit animation
                   orbitGallery.style.animationPlayState = 'paused';
-                  
-                  // Show magnified gallery
                   magnifiedGallery.style.display = 'block';
-                  
-                  // Get the project images
+
                   const projectImages = projectGalleries[projectKey] || [];
-                  
-                  // Find the clicked image in the project array
+                  const projectTitle = projectTitles[projectKey] || 'Project Gallery';
+
+                  // ✅ SET TITLE
+                  document.getElementById('magnified-project-title').textContent = projectTitle;
+
                   let clickedIndex = 0;
                   projectImages.forEach((imgPath, index) => {
                     if (clickedImageSrc.includes(imgPath)) {
                       clickedIndex = index;
                     }
                   });
-                  
-                  // Set main magnified image
+
                   magnifiedImage.src = projectImages[clickedIndex];
-                  
-                  // Clear and populate thumbnails with other images from the same project
                   thumbnailGallery.innerHTML = '';
-                  
-                  // Get other images (excluding the clicked one), limit to 5
+
                   let thumbnailCount = 0;
                   projectImages.forEach((imgPath, index) => {
                     if (index !== clickedIndex && thumbnailCount < 5) {
                       const thumb = document.createElement('img');
                       thumb.src = imgPath;
-                      thumb.alt = `Project Image ${index + 1}`;
                       thumb.className = 'thumbnail-img-gallery';
-                      thumb.setAttribute('data-src', imgPath);
-                      
-                      thumb.addEventListener('click', function() {
-                        magnifiedImage.src = this.getAttribute('data-src');
-                        
-                        // Update active thumbnail
-                        document.querySelectorAll('.thumbnail-img-gallery').forEach(t => t.classList.remove('active'));
+
+                      thumb.addEventListener('click', function () {
+                        magnifiedImage.src = imgPath;
+                        document.querySelectorAll('.thumbnail-img-gallery')
+                          .forEach(t => t.classList.remove('active'));
                         this.classList.add('active');
                       });
-                      
+
                       thumbnailGallery.appendChild(thumb);
                       thumbnailCount++;
                     }
                   });
-                  
-                  // Scroll to magnified gallery
+
                   magnifiedGallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
+
                 
                 // Close button handler
                 closeButton.addEventListener('click', function() {
