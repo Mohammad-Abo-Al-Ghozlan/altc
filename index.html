@@ -3266,26 +3266,36 @@
         <div class="row justify-content-center g-4">
           <div class="col-12 col-md-3">
             <div class="stat-item p-3 bg-opacity-10 rounded">
-              <div class="stat-number fw-bold" data-count="100">0</div>
-              <div class="stat-label" data-translate="stats_projects">Projects Completed</div>
+              <div class="stat-number k-num fw-bold" data-count="150"></div>
+              <div class="stat-label" data-translate="stats_projects">m²</div>
+              <style>
+                .k-num::after {
+                  content: "k+";
+                }
+              </style>
             </div>
           </div>
           <div class="col-12 col-md-3">
             <div class="stat-item p-3 bg-opacity-10 rounded">
-              <div class="stat-number fw-bold" data-count="65">0</div>
+              <div class="stat-number k-numb fw-bold" data-count="65">0</div>
               <div class="stat-label" data-translate="stats_team">Team Members</div>
             </div>
           </div>
           <div class="col-12 col-md-3">
             <div class="stat-item p-3 bg-opacity-10 rounded">
-              <div class="stat-number fw-bold" data-count="15">0</div>
+              <div class="stat-number k-numb fw-bold" data-count="7">0</div>
               <div class="stat-label" data-translate="stats_experience">Years Experience</div>
             </div>
+            <style>
+                .k-numb::after {
+                  content: "+";
+                }
+              </style>
           </div>
           <div class="col-12 col-md-3">
             <div class="stat-item p-3 bg-opacity-10 rounded">
-              <div class="stat-number fw-bold" data-count="130">0</div>
-              <div class="stat-label" data-translate="stats_equipment">Equipment Units<br></div>
+              <div class="stat-number k-num fw-bold" data-count="12">0</div>
+              <div class="stat-label" data-translate="stats_equipment">Hours Worked</div>
             </div>
           </div>
         </div>
@@ -3322,32 +3332,32 @@
       <div class="project-slider">
         <div class="project-slide active">
           <video class="video-background" autoplay muted loop>
-            <source src="assets/proj1.mp4" type="video/mp4" />
+            <source src="t.mp4" type="video/mp4" />
           </video>
           <div class="section-overlay"></div>
           <div class="project-info">
-            <h3 class="project-title" data-translate="project1_title">Yanbu Commercial Port</h3>
-            <p data-translate="project1_description">Marine quay construction for Global Marine</p>
+            <h3 class="project-title" data-translate="project1_title">Execution of concrete works for model buildings in The Line Neom project</h3>
+            <!-- <p data-translate="project1_description">Marine quay construction for Global Marine</p> -->
           </div>
         </div>
         <div class="project-slide">
           <video class="video-background" autoplay muted loop>
-            <source src="assets/proj2.mp4" type="video/mp4" />
+            <source src="test.mp4" type="video/mp4" />
           </video>
           <div class="section-overlay"></div>
           <div class="project-info">
-            <h3 class="project-title" data-translate="project2_title">Ministry Building</h3>
-            <p data-translate="project2_description">Commerce and Investment Ministry in Yanbu</p>
+            <h3 class="project-title" data-translate="project2_title">Neom -18 NIC CONNECTOR - Concrete Works</h3>
+            <!-- <p data-translate="project2_description">Commerce and Investment Ministry in Yanbu</p> -->
           </div>
         </div>
         <div class="project-slide">
           <video class="video-background" autoplay muted loop>
-            <source src="assets/proj3.mp4" type="video/mp4" />
+            <source src="t.mp4" type="video/mp4" />
           </video>
           <div class="section-overlay"></div>
           <div class="project-info">
-            <h3 class="project-title" data-translate="project3_title">King Khalid Road</h3>
-            <p data-translate="project3_description">Road construction and expansion for Ministry of Transport</p>
+            <h3 class="project-title" data-translate="project3_title">Execution of concrete works for model buildings in The Line Neom project</h3>
+            <!-- <p data-translate="project3_description">Road construction and expansion for Ministry of Transport</p> -->
           </div>
         </div>
         <div class="project-nav">
@@ -3389,258 +3399,7 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <!-- <section id="contact">
-        <video class="video-background" autoplay muted loop>
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-architect-in-modern-office-41364-large.mp4" type="video/mp4">
-        </video>
-        <div class="wrapper">
-          <form class="form">
-            <span class="title">Get in Touch</span>
-
-            <div class="input-container">
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 6H5m2 3H5m2 3H5m2 3H5m2 3H5m11-1a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2M7 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Zm8 7a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
-                </svg>
-              <input class="input" type="text" placeholder="Name" />
-            </div>
-        
-            <div class="input-container">
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd" d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-6.616l-2.88 2.592C8.537 20.461 7 19.776 7 18.477V17H5a2 2 0 0 1-2-2V6Zm4 2a1 1 0 0 0 0 2h5a1 1 0 1 0 0-2H7Zm8 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2Zm-8 3a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H7Zm5 0a1 1 0 1 0 0 2h5a1 1 0 1 0 0-2h-5Z" clip-rule="evenodd"/>
-                </svg>
-              <input class="input" type="message" placeholder="Message" />
-            </div>
-        
-            <div class="login-button">
-              <input class="input" type="submit" value="submit" />
-            </div>
-        
-            <div class="texture"></div>
-          </form>
-        </div>
-    </section> -->
-    <!-- <section id="contact" style="padding: 20px;margin-top: 100px;height: auto;">
-        <div class="form-container col-lg-3 col-sm-12 col-md-6">
-          <form class="form">
-            <span class="heading">Contact Us</span>
-        
-            <div class="form-group">
-              <input class="form-input" required="" type="text" />
-              <label>Name</label>
-            </div>
-        
-            <div class="form-group">
-              <textarea class="form-input" rows="5" required></textarea>
-              <label>Message</label>
-            </div>
-        
-            <style>
-                .form-container {
-                  background: linear-gradient(#212121, #212121) padding-box,
-                    linear-gradient(120deg, transparent 10%, #cea539, #ffc020) border-box;
-                  border: 2px solid transparent;
-                  padding: 32px;
-                  font-size: 14px;
-                  color: white;
-                  display: flex;
-                  justify-content: center;
-                  flex-direction: column;
-                  gap: 20px;
-                  box-sizing: border-box;
-                  border-radius: 16px;
-                }
-            
-                .form {
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                  gap: 20px;
-                }
-            
-                .heading {
-                  font-size: 20px;
-                  font-weight: 600;
-                }
-            
-                .form-input {
-                  color: white;
-                  background: transparent;
-                  border: 1px solid #414141;
-                  border-radius: 5px;
-                  padding: 8px;
-                  outline: none;
-                }
-            
-                .conbtn {
-                  border-radius: 5px;
-                  padding: 6px;
-                  background: #ffffff14;
-                  color: #c7c5c5;
-                  border: 1px solid #414141;
-                }
-            
-                .conbtn:hover {
-                  background: #212121;
-                  cursor: pointer;
-                }
-            
-                .form-group {
-                  display: flex;
-                  flex-direction: column;
-                  gap: 5px;
-                  color: #414141;
-                  position: relative;
-                }
-            
-                .form-group label {
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  padding: 5px;
-                  pointer-events: none;
-                  transition: 0.5s;
-                }
-            
-                .form-group input:focus ~ label,
-                .form-group input:valid ~ label {
-                  top: -16px;
-                  left: 0;
-                  background: #212121 padding-box;
-                  padding: 10px 0 0 0;
-                  color: #bdb8b8;
-                
-                  font-size: 12px;
-                }
-            </style>
-            <button class="conbtn">SUBMIT</button>
-          </form>
-        </div>
-    </section> -->
-    <!-- <section
-      id="contact"
-      style="
-        padding: 40px 20px;
-        margin-top: 0px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        max-height: 60vh;
-      "
-    >
-      <div class="form-container col-12 col-sm-10 col-md-8 col-lg-4">
-        <form class="form">
-          <span class="heading">Contact Us</span>
-
-          <div class="form-group">
-            <input class="form-input" required type="text" />
-            <label>Name</label>
-          </div>
-
-          <div class="form-group">
-            <textarea class="form-input" rows="5" required></textarea>
-            <label>Message</label>
-          </div>
-
-          <button class="conbtn">SUBMIT</button>
-        </form>
-      </div>
-
-      <style>
-        .form-container {
-          background: linear-gradient(#212121, #212121) padding-box,
-            linear-gradient(120deg, transparent 10%, #cea539, #ffc020)
-              border-box;
-          border: 2px solid transparent;
-          padding: 32px;
-          font-size: 14px;
-          color: white;
-          display: flex;
-          justify-content: center;
-          flex-direction: column;
-          gap: 20px;
-          box-sizing: border-box;
-          border-radius: 16px;
-          width: 100%;
-          max-width: 500px;
-        }
-
-        .form {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-        }
-
-        .heading {
-          font-size: 24px;
-          font-weight: 600;
-          text-align: center;
-        }
-
-        .form-input {
-          color: white;
-          background: transparent;
-          border: 1px solid #414141;
-          border-radius: 5px;
-          padding: 10px;
-          outline: none;
-        }
-
-        .conbtn {
-          border-radius: 5px;
-          padding: 10px;
-          background: #ffffff14;
-          color: #c7c5c5;
-          border: 1px solid #414141;
-          transition: 0.3s;
-        }
-
-        .conbtn:hover {
-          background: #212121;
-          cursor: pointer;
-        }
-
-        .form-group {
-          display: flex;
-          flex-direction: column;
-          gap: 5px;
-          position: relative;
-        }
-
-        .form-group label {
-          position: absolute;
-          top: 10px;
-          left: 10px;
-          pointer-events: none;
-          color: #bdb8b8;
-          transition: 0.3s;
-          font-size: 14px;
-        }
-
-        .form-group input:focus ~ label,
-        .form-group input:valid ~ label,
-        .form-group textarea:focus ~ label,
-        .form-group textarea:valid ~ label {
-          top: -16px;
-          left: 0;
-          background: #212121 padding-box;
-          padding: 0 5px;
-          font-size: 12px;
-        }
-
-        @media (max-width: 768px) {
-          .form-container {
-            padding: 24px;
-          }
-        }
-
-        @media (max-width: 576px) {
-          .form-container {
-            padding: 20px;
-          }
-        }
-      </style>
-    </section> -->
+    
     <section id="contact" class="contact-section">
       <div class="form-container">
         <form class="form">
@@ -4270,710 +4029,6 @@
       }
     </script>
   
-<!-- <script>
-// const translations = {
-//   en: {
-//     nav_home: "Home",
-//     nav_about: "About",
-//     nav_services: "Services",
-//     nav_achievements: "Achievements",
-//     nav_projects: "Projects",
-//     nav_contact: "Contact",
-//     language_label: "🌐 Language",
-//     lang_en: "English",
-//     lang_ar: "العربية",
-//     brand_english: "Afkar Altatweer Contracting Co.",
-//     hero_title: "AFKAR AL-TATWEER",
-//     hero_short: "ATCC",
-//     hero_tagline: "Building Excellence Beyond Premium Quality",
-//     projects: "Projects",
-//     learn_more: "Learn More",
-//     about_title: "About Afkar Altatweer",
-//     about_paragraph: "Afkar Altatweer Contracting Co. (ATCC) is a premier construction company dedicated to delivering excellence in every project we undertake. With a strong commitment to quality, innovation, and customer satisfaction, we have established ourselves as a trusted partner in the construction industry.",
-//     mission_title: "Our Mission",
-//     mission_text: "To deliver exceptional construction services that exceed client expectations through innovative solutions, quality craftsmanship, and unwavering commitment to excellence.",
-//     vision_title: "Our Vision",
-//     vision_text: "To be the leading construction company recognized for quality, innovation, and sustainable development practices across Saudi Arabia and beyond.",
-//     commitment_title: "Our Commitment",
-//     commitment_subtitle: "Building with excellence, integrity, and innovation",
-//     quality_services: "Quality Services",
-//     customer_satisfaction: "Customer Satisfaction",
-//     international_standards: "International Standards",
-//     ethical_leadership: "Ethical Leadership",
-//     innovative_solutions: "Innovative Solutions",
-//     sustainability: "Sustainability"
-//   },
-//   ar: {
-//     nav_home: "الرئيسية",
-//     nav_about: "من نحن",
-//     nav_services: "الخدمات",
-//     nav_achievements: "الإنجازات",
-//     nav_projects: "المشاريع",
-//     nav_contact: "تواصل معنا",
-//     language_label: "🌐 اللغة",
-//     lang_en: "English",
-//     lang_ar: "العربية",
-//     brand_english: "Afkar Altatweer Contracting Co.",
-//     hero_title: "أفكار التطوير",
-//     hero_short: "ATCC",
-//     hero_tagline: "نبني التميز بجودة تفوق الممتاز",
-//     projects: "المشاريع",
-//     learn_more: "اعرف المزيد",
-//     about_title: "عن أفكار التطوير",
-//     about_paragraph: "شركة أفكار التطوير للمقاولات (ATCC) هي شركة مقاولات رائدة مكرسة لتقديم التميز في كل مشروع نقوم به. مع التزام قوي بالجودة والابتكار ورضا العملاء، لقد أثبتنا أنفسنا كشريك موثوق في صناعة البناء.",
-//     mission_title: "مهمتنا",
-//     mission_text: "تقديم خدمات إنشائية استثنائية تتجاوز توقعات العملاء من خلال حلول مبتكرة، وحرفية عالية، والتزام ثابت بالتميز.",
-//     vision_title: "رؤيتنا",
-//     vision_text: "أن نكون الشركة الرائدة في البناء والمعترف بها للجودة والابتكار والممارسات المستدامة في المملكة العربية السعودية وخارجها.",
-//     commitment_title: "التزامنا",
-//     commitment_subtitle: "نبني بالتميز والنزاهة والابتكار",
-//     quality_services: "خدمات عالية الجودة",
-//     customer_satisfaction: "رضا العملاء",
-//     international_standards: "المعايير الدولية",
-//     ethical_leadership: "القيادة الأخلاقية",
-//     innovative_solutions: "حلول مبتكرة",
-//     sustainability: "الاستدامة"
-//   }
-// };
-const translations = {
-  en: {
-    // Navigation
-    nav_home: "Home",
-    nav_about: "About",
-    nav_services: "Services",
-    nav_achievements: "Achievements",
-    nav_projects: "Projects",
-    nav_contact: "Contact",
-    language_label: "🌐 Language",
-    lang_en: "English",
-    lang_ar: "العربية",
-    lang_es: "Español",
-    lang_zh: "中文",
-    
-    // Brand
-    brand_english: "Afkar Altatweer Contracting Co.",
-    
-    // Hero Section
-    hero_title: "AFKAR AL-TATWEER",
-    hero_short: "ATCC",
-    hero_tagline: "Building Excellence Beyond Premium Quality",
-    
-    // Buttons
-    projects: "Projects",
-    learn_more: "Learn More",
-    
-    // About Company Section
-    about_title_alt: "About Afkar Altatweer",
-    about_paragraph: "Afkar Altatweer Contracting Co. (ATCC) is a premier construction company dedicated to delivering excellence in every project we undertake. With a strong commitment to quality, innovation, and customer satisfaction, we have established ourselves as a trusted partner in the construction industry.",
-    
-    // Highlights
-    highlight_quality: "Quality Excellence",
-    highlight_quality_desc: "Multiple award-winning company with international standards",
-    highlight_team: "Expert Team",
-    highlight_team_desc: "65+ skilled professionals including engineers, technicians, and specialists",
-    highlight_equipment: "Modern Equipment",
-    highlight_equipment_desc: "130+ state-of-the-art equipment units for all construction needs",
-    
-    // Mission & Vision
-    mission_title: "Our Mission",
-    mission_text: "To deliver exceptional construction services that exceed client expectations through innovative solutions, quality craftsmanship, and unwavering commitment to excellence.",
-    vision_title: "Our Vision",
-    vision_text: "To be the leading construction company recognized for quality, innovation, and sustainable development practices across Saudi Arabia and beyond.",
-    
-    // Commitment Section
-    commitment_title: "Our Commitment",
-    commitment_subtitle: "Building with excellence, integrity, and innovation",
-    quality_services: "Quality Services",
-    customer_satisfaction: "Customer Satisfaction",
-    international_standards: "International Standards",
-    ethical_leadership: "Ethical Leadership",
-    innovative_solutions: "Innovative Solutions",
-    sustainability: "Sustainability",
-    
-    // Work Section - Core Values
-    core_values_title: "Core Values",
-    confidentiality_title: "Confidentiality",
-    confidentiality_subtitle: "Protecting Client Information & Trust",
-    confidentiality_data: "Data Security:",
-    confidentiality_data_value: "ISO 27001 Compliant",
-    confidentiality_privacy: "Client Privacy:",
-    confidentiality_privacy_value: "100% Protected",
-    confidentiality_docs: "Documentation:",
-    confidentiality_docs_value: "Secure Storage",
-    confidentiality_access: "Access Control:",
-    confidentiality_access_value: "Authorized Personnel Only",
-    confidentiality_badge1: "NDA Compliance",
-    confidentiality_badge2: "Encrypted Communication",
-    confidentiality_badge3: "Trusted Partner",
-    
-    integrity_title: "Integrity",
-    integrity_subtitle: "Honest & Transparent Business Practices",
-    integrity_ethics: "Ethics:",
-    integrity_ethics_value: "Code of Conduct",
-    integrity_transparency: "Transparency:",
-    integrity_transparency_value: "Clear Communication",
-    integrity_accountability: "Accountability:",
-    integrity_accountability_value: "Full Responsibility",
-    integrity_trust: "Trust:",
-    integrity_trust_value: "Long-term Relationships",
-    integrity_badge1: "Ethical Standards",
-    integrity_badge2: "Fair Dealing",
-    integrity_badge3: "Honest Reporting",
-    
-    excellence_title: "Excellence",
-    excellence_subtitle: "Delivering Superior Quality Results",
-    excellence_quality: "Quality Management:",
-    excellence_quality_value: "ISO 9001:2015",
-    excellence_standards: "Standards:",
-    excellence_standards_value: "International Best Practices",
-    excellence_performance: "Performance:",
-    excellence_performance_value: "Exceeds Expectations",
-    excellence_innovation: "Innovation:",
-    excellence_innovation_value: "Continuous Improvement",
-    excellence_badge1: "Quality Assurance",
-    excellence_badge2: "Premium Delivery",
-    excellence_badge3: "Customer Satisfaction",
-    
-    innovation_title: "Innovation",
-    innovation_subtitle: "Embracing Technology & Modern Solutions",
-    innovation_tech: "Technology:",
-    innovation_tech_value: "Latest Construction Tech",
-    innovation_methods: "Methods:",
-    innovation_methods_value: "Advanced Techniques",
-    innovation_equipment: "Equipment:",
-    innovation_equipment_value: "State-of-the-art Machinery",
-    innovation_research: "Research:",
-    innovation_research_value: "Continuous Development",
-    innovation_badge1: "Smart Solutions",
-    innovation_badge2: "Future-Ready",
-    innovation_badge3: "Industry Leadership",
-    
-    // Stats Section
-    achievements_title: "Our Achievements",
-    stats_projects: "Projects Completed",
-    stats_team: "Team Members",
-    stats_experience: "Years Experience",
-    stats_equipment: "Equipment Units",
-    
-    // Projects Section
-    project_yanbu: "Yanbu Commercial Port",
-    project_yanbu_desc: "Marine quay construction for Global Marine",
-    project_ministry: "Ministry Building",
-    project_ministry_desc: "Commerce and Investment Ministry in Yanbu",
-    project_khalid: "King Khalid Road",
-    project_khalid_desc: "Road construction and expansion for Ministry of Transport",
-    
-    // Contact Section
-    contact_title: "Contact Us",
-    contact_name: "Name",
-    contact_email: "Email",
-    contact_message: "Message",
-    contact_submit: "Send Message",
-    
-    // Footer
-    footer_mobile: "Mobile: 0544777959 | 05336999619",
-    footer_country: "Saudi Arabia",
-    footer_vat: "VAT: 310198822200003 | C.R: 4700116838",
-    footer_copyright: "© 2025 Afkar Altatweer Contracting Co. All Rights Reserved."
-  },
-  
-  ar: {
-    // Navigation
-    nav_home: "الرئيسية",
-    nav_about: "من نحن",
-    nav_services: "الخدمات",
-    nav_achievements: "الإنجازات",
-    nav_projects: "المشاريع",
-    nav_contact: "تواصل معنا",
-    language_label: "🌐 اللغة",
-    lang_en: "English",
-    lang_ar: "العربية",
-    lang_es: "الإسبانية",
-    lang_zh: "الصينية",
-    
-    // Brand
-    brand_english: "Afkar Altatweer Contracting Co.",
-    
-    // Hero Section
-    hero_title: "أفكار التطوير",
-    hero_short: "ATCC",
-    hero_tagline: "نبني التميز بجودة تفوق الممتاز",
-    
-    // Buttons
-    projects: "المشاريع",
-    learn_more: "اعرف المزيد",
-    
-    // About Company Section
-    about_title_alt: "عن أفكار التطوير",
-    about_paragraph: "شركة أفكار التطوير للمقاولات (ATCC) هي شركة مقاولات رائدة مكرسة لتقديم التميز في كل مشروع نقوم به. مع التزام قوي بالجودة والابتكار ورضا العملاء، لقد أثبتنا أنفسنا كشريك موثوق في صناعة البناء.",
-    
-    // Highlights
-    highlight_quality: "التميز في الجودة",
-    highlight_quality_desc: "شركة حاصلة على جوائز متعددة ومعايير دولية",
-    highlight_team: "فريق الخبراء",
-    highlight_team_desc: "أكثر من 65 متخصصًا من المهندسين والفنيين والخبراء",
-    highlight_equipment: "المعدات الحديثة",
-    highlight_equipment_desc: "أكثر من 130 وحدة معدات حديثة لجميع احتياجات البناء",
-    
-    // Mission & Vision
-    mission_title: "مهمتنا",
-    mission_text: "تقديم خدمات إنشائية استثنائية تتجاوز توقعات العملاء من خلال حلول مبتكرة، وحرفية عالية، والتزام ثابت بالتميز.",
-    vision_title: "رؤيتنا",
-    vision_text: "أن نكون الشركة الرائدة في البناء والمعترف بها للجودة والابتكار والممارسات المستدامة في المملكة العربية السعودية وخارجها.",
-    
-    // Commitment Section
-    commitment_title: "التزامنا",
-    commitment_subtitle: "نبني بالتميز والنزاهة والابتكار",
-    quality_services: "خدمات عالية الجودة",
-    customer_satisfaction: "رضا العملاء",
-    international_standards: "المعايير الدولية",
-    ethical_leadership: "القيادة الأخلاقية",
-    innovative_solutions: "حلول مبتكرة",
-    sustainability: "الاستدامة",
-    
-    // Work Section - Core Values
-    core_values_title: "القيم الأساسية",
-    confidentiality_title: "السرية",
-    confidentiality_subtitle: "حماية معلومات العملاء والثقة",
-    confidentiality_data: "أمن البيانات:",
-    confidentiality_data_value: "متوافق مع ISO 27001",
-    confidentiality_privacy: "خصوصية العميل:",
-    confidentiality_privacy_value: "100% محمية",
-    confidentiality_docs: "التوثيق:",
-    confidentiality_docs_value: "تخزين آمن",
-    confidentiality_access: "التحكم في الوصول:",
-    confidentiality_access_value: "الموظفون المصرح لهم فقط",
-    confidentiality_badge1: "الامتثال لاتفاقية السرية",
-    confidentiality_badge2: "اتصالات مشفرة",
-    confidentiality_badge3: "شريك موثوق",
-    
-    integrity_title: "النزاهة",
-    integrity_subtitle: "ممارسات تجارية صادقة وشفافة",
-    integrity_ethics: "الأخلاق:",
-    integrity_ethics_value: "مدونة قواعد السلوك",
-    integrity_transparency: "الشفافية:",
-    integrity_transparency_value: "تواصل واضح",
-    integrity_accountability: "المساءلة:",
-    integrity_accountability_value: "المسؤولية الكاملة",
-    integrity_trust: "الثقة:",
-    integrity_trust_value: "علاقات طويلة الأمد",
-    integrity_badge1: "المعايير الأخلاقية",
-    integrity_badge2: "التعامل العادل",
-    integrity_badge3: "التقارير الصادقة",
-    
-    excellence_title: "التميز",
-    excellence_subtitle: "تقديم نتائج عالية الجودة",
-    excellence_quality: "إدارة الجودة:",
-    excellence_quality_value: "ISO 9001:2015",
-    excellence_standards: "المعايير:",
-    excellence_standards_value: "أفضل الممارسات الدولية",
-    excellence_performance: "الأداء:",
-    excellence_performance_value: "يتجاوز التوقعات",
-    excellence_innovation: "الابتكار:",
-    excellence_innovation_value: "التطوير المستمر",
-    excellence_badge1: "ضمان الجودة",
-    excellence_badge2: "تقديم ممتاز",
-    excellence_badge3: "رضا العملاء",
-    
-    innovation_title: "الابتكار",
-    innovation_subtitle: "تبني التكنولوجيا والحلول الحديثة",
-    innovation_tech: "التكنولوجيا:",
-    innovation_tech_value: "أحدث تكنولوجيا البناء",
-    innovation_methods: "الأساليب:",
-    innovation_methods_value: "تقنيات متقدمة",
-    innovation_equipment: "المعدات:",
-    innovation_equipment_value: "معدات حديثة",
-    innovation_research: "البحث:",
-    innovation_research_value: "تطوير مستمر",
-    innovation_badge1: "حلول ذكية",
-    innovation_badge2: "جاهز للمستقبل",
-    innovation_badge3: "الريادة في الصناعة",
-    
-    // Stats Section
-    achievements_title: "إنجازاتنا",
-    stats_projects: "المشاريع المكتملة",
-    stats_team: "أعضاء الفريق",
-    stats_experience: "سنوات الخبرة",
-    stats_equipment: "وحدات المعدات",
-    
-    // Projects Section
-    project_yanbu: "ميناء ينبع التجاري",
-    project_yanbu_desc: "بناء رصيف بحري لشركة جلوبال مارين",
-    project_ministry: "مبنى الوزارة",
-    project_ministry_desc: "وزارة التجارة والاستثمار في ينبع",
-    project_khalid: "طريق الملك خالد",
-    project_khalid_desc: "إنشاء وتوسعة الطرق لوزارة النقل",
-    
-    // Contact Section
-    contact_title: "تواصل معنا",
-    contact_name: "الاسم",
-    contact_email: "البريد الإلكتروني",
-    contact_message: "الرسالة",
-    contact_submit: "إرسال الرسالة",
-    
-    // Footer
-    footer_mobile: "جوال: 0544777959 | 05336999619",
-    footer_country: "المملكة العربية السعودية",
-    footer_vat: "الرقم الضريبي: 310198822200003 | السجل التجاري: 4700116838",
-    footer_copyright: "© 2025 شركة أفكار التطوير للمقاولات. جميع الحقوق محفوظة."
-  },
-  
-  es: {
-    // Navigation
-    nav_home: "Inicio",
-    nav_about: "Nosotros",
-    nav_services: "Servicios",
-    nav_achievements: "Logros",
-    nav_projects: "Proyectos",
-    nav_contact: "Contacto",
-    language_label: "🌐 Idioma",
-    lang_en: "Inglés",
-    lang_ar: "Árabe",
-    lang_es: "Español",
-    lang_zh: "Chino",
-    
-    // Brand
-    brand_english: "Afkar Altatweer Contracting Co.",
-    
-    // Hero Section
-    hero_title: "AFKAR AL-TATWEER",
-    hero_short: "ATCC",
-    hero_tagline: "Construyendo Excelencia Más Allá de la Calidad Premium",
-    
-    // Buttons
-    projects: "Proyectos",
-    learn_more: "Saber Más",
-    
-    // About Company Section
-    about_title_alt: "Acerca de Afkar Altatweer",
-    about_paragraph: "Afkar Altatweer Contracting Co. (ATCC) es una empresa de construcción líder dedicada a ofrecer excelencia en cada proyecto que emprendemos. Con un fuerte compromiso con la calidad, la innovación y la satisfacción del cliente, nos hemos establecido como un socio confiable en la industria de la construcción.",
-    
-    // Highlights
-    highlight_quality: "Excelencia en Calidad",
-    highlight_quality_desc: "Empresa multipremiada con estándares internacionales",
-    highlight_team: "Equipo de Expertos",
-    highlight_team_desc: "Más de 65 profesionales calificados incluyendo ingenieros, técnicos y especialistas",
-    highlight_equipment: "Equipos Modernos",
-    highlight_equipment_desc: "Más de 130 unidades de equipos de última generación para todas las necesidades de construcción",
-    
-    // Mission & Vision
-    mission_title: "Nuestra Misión",
-    mission_text: "Entregar servicios de construcción excepcionales que superen las expectativas de los clientes a través de soluciones innovadoras, mano de obra de calidad y un compromiso inquebrantable con la excelencia.",
-    vision_title: "Nuestra Visión",
-    vision_text: "Ser la empresa líder en construcción reconocida por la calidad, innovación y prácticas de desarrollo sostenible en Arabia Saudita y más allá.",
-    
-    // Commitment Section
-    commitment_title: "Nuestro Compromiso",
-    commitment_subtitle: "Construyendo con excelencia, integridad e innovación",
-    quality_services: "Servicios de Calidad",
-    customer_satisfaction: "Satisfacción del Cliente",
-    international_standards: "Estándares Internacionales",
-    ethical_leadership: "Liderazgo Ético",
-    innovative_solutions: "Soluciones Innovadoras",
-    sustainability: "Sostenibilidad",
-    
-    // Work Section - Core Values
-    core_values_title: "Valores Fundamentales",
-    confidentiality_title: "Confidencialidad",
-    confidentiality_subtitle: "Protegiendo la Información y Confianza del Cliente",
-    confidentiality_data: "Seguridad de Datos:",
-    confidentiality_data_value: "Cumple con ISO 27001",
-    confidentiality_privacy: "Privacidad del Cliente:",
-    confidentiality_privacy_value: "100% Protegido",
-    confidentiality_docs: "Documentación:",
-    confidentiality_docs_value: "Almacenamiento Seguro",
-    confidentiality_access: "Control de Acceso:",
-    confidentiality_access_value: "Solo Personal Autorizado",
-    confidentiality_badge1: "Cumplimiento de NDA",
-    confidentiality_badge2: "Comunicación Encriptada",
-    confidentiality_badge3: "Socio Confiable",
-    
-    integrity_title: "Integridad",
-    integrity_subtitle: "Prácticas Comerciales Honestas y Transparentes",
-    integrity_ethics: "Ética:",
-    integrity_ethics_value: "Código de Conducta",
-    integrity_transparency: "Transparencia:",
-    integrity_transparency_value: "Comunicación Clara",
-    integrity_accountability: "Responsabilidad:",
-    integrity_accountability_value: "Responsabilidad Total",
-    integrity_trust: "Confianza:",
-    integrity_trust_value: "Relaciones a Largo Plazo",
-    integrity_badge1: "Estándares Éticos",
-    integrity_badge2: "Trato Justo",
-    integrity_badge3: "Informes Honestos",
-    
-    excellence_title: "Excelencia",
-    excellence_subtitle: "Entregando Resultados de Calidad Superior",
-    excellence_quality: "Gestión de Calidad:",
-    excellence_quality_value: "ISO 9001:2015",
-    excellence_standards: "Estándares:",
-    excellence_standards_value: "Mejores Prácticas Internacionales",
-    excellence_performance: "Rendimiento:",
-    excellence_performance_value: "Supera Expectativas",
-    excellence_innovation: "Innovación:",
-    excellence_innovation_value: "Mejora Continua",
-    excellence_badge1: "Garantía de Calidad",
-    excellence_badge2: "Entrega Premium",
-    excellence_badge3: "Satisfacción del Cliente",
-    
-    innovation_title: "Innovación",
-    innovation_subtitle: "Adoptando Tecnología y Soluciones Modernas",
-    innovation_tech: "Tecnología:",
-    innovation_tech_value: "Última Tecnología de Construcción",
-    innovation_methods: "Métodos:",
-    innovation_methods_value: "Técnicas Avanzadas",
-    innovation_equipment: "Equipos:",
-    innovation_equipment_value: "Maquinaria de Última Generación",
-    innovation_research: "Investigación:",
-    innovation_research_value: "Desarrollo Continuo",
-    innovation_badge1: "Soluciones Inteligentes",
-    innovation_badge2: "Preparado para el Futuro",
-    innovation_badge3: "Liderazgo en la Industria",
-    
-    // Stats Section
-    achievements_title: "Nuestros Logros",
-    stats_projects: "Proyectos Completados",
-    stats_team: "Miembros del Equipo",
-    stats_experience: "Años de Experiencia",
-    stats_equipment: "Unidades de Equipos",
-    
-    // Projects Section
-    project_yanbu: "Puerto Comercial de Yanbu",
-    project_yanbu_desc: "Construcción de muelle marítimo para Global Marine",
-    project_ministry: "Edificio Ministerial",
-    project_ministry_desc: "Ministerio de Comercio e Inversión en Yanbu",
-    project_khalid: "Carretera Rey Khalid",
-    project_khalid_desc: "Construcción y ampliación de carreteras para el Ministerio de Transporte",
-    
-    // Contact Section
-    contact_title: "Contáctenos",
-    contact_name: "Nombre",
-    contact_email: "Correo Electrónico",
-    contact_message: "Mensaje",
-    contact_submit: "Enviar Mensaje",
-    
-    // Footer
-    footer_mobile: "Móvil: 0544777959 | 05336999619",
-    footer_country: "Arabia Saudita",
-    footer_vat: "IVA: 310198822200003 | C.R: 4700116838",
-    footer_copyright: "© 2025 Afkar Altatweer Contracting Co. Todos los derechos reservados."
-  },
-  
-  zh: {
-    // Navigation
-    nav_home: "首页",
-    nav_about: "关于我们",
-    nav_services: "服务",
-    nav_achievements: "成就",
-    nav_projects: "项目",
-    nav_contact: "联系我们",
-    language_label: "🌐 语言",
-    lang_en: "英语",
-    lang_ar: "阿拉伯语",
-    lang_es: "西班牙语",
-    lang_zh: "中文",
-    
-    // Brand
-    brand_english: "Afkar Altatweer Contracting Co.",
-    
-    // Hero Section
-    hero_title: "阿法卡·塔特维尔",
-    hero_short: "ATCC",
-    hero_tagline: "打造超越卓越品质的精品工程",
-    
-    // Buttons
-    projects: "项目",
-    learn_more: "了解更多",
-    
-    // About Company Section
-    about_title_alt: "关于阿法卡·塔特维尔",
-    about_paragraph: "阿法卡·塔特维尔承包公司（ATCC）是一家领先的建筑公司，致力于在每个项目中提供卓越品质。我们坚定地致力于质量、创新和客户满意度，已成为建筑行业值得信赖的合作伙伴。",
-    
-    // Highlights
-    highlight_quality: "卓越品质",
-    highlight_quality_desc: "多次获奖的公司，符合国际标准",
-    highlight_team: "专家团队",
-    highlight_team_desc: "超过65名专业技术人员，包括工程师、技术人员和专家",
-    highlight_equipment: "现代设备",
-    highlight_equipment_desc: "超过130台先进设备，满足所有建筑需求",
-    
-    // Mission & Vision
-    mission_title: "我们的使命",
-    mission_text: "通过创新解决方案、精湛工艺和对卓越的坚定承诺，提供超出客户期望的卓越建筑服务。",
-    vision_title: "我们的愿景",
-    vision_text: "成为沙特阿拉伯及周边地区在质量、创新和可持续发展实践方面得到认可的建筑行业领导者。",
-    
-    // Commitment Section
-    commitment_title: "我们的承诺",
-    commitment_subtitle: "以卓越、诚信和创新建设未来",
-    quality_services: "优质服务",
-    customer_satisfaction: "客户满意",
-    international_standards: "国际标准",
-    ethical_leadership: "道德领导",
-    innovative_solutions: "创新解决方案",
-    sustainability: "可持续发展",
-    
-    // Work Section - Core Values
-    core_values_title: "核心价值观",
-    confidentiality_title: "保密性",
-    confidentiality_subtitle: "保护客户信息与信任",
-    confidentiality_data: "数据安全：",
-    confidentiality_data_value: "符合ISO 27001标准",
-    confidentiality_privacy: "客户隐私：",
-    confidentiality_privacy_value: "100%保护",
-    confidentiality_docs: "文档管理：",
-    confidentiality_docs_value: "安全存储",
-    confidentiality_access: "访问控制：",
-    confidentiality_access_value: "仅授权人员",
-    confidentiality_badge1: "保密协议遵守",
-    confidentiality_badge2: "加密通信",
-    confidentiality_badge3: "值得信赖的伙伴",
-    
-    integrity_title: "诚信",
-    integrity_subtitle: "诚实透明的商业实践",
-    integrity_ethics: "道德：",
-    integrity_ethics_value: "行为准则",
-    integrity_transparency: "透明度：",
-    integrity_transparency_value: "清晰沟通",
-    integrity_accountability: "责任：",
-    integrity_accountability_value: "全面负责",
-    integrity_trust: "信任：",
-    integrity_trust_value: "长期关系",
-    integrity_badge1: "道德标准",
-    integrity_badge2: "公平交易",
-    integrity_badge3: "诚实报告",
-    
-    excellence_title: "卓越",
-    excellence_subtitle: "提供卓越品质成果",
-    excellence_quality: "质量管理：",
-    excellence_quality_value: "ISO 9001:2015认证",
-    excellence_standards: "标准：",
-    excellence_standards_value: "国际最佳实践",
-    excellence_performance: "绩效：",
-    excellence_performance_value: "超出期望",
-    excellence_innovation: "创新：",
-    excellence_innovation_value: "持续改进",
-    excellence_badge1: "质量保证",
-    excellence_badge2: "优质交付",
-    excellence_badge3: "客户满意",
-    
-    innovation_title: "创新",
-    innovation_subtitle: "拥抱技术与现代解决方案",
-    innovation_tech: "技术：",
-    innovation_tech_value: "最新建筑技术",
-    innovation_methods: "方法：",
-    innovation_methods_value: "先进技术",
-    innovation_equipment: "设备：",
-    innovation_equipment_value: "先进机械设备",
-    innovation_research: "研究：",
-    innovation_research_value: "持续发展",
-    innovation_badge1: "智能解决方案",
-    innovation_badge2: "面向未来",
-    innovation_badge3: "行业领导",
-    
-    // Stats Section
-    achievements_title: "我们的成就",
-    stats_projects: "完成项目",
-    stats_team: "团队成员",
-    stats_experience: "年经验",
-    stats_equipment: "设备数量",
-    
-    // Projects Section
-    project_yanbu: "延布商业港",
-    project_yanbu_desc: "为环球海洋公司建造海洋码头",
-    project_ministry: "部委大楼",
-    project_ministry_desc: "延布商业投资部大楼",
-    project_khalid: "哈立德国王路",
-    project_khalid_desc: "交通运输部道路建设与扩建",
-    
-    // Contact Section
-    contact_title: "联系我们",
-    contact_name: "姓名",
-    contact_email: "电子邮件",
-    contact_message: "留言",
-    contact_submit: "发送留言",
-    
-    // Footer
-    footer_mobile: "手机：0544777959 | 05336999619",
-    footer_country: "沙特阿拉伯",
-    footer_vat: "增值税号：310198822200003 | 商业注册号：4700116838",
-    footer_copyright: "© 2025 阿法卡·塔特维尔承包公司。保留所有权利。"
-  }
-};
-
-function setLanguage(lang) {
-  if (!translations[lang]) return;
-  document.documentElement.lang = lang;
-  
-  // Set text direction: RTL for Arabic, LTR for others
-  if (lang === 'ar') {
-    document.documentElement.dir = 'rtl';
-    document.body.style.textAlign = 'right';
-  } else {
-    document.documentElement.dir = 'ltr';
-    document.body.style.textAlign = 'left';
-  }
-
-  document.querySelectorAll('[data-translate]').forEach(el => {
-    const key = el.getAttribute('data-translate');
-    const txt = translations[lang][key];
-    if (txt !== undefined) {
-      // Special handling for copyright symbol
-      if (key === 'footer_copyright') {
-        el.textContent = txt.replace('©', '©');
-      }
-      
-      // Preserve innerHTML structure if the element contains child elements
-      if (el.children.length === 0) {
-        el.textContent = txt;
-      } else {
-        // If element has children, try to replace only text nodes
-        Array.from(el.childNodes).forEach(node => {
-          if (node.nodeType === Node.TEXT_NODE) {
-            node.textContent = txt;
-          }
-        });
-      }
-    }
-  });
-}
-
-// Clean up and attach fresh event listeners
-document.addEventListener('DOMContentLoaded', function() {
-  // Clone language dropdown items to remove old event listeners
-  document.querySelectorAll('.lang-select').forEach(item => {
-    const newItem = item.cloneNode(true);
-    item.parentNode.replaceChild(newItem, item);
-  });
-  
-  // Add new event listeners
-  document.querySelectorAll('.lang-select').forEach(item => {
-    item.addEventListener('click', function(e) {
-      e.preventDefault();
-      const lang = this.getAttribute('data-lang');
-      setLanguage(lang);
-      
-      // Update dropdown text
-      const dropdownToggle = document.querySelector('#languageDropdown');
-      const flag = lang === 'ar' ? '🇸🇦' : lang === 'es' ? '🇪🇸' : lang === 'zh' ? '🇨🇳' : '🇺🇸';
-      dropdownToggle.innerHTML = `${flag} ${this.textContent}`;
-    });
-  });
-});
-
-
-// Remove any existing event listeners first
-document.querySelectorAll('.lang-select').forEach(item => {
-  const newItem = item.cloneNode(true);
-  item.parentNode.replaceChild(newItem, item);
-});
-
-// Add fresh event listeners
-document.querySelectorAll('.lang-select').forEach(item => {
-
-// Set default language: English
-setLanguage('en');
-</script> -->
 <script>
 // Complete translations object with all 4 languages
 const translations = {
@@ -5061,10 +4116,10 @@ const translations = {
     innovation_badge2: "Future-Ready",
     innovation_badge3: "Industry Leadership",
     achievements_title: "Our Achievements",
-    stats_projects: "Projects Completed",
+    stats_projects: "m²",
     stats_team: "Team Members",
     stats_experience: "Years Experience",
-    stats_equipment: "Equipment Units",
+    stats_equipment: "Hours Worked",
     project_yanbu: "Yanbu Commercial Port",
     project_yanbu_desc: "Marine quay construction for Global Marine",
     project_ministry: "Ministry Building",
@@ -5158,10 +4213,10 @@ const translations = {
     innovation_badge2: "جاهز للمستقبل",
     innovation_badge3: "الريادة في الصناعة",
     achievements_title: "إنجازاتنا",
-    stats_projects: "المشاريع المكتملة",
+    stats_projects: "متر مربع",
     stats_team: "أعضاء الفريق",
     stats_experience: "سنوات الخبرة",
-    stats_equipment: "وحدات المعدات",
+    stats_equipment: "ساعات العمل",
     project_yanbu: "ميناء ينبع التجاري",
     project_yanbu_desc: "بناء رصيف بحري لشركة جلوبال مارين",
     project_ministry: "مبنى الوزارة",
@@ -5255,10 +4310,10 @@ const translations = {
     innovation_badge2: "Preparado para el Futuro",
     innovation_badge3: "Liderazgo en la Industria",
     achievements_title: "Nuestros Logros",
-    stats_projects: "Proyectos Completados",
+    stats_projects: "metro cuadrado",
     stats_team: "Miembros del Equipo",
     stats_experience: "Años de Experiencia",
-    stats_equipment: "Unidades de Equipos",
+    stats_equipment: "horas trabajadas",
     project_yanbu: "Puerto Comercial de Yanbu",
     project_yanbu_desc: "Construcción de muelle marítimo para Global Marine",
     project_ministry: "Edificio Ministerial",
@@ -5352,10 +4407,10 @@ const translations = {
     innovation_badge2: "面向未来",
     innovation_badge3: "行业领导",
     achievements_title: "我们的成就",
-    stats_projects: "完成项目",
+    stats_projects: "平方米",
     stats_team: "团队成员",
     stats_experience: "年经验",
-    stats_equipment: "设备数量",
+    stats_equipment: "工作时间",
     project_yanbu: "延布商业港",
     project_yanbu_desc: "为环球海洋公司建造海洋码头",
     project_ministry: "部委大楼",
