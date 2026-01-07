@@ -3399,6 +3399,348 @@
       </div>
     </section>
 
+    <!-- Add this CSS to your existing <style> section -->
+<style>
+  /* Contributors Section */
+  #contributers {
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  #contributers::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(255, 180, 0, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(206, 165, 57, 0.05) 0%, transparent 50%);
+    z-index: 1;
+  }
+
+  .contributors-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .contributors-header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 0 20px;
+  }
+
+  .contributors-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ffb400;
+    margin-bottom: 15px;
+    background: linear-gradient(45deg, #ffb400, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 180, 0, 0.3);
+    position: relative;
+    display: inline-block;
+  }
+
+  .contributors-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #ffb400, transparent);
+    border-radius: 2px;
+  }
+
+  .contributors-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Enhanced Logo Grid */
+  .contributors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 40px;
+    padding: 40px;
+    position: relative;
+  }
+
+  .contributors-grid::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, 
+      transparent 0%, 
+      rgba(255, 180, 0, 0.03) 50%, 
+      transparent 100%);
+    pointer-events: none;
+    border-radius: 20px;
+  }
+
+  .contributor-item {
+    background: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 180, 0, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    min-height: 120px;
+    cursor: pointer;
+  }
+
+  .contributor-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 180, 0, 0.1), 
+      transparent);
+    transition: left 0.6s ease;
+  }
+
+  .contributor-item:hover {
+    transform: translateY(-10px) scale(1.05);
+    border-color: rgba(255, 180, 0, 0.3);
+    box-shadow: 
+      0 15px 35px rgba(0, 0, 0, 0.5),
+      0 0 30px rgba(255, 180, 0, 0.2),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .contributor-item:hover::before {
+    left: 100%;
+  }
+
+  .contributor-item img {
+    max-width: 100%;
+    max-height: 60px;
+    object-fit: contain;
+    filter: grayscale(100%) brightness(0.8);
+    transition: all 0.4s ease;
+    padding: 10px;
+  }
+
+  .contributor-item:hover img {
+    filter: grayscale(0%) brightness(1.2);
+    transform: scale(1.1);
+  }
+
+  /* Floating Animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  .contributor-item:nth-child(odd) {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .contributor-item:nth-child(even) {
+    animation: float 6s ease-in-out infinite 1.5s;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .contributors-grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 30px;
+      padding: 30px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #contributers {
+      padding: 60px 15px;
+    }
+
+    .contributors-title {
+      font-size: 2.2rem;
+    }
+
+    .contributors-subtitle {
+      font-size: 1rem;
+      padding: 0 20px;
+    }
+
+    .contributors-grid {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .contributor-item {
+      padding: 20px;
+      min-height: 100px;
+    }
+
+    .contributor-item img {
+      max-height: 50px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contributors-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .contributor-item {
+      padding: 15px;
+      min-height: 90px;
+    }
+
+    .contributor-item img {
+      max-height: 40px;
+    }
+  }
+
+  /* Scroll Animation */
+  .contributor-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .contributor-item.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<!-- Replace your existing #contributers section with this enhanced HTML -->
+<section id="contributers">
+  <div class="contributors-container">
+    <div class="contributors-header">
+      <h2 class="contributors-title" data-translate="contributors_title">Our Trusted Partners</h2>
+      <p class="contributors-subtitle" data-translate="contributors_subtitle">
+        Collaborating with industry leaders to deliver exceptional construction solutions
+      </p>
+    </div>
+    
+    <div class="contributors-grid">
+      <div class="contributor-item">
+        <img src="assets/contributes/arco-removebg-preview.png" alt="ARCO Construction" loading="lazy">
+      </div>
+      <div class="contributor-item">
+        <img src="assets/contributes/asg-removebg-preview.png" alt="ASG Group" loading="lazy">
+      </div>
+      <div class="contributor-item">
+        <img src="assets/contributes/cobra-removebg-preview.png" alt="COBRA Engineering" loading="lazy">
+      </div>
+      <div class="contributor-item">
+        <img src="assets/contributes/jada-tatweer-removebg-preview.png" alt="Jada Tatweer" loading="lazy">
+      </div>
+      <div class="contributor-item">
+        <img src="assets/contributes/l5areef-removebg-preview.png" alt="Al Areef" loading="lazy">
+      </div>
+      <div class="contributor-item">
+        <img src="assets/contributes/may-del-removebg-preview.png" alt="May Del" loading="lazy">
+      </div>
+      <div class="contributor-item">
+        <img src="assets/contributes/rayis-removebg-preview.png" alt="Rayis" loading="lazy">
+      </div>
+      <div class="contributor-item">
+        <img src="assets/contributes/sa-khrba-removebg-preview.png" alt="SA Kharaba" loading="lazy">
+      </div>
+      <div class="contributor-item">
+        <img src="assets/contributes/sama-china-removebg-preview.png" alt="Sama China" loading="lazy">
+      </div>
+      <div class="contributor-item">
+        <img src="assets/contributes/sama-removebg-preview.png" alt="Sama" loading="lazy">
+      </div>
+      <div class="contributor-item">
+        <img src="assets/contributes/tedagua-removebg-preview.png" alt="Tedagua" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Add this JavaScript to your existing script section -->
+<script>
+  // Intersection Observer for scroll animations
+  const contributorObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('in-view');
+        }, index * 100); // Staggered animation
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  // Observe all contributor items
+  document.querySelectorAll('.contributor-item').forEach(item => {
+    contributorObserver.observe(item);
+  });
+
+  // Hover sound effect (optional)
+  document.querySelectorAll('.contributor-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      item.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    });
+  });
+
+  // Add translations for new text
+  const contributorTranslations = {
+    en: {
+      contributors_title: "Our Trusted Partners",
+      contributors_subtitle: "Collaborating with industry leaders to deliver exceptional construction solutions"
+    },
+    ar: {
+      contributors_title: "شركاؤنا الموثوقون",
+      contributors_subtitle: "نتعاون مع قادة الصناعة لتقديم حلول إنشائية استثنائية"
+    },
+    es: {
+      contributors_title: "Nuestros Socios de Confianza",
+      contributors_subtitle: "Colaborando con líderes de la industria para ofrecer soluciones de construcción excepcionales"
+    },
+    zh: {
+      contributors_title: "我们的信任伙伴",
+      contributors_subtitle: "与行业领导者合作，提供卓越的建筑解决方案"
+    }
+  };
+
+  // Merge with existing translations
+  Object.keys(contributorTranslations).forEach(lang => {
+    if (translations[lang]) {
+      translations[lang] = { ...translations[lang], ...contributorTranslations[lang] };
+    }
+  });
+</script>
+
     
     <section id="contact" class="contact-section">
       <div class="form-container">
