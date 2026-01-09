@@ -3686,7 +3686,7 @@
     </div>
   </div>
 </section> -->
-    <section id="contributers" class="partners-section">
+    <section id="contributers" class="partners-section" style="max-height: max-content;">
       <div class="contributors-container">
         <div class="contributors-header">
           <h2 class="contributors-title" data-translate="contributors_title">Our Trusted Partners</h2>
@@ -3847,7 +3847,7 @@
     <style>
     .partners-section {
       padding: 100px 5%;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      background: linear-gradient(135deg, #ffb400 0%, #ffd700 100%);
       position: relative;
       overflow: hidden;
     }
@@ -3860,8 +3860,8 @@
       right: 0;
       bottom: 0;
       background: 
-        radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, #ffb400 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, #ffd700 0%, transparent 50%);
       animation: gradientShift 10s ease-in-out infinite alternate;
     }
 
@@ -3895,7 +3895,9 @@
     .contributors-title {
       font-size: 3.5rem;
       font-weight: 700;
-      background: linear-gradient(135deg, #fff 0%, #60a5fa 100%);
+      color: #ffb400;
+      margin-bottom: 15px;
+      background: linear-gradient(45deg, #ffb400, #ffd700);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -3949,12 +3951,12 @@
 
     .left-overlay {
       left: 0;
-      background: linear-gradient(90deg, #0f172a 0%, transparent 100%);
+      background: linear-gradient(90deg, #ffb400 0%, transparent 100%);
     }
 
     .right-overlay {
       right: 0;
-      background: linear-gradient(270deg, #0f172a 0%, transparent 100%);
+      background: linear-gradient(270deg, #ffd700 0%, transparent 100%);
     }
 
     .logo-item {
