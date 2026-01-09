@@ -3297,7 +3297,7 @@
           <div class="col-12 col-md-3">
             <div class="stat-item p-3 bg-opacity-10 rounded">
               <div class="stat-number k-num fw-bold" data-count="12">0</div>
-              <div class="stat-label" data-translate="stats_equipment" style="padding-bottom: 135px;">Hours Worked</div>
+              <div class="stat-label" data-translate="stats_equipment" style="padding-bottom: 150px;">Hours Worked</div>
             </div>
           </div>
         </div>
@@ -3334,7 +3334,7 @@
       <div class="project-slider">
         <div class="project-slide active">
           <video class="video-background" autoplay muted loop>
-            <source src="t.mp4" type="video/mp4" />
+            <source src="assets/proj1.mp4" type="video/mp4" />
           </video>
           <div class="section-overlay"></div>
           <div class="project-info">
@@ -3344,7 +3344,7 @@
         </div>
         <div class="project-slide">
           <video class="video-background" autoplay muted loop>
-            <source src="test.mp4" type="video/mp4" />
+            <source src="assets/proj2.mp4" type="video/mp4" />
           </video>
           <div class="section-overlay"></div>
           <div class="project-info">
@@ -3354,7 +3354,7 @@
         </div>
         <div class="project-slide">
           <video class="video-background" autoplay muted loop>
-            <source src="t.mp4" type="video/mp4" />
+            <source src="assets/proj3.mp4" type="video/mp4" />
           </video>
           <div class="section-overlay"></div>
           <div class="project-info">
@@ -5066,6 +5066,53 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('Test element found:', testElement.textContent);
     }
   }, 100);
+});
+
+
+// Closing navbar
+// Navbar collapse handler
+document.addEventListener('DOMContentLoaded', function() {
+    const navbarCollapse = document.getElementById('navbarNav');
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    
+    // Function to close navbar
+    function closeNavbar() {
+        if (navbarCollapse.classList.contains('show')) {
+            // Bootstrap 5 way to close navbar
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                toggle: false
+            });
+            bsCollapse.hide();
+            
+            // Update aria-expanded attribute
+            navbarToggler.setAttribute('aria-expanded', 'false');
+        }
+    }
+    
+    // Close navbar when clicking any nav link
+    document.querySelectorAll('.nav-link:not(.dropdown-toggle)').forEach(link => {
+        link.addEventListener('click', closeNavbar);
+    });
+    
+    // Close navbar when clicking language dropdown items
+    document.querySelectorAll('.lang-select').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const lang = this.getAttribute('data-lang');
+            setLanguage(lang);
+            closeNavbar();
+        });
+    });
+    
+    // Close navbar when clicking anywhere outside (optional)
+    document.addEventListener('click', function(event) {
+        const isClickInsideNavbar = navbarCollapse.contains(event.target) || 
+                                     navbarToggler.contains(event.target);
+        
+        if (!isClickInsideNavbar && navbarCollapse.classList.contains('show')) {
+            closeNavbar();
+        }
+    });
 });
 </script>
 </body>
