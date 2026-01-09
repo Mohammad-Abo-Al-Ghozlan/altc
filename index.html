@@ -3253,7 +3253,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section
+    <!-- <section
       id="stats"
       class="position-relative py-3"
       style="max-width: none; max-height: max-content;padding-bottom: 50px;padding-top: 50px;"
@@ -3294,15 +3294,77 @@
                 }
               </style>
           </div>
-          <div class="col-12 col-md-3" style="padding-bottom: 90px;">
-            <div class="stat-item p-3 bg-opacity-10 rounded" style="padding-bottom: 90px;">
+          <div class="col-12 col-md-3">
+            <div class="stat-item p-3 bg-opacity-10 rounded">
               <div class="stat-number k-num fw-bold" data-count="12">0</div>
-              <div class="stat-label" style="padding-bottom: 90px;" data-translate="stats_equipment">Hours Worked</div>
+              <div class="stat-label" data-translate="stats_equipment">Hours Worked</div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
+    <section id="stats" class="py-3" style="max-height: max-content;">
+  <div class="section-overlay position-absolute w-100 h-100"></div>
+
+  <div class="container text-center position-relative">
+    <div class="about-header text-center mb-4">
+      <h2 data-translate="achievements_title">Our Achievements</h2>
+    </div>
+
+    <div class="row justify-content-center g-4">
+      <div class="col-6 col-md-3">
+        <div class="stat-item p-3 bg-opacity-10 rounded">
+          <div class="stat-number k-num fw-bold" data-count="150">0</div>
+          <div class="stat-label" data-translate="stats_projects">m²</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item p-3 bg-opacity-10 rounded">
+          <div class="stat-number k-numb fw-bold" data-count="65">0</div>
+          <div class="stat-label" data-translate="stats_team">Team Members</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item p-3 bg-opacity-10 rounded">
+          <div class="stat-number k-numb fw-bold" data-count="7">0</div>
+          <div class="stat-label" data-translate="stats_experience">Years Experience</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item p-3 bg-opacity-10 rounded">
+          <div class="stat-number k-num fw-bold" data-count="12">0</div>
+          <div class="stat-label" data-translate="stats_equipment">Hours Worked</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.k-num::after {
+  content: "k+";
+}
+.k-numb::after {
+  content: "+";
+}
+
+/* Make stat-item auto-height, content-fit */
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto; /* fits content only */
+  min-height: 0; /* no extra space */
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  word-wrap: break-word;
+}
+</style>
+
 
     <!-- <section id="stats" style="max-width:none;">
         <div class="section-overlay"></div>
