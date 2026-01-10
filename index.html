@@ -1927,292 +1927,483 @@
             class="col-lg-12 order-2 order-lg-1"
             style="padding-top: 0px; margin-top: -135px"
           >
-            <div
-              class="container"
-              style="text-align: center; padding-top: 0px; margin-top: 0px"
-            >
-              <div
-                class="orbit-gallery"
-                style="
-                  display: grid;
-                  justify-content: center;
-                  align-items: center;
-                "
-              >
-                <!-- Updated orbit gallery to use actual project images -->
-                <span style="--i: 1"
-                  ><img src="assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/main.png" alt="Asphalt Work Project" data-project="asphalt"
-                /></span>
-                <span style="--i: 2"
-                  ><img src="assets/faced mock-up The line  Neom project- Concrete work/main.jpeg" alt="Neom Concrete Project" data-project="neom"
-                /></span>
-                <span style="--i: 3"
-                  ><img src="assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/main.jpeg" alt="Jeddah Stadium Project" data-project="jeddah"
-                /></span>
-                <span style="--i: 4"
-                  ><img src="assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM.jpeg" alt="The Line Project" data-project="theline"
-                /></span>
-                <span style="--i: 5"
-                  ><img src="assets/Water and sewage networks works/main.jpeg" alt="Water Networks Project" data-project="water"
-                /></span>
-                <span style="--i: 6"
-                  ><img src="assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/main.jpg" alt="General Project" data-project="general"
-                /></span>
-              </div>
+            <!-- Updated orbit gallery to use actual project images -->
+<div class="orbit-gallery-container">
+  <div class="orbit-gallery">
+    <span style="--i: 1">
+      <img src="assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/main.png" alt="Asphalt Work Project" data-project="asphalt">
+    </span>
+    <span style="--i: 2">
+      <img src="assets/faced mock-up The line  Neom project- Concrete work/main.jpeg" alt="Neom Concrete Project" data-project="neom">
+    </span>
+    <span style="--i: 3">
+      <img src="assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/main.jpeg" alt="Jeddah Stadium Project" data-project="jeddah">
+    </span>
+    <span style="--i: 4">
+      <img src="assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM.jpeg" alt="The Line Project" data-project="theline">
+    </span>
+    <span style="--i: 5">
+      <img src="assets/Water and sewage networks works/main.jpeg" alt="Water Networks Project" data-project="water">
+    </span>
+    <span style="--i: 6">
+      <img src="assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/main.jpg" alt="General Project" data-project="general">
+    </span>
+  </div>
 
-              <br><p data-translate="gallery_click" style="justify-content: center; text-align: center;color: rgba(255, 180, 0, 0.8);"><br>Click on any image to view it in magnified view</p>
-              
-              <!-- Updated magnified gallery structure -->
-              <div id="magnified-gallery" style="display: none; margin-top: 40px; padding: 20px;">
-                <div id="magnified-image-container" style="text-align: center; margin-bottom: 30px;">
-                  <img id="magnified-image" src="/placeholder.svg" alt="Magnified" style="
-                    max-width: 80%;
-                    max-height: 500px;
-                    border-radius: 20px;
-                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-                  "/>
-                </div>
-                <h3 id="magnified-project-title" style="
-                  text-align: center;
-                  color: #d4af37;
-                  margin-bottom: 20px;
-                  font-size: clamp(1.3rem, 3vw, 1.8rem);
-                  font-weight: 700;
-                  letter-spacing: 1px;
-                ">
-                </h3>
+  <br>
+  <p data-translate="gallery_click" style="justify-content: center; text-align: center;color: rgba(255, 180, 0, 0.8);"><br>Click on any image to view it in magnified view</p>
+  
+  <!-- Magnified gallery with thumbnail carousel -->
+  <div id="magnified-gallery" style="display: none; margin-top: 40px; padding: 20px;">
+    <div id="magnified-image-container" style="text-align: center; margin-bottom: 30px;">
+      <img id="magnified-image" src="" alt="Magnified" style="
+        max-width: 80%;
+        max-height: 500px;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+        object-fit: contain;
+      "/>
+    </div>
+    
+    <h3 id="magnified-project-title" style="
+      text-align: center;
+      color: #d4af37;
+      margin-bottom: 20px;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: 1px;
+    ">
+    </h3>
 
-                <div id="thumbnail-gallery" style="
-                  display: flex;
-                  justify-content: center;
-                  gap: 15px;
-                  flex-wrap: wrap;
-                ">
-                  <!-- Thumbnails will be inserted here -->
-                </div>
-                <button id="close-magnified" data-translate="gallery_close" style="
-                  margin-top: 20px;
-                  padding: 10px 30px;
-                  background: linear-gradient(135deg, #d4af37, #f4d03f);
-                  border: none;
-                  border-radius: 25px;
-                  color: #000;
-                  font-weight: bold;
-                  cursor: pointer;
-                  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-                  transition: all 0.3s ease;
-                ">Close Gallery</button>
-              </div>
-            </div>
+    <!-- Thumbnail Carousel Container -->
+    <div class="thumbnail-carousel-container" style="
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      padding: 0 40px;
+    ">
+      <!-- Previous Button -->
+      <button class="carousel-btn prev-btn" style="
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(212, 175, 55, 0.2);
+        border: none;
+        color: #fff;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      ">
+        ‹
+      </button>
+      
+      <!-- Thumbnail Carousel Track -->
+      <div id="thumbnail-carousel-track" class="thumbnail-carousel-track" style="
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        padding: 10px;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+      ">
+        <!-- Thumbnails will be inserted here -->
+      </div>
+      
+      <!-- Next Button -->
+      <button class="carousel-btn next-btn" style="
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(212, 175, 55, 0.2);
+        border: none;
+        color: #fff;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      ">
+        ›
+      </button>
+    </div>
+    
+    <div style="text-align: center; margin-top: 20px;">
+      <button id="close-magnified" data-translate="gallery_close" style="
+        padding: 12px 40px;
+        background: linear-gradient(135deg, #d4af37, #f4d03f);
+        border: none;
+        border-radius: 25px;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        transition: all 0.3s ease;
+        font-size: 1rem;
+      ">Close Gallery</button>
+    </div>
+  </div>
+</div>
 
-            <style>
-              .orbit-gallery {
-                position: relative;
-                width: 400px;
-                height: 400px;
-                margin: auto;
-                transform-style: preserve-3d;
-                animation: spin 15s linear infinite;
-              }
+<style>
+  .orbit-gallery-container {
+    position: relative;
+    width: 100%;
+  }
 
-              .orbit-gallery span {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 180px;
-                height: 200px;
-                transform-origin: center;
-                transform: rotateY(calc(var(--i) * 60deg)) translateZ(350px);
-              }
+  .orbit-gallery {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    transform-style: preserve-3d;
+    animation: spin 15s linear infinite;
+  }
 
-              .orbit-gallery img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 20px;
-                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-                transition: transform 0.5s ease, filter 0.5s ease;
-              }
+  .orbit-gallery span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 180px;
+    height: 200px;
+    transform-origin: center;
+    transform: rotateY(calc(var(--i) * 60deg)) translateZ(350px);
+  }
 
-              .orbit-gallery img:hover {
-                transform: scale(1.15);
-                filter: brightness(1.3);
-              }
+  .orbit-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    transition: transform 0.5s ease, filter 0.5s ease;
+    cursor: pointer;
+  }
 
-              @keyframes spin {
-                0% {
-                  transform: rotateY(0deg);
-                }
-                100% {
-                  transform: rotateY(360deg);
-                }
-              }
-              
-              /* Added styles for thumbnail images and gallery interactions */
-              .thumbnail-img-gallery {
-                width: 120px;
-                height: 140px;
-                object-fit: cover;
-                border-radius: 10px;
-                cursor: pointer;
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-                transition: all 0.3s ease;
-                border: 3px solid transparent;
-              }
-              
-              .thumbnail-img-gallery:hover {
-                transform: scale(1.1);
-                border-color: #d4af37;
-              }
-              
-              .thumbnail-img-gallery.active {
-                border-color: #d4af37;
-                box-shadow: 0 5px 25px rgba(212, 175, 55, 0.6);
-              }
-              
-              #close-magnified:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 7px 20px rgba(212, 175, 55, 0.6);
-              }
+  .orbit-gallery img:hover {
+    transform: scale(1.15);
+    filter: brightness(1.3);
+  }
 
-              #magnified-project-title {
-                white-space: pre-line;
-              }
-            </style>
-            
-            
-            <!-- Updated JavaScript to handle project-based image galleries -->
-            <script>
-              (function() {
-                const projectTitles = {
-                  asphalt: 'Project for the construction of concrete structures for the Jeddah Central Stadium and surrounding buildings\n“In compliance with the policies of the project owner and the main contractor, project images will be shared after the construction works are fully completed. We look forward to sharing the details with you soon.”',
-                  neom: 'Neom -18 NIC CONNECTOR - Concrete Works',
-                  jeddah: 'Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/110KV',
-                  theline: 'Execution of concrete works for model buildings in The Line Neom project',
-                  water: 'Infrastructure works - AL Madinah AL Munawwarah\nWater and sewage networks works',
-                  general: 'Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/110KV'
-                };
+  @keyframes spin {
+    0% {
+      transform: rotateY(0deg);
+    }
+    100% {
+      transform: rotateY(360deg);
+    }
+  }
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .thumbnail-carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Thumbnail styles */
+  .thumbnail-carousel-track img {
+    width: 120px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+    flex-shrink: 0;
+  }
+  
+  .thumbnail-carousel-track img:hover {
+    transform: scale(1.05);
+    border-color: #d4af37;
+  }
+  
+  .thumbnail-carousel-track img.active {
+    border-color: #d4af37;
+    box-shadow: 0 5px 25px rgba(212, 175, 55, 0.6);
+    transform: scale(1.05);
+  }
+  
+  /* Carousel button hover effects */
+  .carousel-btn:hover {
+    background: rgba(212, 175, 55, 0.4) !important;
+    transform: translateY(-50%) scale(1.1) !important;
+  }
+  
+  #close-magnified:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(212, 175, 55, 0.6);
+  }
 
-                // Define project galleries with all images for each project
-                const projectGalleries = {
-                  asphalt: [
-                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/main.png',
-                    // 'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work2.jpeg',
-                    // 'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work3.jpeg',
-                    // 'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work4.jpeg',
-                    // 'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work5.jpeg',
-                    // 'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work6.jpeg'
-                  ],
-                  neom: [
-                    'assets/faced mock-up The line  Neom project- Concrete work/main.jpeg',
-                    'assets/faced mock-up The line  Neom project- Concrete work/neom2.jpeg',
-                    'assets/faced mock-up The line  Neom project- Concrete work/neom3.jpeg',
-                    'assets/faced mock-up The line  Neom project- Concrete work/neom4.jpeg',
-                    'assets/faced mock-up The line  Neom project- Concrete work/neom5.jpeg',
-                    // 'assets/faced mock-up The line  Neom project- Concrete work/neom6.jpeg'
-                  ],
-                  jeddah: [
-                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/main.jpeg',
-                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img2.jpeg',
-                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img3.jpeg',
-                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img4.jpeg',
-                    'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img5.jpeg',
-                    // 'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img6.jpeg'
-                  ],
-                  theline: [
-                    'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM.jpeg',
-                    'assets/The line/WhatsApp Image 2026-01-01 at 10.26.58 AM.jpeg',
-                    'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM (1).jpeg',
-                    'assets/The line/main.jpeg',
-                    'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM (3).jpeg',
-                    // 'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM (4).jpeg',
-                  ],
-                  water: [
-                    'assets/Water and sewage networks works/main.jpeg',
-                    'assets/Water and sewage networks works/water2.jpeg',
-                    'assets/Water and sewage networks works/water3.jpeg',
-                    'assets/Water and sewage networks works/water4.jpeg',
-                    'assets/Water and sewage networks works/water5.jpeg',
-                    // 'assets/Water and sewage networks works/water6.jpeg'
-                  ],
-                  general: [
-                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/main.jpg',
-                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asph1.jpeg',
-                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asp2.jpeg',
-                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asph3.jpeg',
-                    'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asp4.jpeg',
-                  ]
-                };
-                
-                const orbitGallery = document.querySelector('.orbit-gallery');
-                const magnifiedGallery = document.getElementById('magnified-gallery');
-                const magnifiedImage = document.getElementById('magnified-image');
-                const thumbnailGallery = document.getElementById('thumbnail-gallery');
-                const closeButton = document.getElementById('close-magnified');
-                
-                // Add click event to orbit gallery images
-                document.querySelectorAll('.orbit-gallery img').forEach((img) => {
-                  img.style.cursor = 'pointer';
-                  img.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const projectKey = this.getAttribute('data-project');
-                    const clickedImageSrc = this.src;
-                    openMagnifiedGallery(projectKey, clickedImageSrc);
-                  });
-                });
-                
-                function openMagnifiedGallery(projectKey, clickedImageSrc) {
-                  orbitGallery.style.animationPlayState = 'paused';
-                  magnifiedGallery.style.display = 'block';
+  #magnified-project-title {
+    white-space: pre-line;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .orbit-gallery {
+      width: 300px;
+      height: 300px;
+    }
+    
+    .orbit-gallery span {
+      width: 140px;
+      height: 160px;
+      transform: rotateY(calc(var(--i) * 60deg)) translateZ(250px);
+    }
+    
+    .thumbnail-carousel-container {
+      padding: 0 30px !important;
+    }
+    
+    .thumbnail-carousel-track img {
+      width: 100px;
+      height: 120px;
+    }
+    
+    .carousel-btn {
+      width: 35px !important;
+      height: 35px !important;
+      font-size: 1.2rem !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .orbit-gallery {
+      width: 250px;
+      height: 250px;
+    }
+    
+    .orbit-gallery span {
+      width: 120px;
+      height: 140px;
+      transform: rotateY(calc(var(--i) * 60deg)) translateZ(200px);
+    }
+    
+    .thumbnail-carousel-container {
+      padding: 0 25px !important;
+    }
+    
+    .thumbnail-carousel-track img {
+      width: 80px;
+      height: 100px;
+    }
+    
+    .carousel-btn {
+      width: 30px !important;
+      height: 30px !important;
+      font-size: 1rem !important;
+    }
+  }
+</style>
 
-                  const projectImages = projectGalleries[projectKey] || [];
-                  const projectTitle = projectTitles[projectKey] || 'Project Gallery';
+<script>
+  (function() {
+    const projectTitles = {
+      asphalt: 'Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/110KV',
+      neom: 'Neom -18 NIC CONNECTOR - Concrete Works',
+      jeddah: 'STRUCTURE CONCRETE WORKS FOR JEDDAH CENTRAL STADIUM AND SURROUNDING VILLAGES',
+      theline: 'Execution of concrete works for model buildings in The Line Neom project',
+      water: 'Infrastructure works - AL Madinah AL Munawwarah\nWater and sewage networks works',
+      general: 'Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/110KV'
+    };
 
-                  // ✅ SET TITLE
-                  document.getElementById('magnified-project-title').textContent = projectTitle;
+    // Define project galleries with all images for each project
+    const projectGalleries = {
+      asphalt: [
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/main.png',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work2.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work3.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work4.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work5.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work6.jpeg'
+      ],
+      neom: [
+        'assets/faced mock-up The line  Neom project- Concrete work/main.jpeg',
+        'assets/faced mock-up The line  Neom project- Concrete work/neom2.jpeg',
+        'assets/faced mock-up The line  Neom project- Concrete work/neom3.jpeg',
+        'assets/faced mock-up The line  Neom project- Concrete work/neom4.jpeg',
+        'assets/faced mock-up The line  Neom project- Concrete work/neom5.jpeg',
+        'assets/faced mock-up The line  Neom project- Concrete work/neom6.jpeg'
+      ],
+      jeddah: [
+        'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/main.jpeg',
+        'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img2.jpeg',
+        'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img3.jpeg',
+        'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img4.jpeg',
+        'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img5.jpeg',
+        'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img6.jpeg'
+      ],
+      theline: [
+        'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM.jpeg',
+        'assets/The line/WhatsApp Image 2026-01-01 at 10.26.58 AM.jpeg',
+        'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM (1).jpeg',
+        'assets/The line/main.jpeg',
+        'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM (3).jpeg',
+        'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM (4).jpeg',
+      ],
+      water: [
+        'assets/Water and sewage networks works/main.jpeg',
+        'assets/Water and sewage networks works/water2.jpeg',
+        'assets/Water and sewage networks works/water3.jpeg',
+        'assets/Water and sewage networks works/water4.jpeg',
+        'assets/Water and sewage networks works/water5.jpeg',
+        'assets/Water and sewage networks works/water6.jpeg'
+      ],
+      general: [
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/main.jpg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asph1.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asp2.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asph3.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asp4.jpeg',
+      ]
+    };
+    
+    const orbitGallery = document.querySelector('.orbit-gallery');
+    const magnifiedGallery = document.getElementById('magnified-gallery');
+    const magnifiedImage = document.getElementById('magnified-image');
+    const thumbnailCarousel = document.getElementById('thumbnail-carousel-track');
+    const closeButton = document.getElementById('close-magnified');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    
+    let currentProject = '';
+    let currentIndex = 0;
+    
+    // Add click event to orbit gallery images
+    document.querySelectorAll('.orbit-gallery img').forEach((img) => {
+      img.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const projectKey = this.getAttribute('data-project');
+        openMagnifiedGallery(projectKey);
+      });
+    });
+    
+    function openMagnifiedGallery(projectKey) {
+      orbitGallery.style.animationPlayState = 'paused';
+      magnifiedGallery.style.display = 'block';
+      currentProject = projectKey;
 
-                  let clickedIndex = 0;
-                  projectImages.forEach((imgPath, index) => {
-                    if (clickedImageSrc.includes(imgPath)) {
-                      clickedIndex = index;
-                    }
-                  });
+      const projectImages = projectGalleries[projectKey] || [];
+      const projectTitle = projectTitles[projectKey] || 'Project Gallery';
 
-                  magnifiedImage.src = projectImages[clickedIndex];
-                  thumbnailGallery.innerHTML = '';
+      // Set title
+      document.getElementById('magnified-project-title').textContent = projectTitle;
 
-                  let thumbnailCount = 0;
-                  projectImages.forEach((imgPath, index) => {
-                    if (index !== clickedIndex && thumbnailCount < 5) {
-                      const thumb = document.createElement('img');
-                      thumb.src = imgPath;
-                      thumb.className = 'thumbnail-img-gallery';
-
-                      thumb.addEventListener('click', function () {
-                        magnifiedImage.src = imgPath;
-                        document.querySelectorAll('.thumbnail-img-gallery')
-                          .forEach(t => t.classList.remove('active'));
-                        this.classList.add('active');
-                      });
-
-                      thumbnailGallery.appendChild(thumb);
-                      thumbnailCount++;
-                    }
-                  });
-
-                  magnifiedGallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-
-                
-                // Close button handler
-                closeButton.addEventListener('click', function() {
-                  magnifiedGallery.style.display = 'none';
-                  orbitGallery.style.animationPlayState = 'running';
-                  orbitGallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                });
-              })();
-            </script>
-            
+      // Set main image to first one
+      currentIndex = 0;
+      magnifiedImage.src = projectImages[currentIndex];
+      
+      // Clear and create thumbnail carousel
+      thumbnailCarousel.innerHTML = '';
+      
+      projectImages.forEach((imgPath, index) => {
+        const thumb = document.createElement('img');
+        thumb.src = imgPath;
+        thumb.alt = `Thumbnail ${index + 1}`;
+        
+        if (index === currentIndex) {
+          thumb.classList.add('active');
+        }
+        
+        thumb.addEventListener('click', function() {
+          setActiveImage(index);
+        });
+        
+        thumbnailCarousel.appendChild(thumb);
+      });
+      
+      // Center the active thumbnail
+      scrollToActiveThumbnail();
+      
+      magnifiedGallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    function setActiveImage(index) {
+      currentIndex = index;
+      const projectImages = projectGalleries[currentProject] || [];
+      
+      if (projectImages[index]) {
+        magnifiedImage.src = projectImages[index];
+        
+        // Update active thumbnail
+        document.querySelectorAll('.thumbnail-carousel-track img').forEach((thumb, i) => {
+          if (i === index) {
+            thumb.classList.add('active');
+          } else {
+            thumb.classList.remove('active');
+          }
+        });
+        
+        // Center the active thumbnail
+        scrollToActiveThumbnail();
+      }
+    }
+    
+    function scrollToActiveThumbnail() {
+      const thumbnails = document.querySelectorAll('.thumbnail-carousel-track img');
+      if (thumbnails[currentIndex]) {
+        thumbnails[currentIndex].scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }
+    }
+    
+    // Carousel navigation
+    prevBtn.addEventListener('click', function() {
+      const projectImages = projectGalleries[currentProject] || [];
+      if (projectImages.length > 0) {
+        currentIndex = (currentIndex - 1 + projectImages.length) % projectImages.length;
+        setActiveImage(currentIndex);
+      }
+    });
+    
+    nextBtn.addEventListener('click', function() {
+      const projectImages = projectGalleries[currentProject] || [];
+      if (projectImages.length > 0) {
+        currentIndex = (currentIndex + 1) % projectImages.length;
+        setActiveImage(currentIndex);
+      }
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (magnifiedGallery.style.display === 'block') {
+        if (e.key === 'ArrowLeft') {
+          prevBtn.click();
+        } else if (e.key === 'ArrowRight') {
+          nextBtn.click();
+        } else if (e.key === 'Escape') {
+          closeMagnifiedGallery();
+        }
+      }
+    });
+    
+    // Close button handler
+    closeButton.addEventListener('click', closeMagnifiedGallery);
+    
+    function closeMagnifiedGallery() {
+      magnifiedGallery.style.display = 'none';
+      orbitGallery.style.animationPlayState = 'running';
+      orbitGallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  })();
+</script>            
 
             <style>
               .orbit-gallery {
@@ -3396,7 +3587,7 @@
       <div class="project-slider">
         <div class="project-slide active">
           <video class="video-background" autoplay muted loop>
-            <source src="assets/proj1.mp4" type="video/mp4" />
+            <source src="assets/bg-new.mp4" type="video/mp4" />
           </video>
           <div class="section-overlay"></div>
           <div class="project-info">
