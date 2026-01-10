@@ -37,7 +37,7 @@
       }
 
       body {
-        font-family: "Montserrat", sans-serif;
+        font-family: "Inter", "Montserrat", sans-serif;
         color: var(--primary-color);
         background-color: var(--dark-bg);
         overflow-x: hidden;
@@ -291,7 +291,7 @@
       .scroll-indicator {
         position: absolute;
         bottom: 30px;
-        left: 50%;
+        left: 49%;
         transform: translateX(-50%);
         animation: bounce 2s infinite;
         z-index: 3;
@@ -1387,7 +1387,7 @@
               <span class="button-text"
                 ><a
                   href="#contact"
-                  style="text-decoration: none; color: inherit"
+                  style="text-decoration: none; color: inherit" data-translate="hero.learnMoreBtn"
                   >Learn More</a
                 ></span
               >
@@ -1965,7 +1965,7 @@
       "/>
     </div>
     
-    <h3 id="magnified-project-title" style="
+    <h3 id="magnified-project-title" data-translate="hero.magnifiedProjectTitle" style="
       text-align: center;
       color: #d4af37;
       margin-bottom: 20px;
@@ -2301,7 +2301,13 @@
       const projectTitle = projectTitles[projectKey] || 'Project Gallery';
 
       // Set title
-      document.getElementById('magnified-project-title').textContent = projectTitle;
+      // document.getElementById('magnified-project-title').textContent = projectTitle;
+      const titleElem = document.getElementById('magnified-project-title');
+        if (titleElem.dataset.translate) {
+            titleElem.textContent = translations[titleElem.dataset.translate] || projectTitle;
+        } else {
+            titleElem.textContent = projectTitle;
+        }
 
       // Set main image to first one
       currentIndex = 0;
@@ -2838,7 +2844,7 @@
               <div class="car-subtitle" data-translate="confidentiality_subtitle">
                 Protecting Client Information & Trust
               </div>
-              <div class="car-specs">
+              <div class="car-specs" data-translate-section="carSpecs">
                 <div class="spec-row">
                   <span class="spec-label" data-translate="confidentiality_data">Data Security:</span>
                   <span class="spec-value">ISO 27001 Compliant</span>
@@ -2887,7 +2893,7 @@
               <div class="car-subtitle" data-translate="integrity_subtitle">
                 Honest & Transparent Business Practices
               </div>
-              <div class="car-specs">
+              <div class="car-specs" data-translate-section="carSpecs">
                 <div class="spec-row">
                   <span class="spec-label" data-translate="integrity_ethics">Ethics:</span>
                   <span class="spec-value">Code of Conduct</span>
@@ -2936,7 +2942,7 @@
               <div class="car-subtitle" data-translate="excellence_subtitle">
                 Delivering Superior Quality Results
               </div>
-              <div class="car-specs">
+              <div class="car-specs" data-translate-section="carSpecs">
                 <div class="spec-row">
                   <span class="spec-label" data-translate="excellence_quality">Quality Management:</span>
                   <span class="spec-value" data-translate="excellence_quality_value">ISO 9001:2015</span>
@@ -2985,7 +2991,7 @@
               <div class="car-subtitle" data-translate="innovation_subtitle">
                 Embracing Technology & Modern Solutions
               </div>
-              <div class="car-specs">
+              <div class="car-specs" data-translate-section="carSpecs">
                 <div class="spec-row">
                   <span class="spec-label" data-translate="innovation_technology">Technology:</span>
                   <span class="spec-value" data-translate="innovation_technology_value">Latest Construction Tech</span>
@@ -5665,9 +5671,11 @@ function setLanguageOLD(lang) {
   if (lang === 'ar') {
     document.documentElement.dir = 'rtl';
     document.body.style.textAlign = 'right';
+    document.body.style.fontFamily = "'Tahoma', 'Arial', sans-serif";
   } else {
     document.documentElement.dir = 'ltr';
     document.body.style.textAlign = 'left';
+    document.body.style.fontFamily = "'Playfair Display', 'Montserrat', sans-serif";
   }
   
   document.documentElement.lang = lang;
