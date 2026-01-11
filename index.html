@@ -972,7 +972,7 @@
         <a class="navbar-brand" href="#">
           <img src="assets/atcc-logo-n.png" alt="ATCC Logo" />
           <div class="brand-text">
-            <p style="font-size: x-small">شركة افكار التـطـويـر للمقاولات</p>
+            <p style="font-size: x-small;text-align: center;">شركة افكار التـطـويـر للمقاولات</p>
             <p style="font-size: xx-small;text-align: left;direction: ltr;">Afkar Altatweer Contracting Co.</p>
           </div>
         </a>
@@ -1940,10 +1940,10 @@
       <img src="assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/main.jpeg" alt="Jeddah Stadium Project" data-project="jeddah">
     </span>
     <span style="--i: 4">
-      <img src="assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM.jpeg" alt="The Line Project" data-project="theline">
+      <img src="assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new9.jpeg" alt="The Line Project" data-project="theline">
     </span>
     <span style="--i: 5">
-      <img src="assets/Water and sewage networks works/main.jpeg" alt="Water Networks Project" data-project="water">
+      <img src="assets/Water and sewage networks works/mainnew.jpeg" alt="Water Networks Project" data-project="water">
     </span>
     <span style="--i: 6">
       <img src="assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/main.jpg" alt="General Project" data-project="general">
@@ -2212,69 +2212,97 @@
 
 <script>
   (function() {
-    const projectTitles = {
-      asphalt: 'Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/110KV',
-      neom: 'Neom -18 NIC CONNECTOR - Concrete Works',
-      jeddah: 'STRUCTURE CONCRETE WORKS FOR JEDDAH CENTRAL STADIUM AND SURROUNDING VILLAGES',
-      theline: 'Execution of concrete works for model buildings in The Line Neom project',
-      water: 'Infrastructure works - AL Madinah AL Munawwarah\nWater and sewage networks works',
-      general: 'Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/110KV'
-    };
-
     // Define project galleries with all images for each project
     const projectGalleries = {
       asphalt: [
         'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/main.png',
-        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work2.jpeg',
-        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work3.jpeg',
-        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work4.jpeg',
-        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work5.jpeg',
-        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/work6.jpeg'
       ],
       neom: [
         'assets/faced mock-up The line  Neom project- Concrete work/main.jpeg',
-        'assets/faced mock-up The line  Neom project- Concrete work/neom2.jpeg',
-        'assets/faced mock-up The line  Neom project- Concrete work/neom3.jpeg',
-        'assets/faced mock-up The line  Neom project- Concrete work/neom4.jpeg',
-        'assets/faced mock-up The line  Neom project- Concrete work/neom5.jpeg',
-        'assets/faced mock-up The line  Neom project- Concrete work/neom6.jpeg'
+        'assets/faced mock-up The line  Neom project- Concrete work/now1.jpeg',
+        'assets/faced mock-up The line  Neom project- Concrete work/now2.jpeg',
+        'assets/faced mock-up The line  Neom project- Concrete work/now3.jpeg',
+        'assets/faced mock-up The line  Neom project- Concrete work/now4.jpeg',
+        'assets/faced mock-up The line  Neom project- Concrete work/now5.jpeg',
+        'assets/faced mock-up The line  Neom project- Concrete work/now6.jpeg',
+        'assets/faced mock-up The line  Neom project- Concrete work/now7.jpeg',
+        'assets/faced mock-up The line  Neom project- Concrete work/now8.jpeg',
+        'assets/faced mock-up The line  Neom project- Concrete work/now9.jpeg',
+        'assets/faced mock-up The line  Neom project- Concrete work/now10.jpeg'
       ],
       jeddah: [
         'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/main.jpeg',
-        'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img2.jpeg',
-        'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img3.jpeg',
-        'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img4.jpeg',
-        'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img5.jpeg',
-        'assets/STRUCTURE CONCRETE WORKS FOR JEDDAH  CENTERAL STADIUM AND SURROUNDING VILLAGES/img6.jpeg'
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/niw3.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/niw5.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/niw6.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/niw7.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/niw9.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/niw10.jpeg',
       ],
       theline: [
-        'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM.jpeg',
-        'assets/The line/WhatsApp Image 2026-01-01 at 10.26.58 AM.jpeg',
-        'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM (1).jpeg',
-        'assets/The line/main.jpeg',
-        'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM (3).jpeg',
-        'assets/The line/WhatsApp Image 2026-01-01 at 10.26.57 AM (4).jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new2.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new3.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new4.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new5.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new6.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new10.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new13.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new15.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new16.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new17.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new18.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new19.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new21.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new22.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new24.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new25.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new26.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new27.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new11.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new12.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new14.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new1.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new20.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new23.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new7.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new8.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380/new9.jpeg',
       ],
       water: [
-        'assets/Water and sewage networks works/main.jpeg',
-        'assets/Water and sewage networks works/water2.jpeg',
-        'assets/Water and sewage networks works/water3.jpeg',
-        'assets/Water and sewage networks works/water4.jpeg',
-        'assets/Water and sewage networks works/water5.jpeg',
-        'assets/Water and sewage networks works/water6.jpeg'
+        'assets/Water and sewage networks works/mainnew.jpeg',
+        'assets/Water and sewage networks works/new1.jpeg',
+        'assets/Water and sewage networks works/new2.jpeg',
+        'assets/Water and sewage networks works/new3.jpeg',
+        'assets/Water and sewage networks works/new4.jpeg',
+        'assets/Water and sewage networks works/new5.jpeg',
+        'assets/Water and sewage networks works/new6.jpeg',
+        'assets/Water and sewage networks works/new7.jpeg',
+        'assets/Water and sewage networks works/new8.jpeg',
+        'assets/Water and sewage networks works/new9.jpeg',
+        'assets/Water and sewage networks works/new10.jpeg',
+        'assets/Water and sewage networks works/new11.jpeg',
+        'assets/Water and sewage networks works/new12.jpeg',
+        'assets/Water and sewage networks works/new13.jpeg',
+        'assets/Water and sewage networks works/new14.jpeg',
+        'assets/Water and sewage networks works/new15.jpeg',
       ],
       general: [
         'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/main.jpg',
-        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asph1.jpeg',
-        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asp2.jpeg',
-        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asph3.jpeg',
-        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/asp4.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/niw1.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/niw2.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/niw4.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/niw8.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/niw11.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/niw12.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/niw13.jpeg',
+        'assets/Asphalt work Substation Yanbu04-BSB-ESF-IWP 380 part2/niw14.jpeg',
       ]
     };
     
     const orbitGallery = document.querySelector('.orbit-gallery');
     const magnifiedGallery = document.getElementById('magnified-gallery');
     const magnifiedImage = document.getElementById('magnified-image');
+    const magnifiedTitle = document.getElementById('magnified-project-title');
     const thumbnailCarousel = document.getElementById('thumbnail-carousel-track');
     const closeButton = document.getElementById('close-magnified');
     const prevBtn = document.querySelector('.prev-btn');
@@ -2282,6 +2310,26 @@
     
     let currentProject = '';
     let currentIndex = 0;
+    
+    // Function to get current language
+    function getCurrentLanguage() {
+      return document.documentElement.lang || 'en';
+    }
+    
+    // Function to get project titles based on current language
+    function getProjectTitles() {
+      const currentLang = getCurrentLanguage();
+      const trans = translations[currentLang] || translations.en;
+      
+      return {
+        asphalt: trans.project3_description || 'Default title',
+        neom: trans.project1_description || 'Default title',
+        jeddah: trans.project3_description || 'Default title',
+        theline: trans.project1_description || 'Default title',
+        water: trans.project2_description || 'Default title',
+        general: trans.project3_description || 'Default title'
+      };
+    }
     
     // Add click event to orbit gallery images
     document.querySelectorAll('.orbit-gallery img').forEach((img) => {
@@ -2293,25 +2341,30 @@
     });
     
     function openMagnifiedGallery(projectKey) {
+      console.log('Opening gallery for project:', projectKey);
+      console.log('Project images:', projectGalleries[projectKey]);
+      
       orbitGallery.style.animationPlayState = 'paused';
       magnifiedGallery.style.display = 'block';
       currentProject = projectKey;
 
       const projectImages = projectGalleries[projectKey] || [];
+      
+      // Get titles based on current language
+      const projectTitles = getProjectTitles();
       const projectTitle = projectTitles[projectKey] || 'Project Gallery';
 
       // Set title
-      // document.getElementById('magnified-project-title').textContent = projectTitle;
-      const titleElem = document.getElementById('magnified-project-title');
-        if (titleElem.dataset.translate) {
-            titleElem.textContent = translations[titleElem.dataset.translate] || projectTitle;
-        } else {
-            titleElem.textContent = projectTitle;
-        }
+      magnifiedTitle.textContent = projectTitle;
 
       // Set main image to first one
       currentIndex = 0;
-      magnifiedImage.src = projectImages[currentIndex];
+      if (projectImages.length > 0) {
+        magnifiedImage.src = projectImages[currentIndex];
+      } else {
+        console.error('No images found for project:', projectKey);
+        return;
+      }
       
       // Clear and create thumbnail carousel
       thumbnailCarousel.innerHTML = '';
@@ -2335,7 +2388,10 @@
       // Center the active thumbnail
       scrollToActiveThumbnail();
       
-      magnifiedGallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Scroll to gallery
+      setTimeout(() => {
+        magnifiedGallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
     }
     
     function setActiveImage(index) {
@@ -2406,10 +2462,18 @@
     function closeMagnifiedGallery() {
       magnifiedGallery.style.display = 'none';
       orbitGallery.style.animationPlayState = 'running';
-      orbitGallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+    
+    // Function to update gallery when language changes
+    window.updateGalleryTitles = function() {
+      if (currentProject && magnifiedGallery.style.display === 'block') {
+        const projectTitles = getProjectTitles();
+        const projectTitle = projectTitles[currentProject] || 'Project Gallery';
+        magnifiedTitle.textContent = projectTitle;
+      }
+    };
   })();
-</script>            
+</script>          
 
             <style>
               .orbit-gallery {
@@ -3608,17 +3672,17 @@
           <div class="section-overlay"></div>
           <div class="project-info">
             <!-- <h3 class="project-title" data-translate="project2_title">Neom -18 NIC CONNECTOR - Concrete Works</h3> -->
-            <p data-translate="project2_description">Neom -18 NIC CONNECTOR - Concrete Works</p>
+            <p data-translate="project2_description">Infrastructure works - Water and sewage networks works</p>
           </div>
         </div>
         <div class="project-slide">
           <video class="video-background" autoplay muted loop>
-            <source src="assets/bg-new3.mp4" type="video/mp4" />
+            <source src="assets/bg-new-3.mp4" type="video/mp4" />
           </video>
           <div class="section-overlay"></div>
           <div class="project-info">
             <!-- <h3 class="project-title" data-translate="project3_title">Execution of concrete works for model buildings in The Line Neom project</h3> -->
-            <p data-translate="project3_description">Execution of concrete works for model buildings in The Line Neom project</p>
+            <p data-translate="project3_description">Project for the construction of concrete structures for the Jeddah Central Stadium and surrounding buildings</p>
           </div>
         </div>
         <div class="project-nav">
@@ -5243,7 +5307,13 @@ const translations = {
     "form_name": "Name",
     "form_email": "Email", 
     "form_message": "Message",
-    "form_submit": "Send Message"
+    "form_submit": "Send Message",
+    "project1_description": "Execution of concrete works for model buildings in The Line Neom project",
+    "project2_description": "Infrastructure works - Water and sewage networks works",
+    "project3_description": "Project for the construction of concrete structures for the Jeddah Central Stadium and surrounding buildings",
+    "magnifiedProjectTitle": "Project Gallery",
+    "contributors_title": "Our Trusted Partners",
+    "contributors_subtitle": "Collaborating with industry leaders to deliver exceptional construction solutions",
   },
   
   ar: {
@@ -5380,7 +5450,13 @@ const translations = {
     "form_name": "الاسم",
     "form_email": "البريد الإلكتروني",
     "form_message": "الرسالة",
-    "form_submit": "إرسال الرسالة"
+    "form_submit": "إرسال الرسالة",
+    "project1_description": "تنفيذ أعمال الخرسانة لمباني النموذج في مشروع ذا لاين نيوم",
+    "project2_description": "أعمال البنية التحتية - أعمال شبكات المياه والصرف الصحي",
+    "project3_description": "مشروع إنشاء الهياكل الخرسانية لاستاد جدة المركزي والمباني المحيطة",
+    "magnifiedProjectTitle": "معرض المشاريع",
+    "contributors_title": "شركاؤنا الموثوقون",
+    "contributors_subtitle": "نتعاون مع قادة الصناعة لتقديم حلول إنشائية استثنائية",
   },
   
   es: {
@@ -5517,7 +5593,13 @@ const translations = {
     "form_name": "Nombre",
     "form_email": "Correo Electrónico",
     "form_message": "Mensaje",
-    "form_submit": "Enviar Mensaje"
+    "form_submit": "Enviar Mensaje",
+    "project1_description": "Ejecución de trabajos de hormigón para edificios modelo en el proyecto The Line Neom",
+    "project2_description": "Obras de infraestructura - Redes de agua y alcantarillado",
+    "project3_description": "Proyecto para la construcción de estructuras de hormigón para el Estadio Central de Yeda y edificios circundantes",
+    "magnifiedProjectTitle": "Galería de Proyectos",
+    "contributors_title": "Nuestros Socios de Confianza",
+    "contributors_subtitle": "Colaborando con líderes de la industria para ofrecer soluciones de construcción excepcionales",
   },
   
   zh: {
@@ -5654,7 +5736,13 @@ const translations = {
     "form_name": "姓名",
     "form_email": "电子邮件",
     "form_message": "留言",
-    "form_submit": "发送留言"
+    "form_submit": "发送留言",
+    "project1_description": "执行Neom线项目模型建筑的混凝土工程",
+    "project2_description": "基础设施工程 - 供水和污水管网工程",
+    "project3_description": "吉达中央体育场及周边建筑混凝土结构建设项目",
+    "magnifiedProjectTitle": "项目图库",
+    "contributors_title": "我们的信任伙伴",
+    "contributors_subtitle": "与行业领导者合作，提供卓越的建筑解决方案"
   }
 };
 
@@ -5750,6 +5838,11 @@ function setLanguage(lang) {
       console.warn('Missing translation:', key, 'in', lang);
     }
   });
+
+  // Update gallery titles if gallery is open
+  if (typeof window.updateGalleryTitles === 'function') {
+    window.updateGalleryTitles();
+  }
   
   // Update dropdown button
   const dropdownBtn = document.querySelector('#languageDropdown');
