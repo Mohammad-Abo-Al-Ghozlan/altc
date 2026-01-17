@@ -578,7 +578,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="assets/atcc-logo-n.png" alt="ATCC Logo" />
+                <!-- <img src="assets/atcc-logo-.png" alt="ATCC Logo" /> -->
                 <div class="brand-text">
                     <p style="font-size: small">شركـة افـكـار الـتـطـويـر للمقاولات</p>
                     <p style="font-size: x-small">Afkar Altatweer Contracting Co.</p>
@@ -586,13 +586,35 @@
             </a>
         </div>
     </nav>
+    <div class="fullscreen-bg">
+      <video autoplay muted loop playsinline>
+        <source src="assets/bg-home-en+ar.MOV" type="video/mp4">
+      </video>
+    </div>
+    
+    <style>
+    .fullscreen-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    .fullscreen-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.5;
+    }
+    </style>
 
     <!-- Hero Section -->
-    <section id="hero">
-        <div class="hero-background"></div>
+    <!-- <section id="hero">
+        <div class="hero-background"></div> // this is the old background - commented - MoDEV - abu lkassem
         <div class="hero-overlay"></div>
         
-        <div class="hero-content">
+        <div class="hero-content" style="transform: translateY(100px);">
             <h1 class="hero-logo">AFKAR AL-TATWEER</h1>
             <h2 style="color: #fff; margin-bottom: 1.5rem;">ATCC</h2>
             <p class="hero-tagline">Building Excellence Beyond Premium Quality</p>
@@ -606,7 +628,326 @@
                 </a>
             </div>
         </div>
+    </section> -->
+    <section id="hero">
+        <!-- <div class="hero-background"></div> -->
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content" style="transform: translateY(100px);">
+            <h1 class="hero-logo">AFKAR AL-TATWEER</h1>
+            <h2 style="color: #fff; margin-bottom: 1.5rem;">ATCC</h2>
+            <p class="hero-tagline">Building Excellence Beyond Premium Quality</p>
+
+            <div class="cta-buttons">
+                <a href="https://altc-tawny.vercel.app/" class="cta-btn btn-primary" target="_blank">
+                    <i class="fas fa-globe"></i> Visit Our Website
+                </a>
+                <button class="cta-btn btn-outline" id="profile-download-btn">
+                    <i class="fas fa-download"></i> Company Profile
+                </button>
+            </div>
+        </div>
+
+        <!-- Language Selection Modal -->
+        <div id="language-modal" class="language-modal" style="display: none;">
+            <div class="modal-overlay" id="modal-overlay"></div>
+            <div class="modal-content">
+                <h3>Choose Profile Language</h3>
+                <p>Select your preferred language for the company profile:</p>
+                <div class="language-options">
+                    <button class="lang-option" data-lang="en">
+                        <span class="flag">🇺🇸</span>
+                        <span class="text">English</span>
+                    </button>
+                    <button class="lang-option" data-lang="ar">
+                        <span class="flag">🇸🇦</span>
+                        <span class="text">العربية</span>
+                    </button>
+                </div>
+                <button class="cancel-btn" id="cancel-btn">Cancel</button>
+            </div>
+        </div>
     </section>
+
+    <style>
+        /* Modal Styles */
+        .language-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 180, 0, 0.3);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-content h3 {
+            color: #ffb400;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-content p {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .language-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .lang-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .lang-option:hover {
+            background: rgba(255, 180, 0, 0.1);
+            border-color: #ffb400;
+            transform: translateY(-2px);
+        }
+
+        .lang-option .flag {
+            font-size: 1.2rem;
+        }
+
+        .lang-option .text {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .cancel-btn {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #ccc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .cancel-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .modal-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
+
+            .modal-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .lang-option {
+                padding: 12px;
+            }
+
+            .lang-option .text {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileBtn = document.getElementById('profile-download-btn');
+            const languageModal = document.getElementById('language-modal');
+            const modalOverlay = document.getElementById('modal-overlay');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const langOptions = document.querySelectorAll('.lang-option');
+
+            // Show modal when profile button is clicked
+            profileBtn.addEventListener('click', function() {
+                languageModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
+
+            // Close modal when overlay is clicked
+            modalOverlay.addEventListener('click', closeModal);
+
+            // Close modal when cancel button is clicked
+            cancelBtn.addEventListener('click', closeModal);
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && languageModal.style.display === 'flex') {
+                    closeModal();
+                }
+            });
+
+            // Handle language selection
+            langOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    downloadProfile(lang);
+                    closeModal();
+                });
+            });
+
+            function closeModal() {
+                languageModal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+
+            function downloadProfile(lang) {
+                let filename = '';
+                let downloadText = '';
+
+                switch(lang) {
+                    case 'en':
+                        filename = 'assets/Afkar_Al_Tatweer_Profile-en.pdf';
+                        downloadText = 'Afkar_Al_Tatweer_Profile_English.pdf';
+                        break;
+                    case 'ar':
+                        filename = 'assets/Afkar_Al_Tatweer_Profile-ar.pdf';
+                        downloadText = 'Afkar_Al_Tatweer_Profile_Arabic.pdf';
+                        break;
+                    default:
+                        filename = 'assets/Afkar_Al_Tatweer_Profile-en.pdf';
+                        downloadText = 'Afkar_Al_Tatweer_Profile_English.pdf';
+                }
+
+                // Create temporary link for download
+                const link = document.createElement('a');
+                link.href = filename;
+                link.download = downloadText;
+                link.style.display = 'none';
+
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Optional: Show download confirmation
+                showDownloadToast(lang);
+            }
+
+            function showDownloadToast(lang) {
+                // Create toast element
+                const toast = document.createElement('div');
+                toast.className = 'download-toast';
+                toast.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <span>${lang === 'ar' ? 'جاري تحميل الملف العربي' : 'Downloading English Profile'}</span>
+                `;
+
+                // Style the toast
+                Object.assign(toast.style, {
+                    position: 'fixed',
+                    bottom: '20px',
+                    right: '20px',
+                    background: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
+                    color: '#ffb400',
+                    padding: '15px 20px',
+                    borderRadius: '10px',
+                    border: '1px solid rgba(255, 180, 0, 0.3)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)',
+                    zIndex: '10000',
+                    animation: 'toastSlideIn 0.3s ease-out'
+                });
+
+                // Add animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes toastSlideIn {
+                        from {
+                            opacity: 0;
+                            transform: translateX(100%);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateX(0);
+                        }
+                    }
+
+                    @keyframes toastFadeOut {
+                        from {
+                            opacity: 1;
+                            transform: translateX(0);
+                        }
+                        to {
+                            opacity: 0;
+                            transform: translateX(100%);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+
+                document.body.appendChild(toast);
+
+                // Remove toast after 3 seconds
+                setTimeout(() => {
+                    toast.style.animation = 'toastFadeOut 0.3s ease-out forwards';
+                    setTimeout(() => {
+                        if (toast.parentNode) {
+                            toast.parentNode.removeChild(toast);
+                        }
+                        if (style.parentNode) {
+                            style.parentNode.removeChild(style);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+        });
+    </script>
 
     <!-- Social Media Section -->
     <section id="social-media">
@@ -697,4 +1038,3 @@
     </script>
 </body>
 </html>
-
